@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0169C223D4B0CBD72EE17C25 /* Pods_leaploan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3FFCD76033F537953878033 /* Pods_leaploan.framework */; };
 		73F59DEC2EAF638100A68B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73F59DE32EAF638100A68B13 /* Assets.xcassets */; };
 		73F59DEE2EAF638100A68B13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F59DE62EAF638100A68B13 /* LaunchScreen.storyboard */; };
 		73F59DF02EAF638100A68B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F59DE22EAF638100A68B13 /* AppDelegate.swift */; };
@@ -18,6 +19,9 @@
 		73F59DE32EAF638100A68B13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73F59DE42EAF638100A68B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73F59DE52EAF638100A68B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-leaploan.debug.xcconfig"; path = "Target Support Files/Pods-leaploan/Pods-leaploan.debug.xcconfig"; sourceTree = "<group>"; };
+		C3FFCD76033F537953878033 /* Pods_leaploan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_leaploan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-leaploan.release.xcconfig"; path = "Target Support Files/Pods-leaploan/Pods-leaploan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0169C223D4B0CBD72EE17C25 /* Pods_leaploan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +41,8 @@
 			children = (
 				73F59DEB2EAF638100A68B13 /* leaploan */,
 				73F59DCB2EAF637A00A68B13 /* Products */,
+				8B10A4DB0CF33364F9F57333 /* Pods */,
+				CC17A6357373F24B003479A5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +65,24 @@
 			path = leaploan;
 			sourceTree = "<group>";
 		};
+		8B10A4DB0CF33364F9F57333 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */,
+				EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CC17A6357373F24B003479A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3FFCD76033F537953878033 /* Pods_leaploan.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -65,6 +90,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F59DDD2EAF637C00A68B13 /* Build configuration list for PBXNativeTarget "leaploan" */;
 			buildPhases = (
+				F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */,
 				73F59DC62EAF637A00A68B13 /* Sources */,
 				73F59DC72EAF637A00A68B13 /* Frameworks */,
 				73F59DC82EAF637A00A68B13 /* Resources */,
@@ -74,8 +100,6 @@
 			dependencies = (
 			);
 			name = leaploan;
-			packageProductDependencies = (
-			);
 			productName = leaploan;
 			productReference = 73F59DCA2EAF637A00A68B13 /* leaploan.app */;
 			productType = "com.apple.product-type.application";
@@ -126,6 +150,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-leaploan-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		73F59DC62EAF637A00A68B13 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -151,6 +200,7 @@
 /* Begin XCBuildConfiguration section */
 		73F59DDE2EAF637C00A68B13 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -192,6 +242,7 @@
 		};
 		73F59DDF2EAF637C00A68B13 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
