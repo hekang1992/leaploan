@@ -15,6 +15,7 @@ target 'leaploan' do
   pod 'RxGesture'
   pod 'MJRefresh'
   pod 'Kingfisher'
+  pod 'SAMKeychain'
   pod 'FBSDKCoreKit'
   pod 'TYAlertController'
   pod 'IQKeyboardManagerSwift'
