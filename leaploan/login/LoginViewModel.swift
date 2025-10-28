@@ -13,7 +13,17 @@ class LoginViewModel {
             return model
         } catch {
             print("error===: \(error)")
-            throw error // 把错误抛出去，由调用方处理
+            throw error
+        }
+    }
+    
+    func toAppleMarket(with json: [String: String]) async throws -> BaseModel {
+        do {
+            let model: BaseModel = try await HttpsRequest.shared.postFrom("/Pasteurella/nighted", parameters: json)
+            return model
+        } catch {
+            print("error===: \(error)")
+            throw error
         }
     }
     

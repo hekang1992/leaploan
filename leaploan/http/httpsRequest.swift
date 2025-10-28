@@ -2,12 +2,13 @@
 //  httprequest.swift
 //  PeraLend
 //
-//  Created by Jennifer Adams on 2025/7/21.
+//  Created by hekang on 2025/7/21.
 //
 
 import Foundation
 import Alamofire
 import UIKit
+import SnapKit
 
 struct API {
     static let baseURL = "http://47.84.60.25:8590/Mithraeums"
@@ -111,3 +112,58 @@ extension HttpsRequest {
         }
     }
 }
+
+
+final class Loading {
+    static let shared = Loading()
+    
+    private var loadingView: UIView?
+    private var activityIndicator: UIActivityIndicatorView?
+    
+    private init() {}
+    
+    static func show() {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+            
+            if shared.loadingView != nil { return }
+            
+            let backgroundView = UIView(frame: window.bounds)
+            backgroundView.backgroundColor = UIColor.clear
+            
+            
+            let bgView = UIView()
+            bgView.backgroundColor = .darkGray
+            bgView.layer.cornerRadius = 20
+            bgView.clipsToBounds = true
+            
+            let indicator = UIActivityIndicatorView(style: .large)
+            indicator.color = .white
+            indicator.center = backgroundView.center
+            indicator.startAnimating()
+            
+            backgroundView.addSubview(bgView)
+            bgView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+                make.size.equalTo(CGSize(width: 80, height: 80))
+            }
+            
+            backgroundView.addSubview(indicator)
+            window.addSubview(backgroundView)
+            
+            shared.loadingView = backgroundView
+            shared.activityIndicator = indicator
+        }
+    }
+    
+    static func hide() {
+        DispatchQueue.main.async {
+            shared.activityIndicator?.stopAnimating()
+            shared.loadingView?.removeFromSuperview()
+            
+            shared.activityIndicator = nil
+            shared.loadingView = nil
+        }
+    }
+}
+

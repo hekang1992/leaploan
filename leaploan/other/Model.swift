@@ -6,5 +6,18 @@
 //
 
 class BaseModel: Codable {
-    
+    var phacotherapy: String?
+    var marsi: String?
+    var billionth: billionthModel?
+}
+
+class billionthModel: Codable {
+    var oocyst: oocystModel?
+}
+
+class oocystModel: Codable {
+    var snookers: String?
+    var inflictable: String?
+    var dispender: String?
+    var poinder: String?
 }

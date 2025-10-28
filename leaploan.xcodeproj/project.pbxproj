@@ -13,6 +13,10 @@
 		73B2B1F42EB0A73E00F3A877 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F32EB0A73E00F3A877 /* LoginView.swift */; };
 		73B2B1F62EB0A74F00F3A877 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F52EB0A74A00F3A877 /* LoginViewModel.swift */; };
 		73B2B1F82EB0A7AD00F3A877 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F72EB0A7A900F3A877 /* Model.swift */; };
+		73B2B1FA2EB0ADE700F3A877 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F92EB0ADE700F3A877 /* BaseView.swift */; };
+		73B2B1FC2EB0AEBC00F3A877 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1FB2EB0AEBC00F3A877 /* LaunchViewController.swift */; };
+		73B2B1FE2EB0AF4F00F3A877 /* other.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1FD2EB0AF4D00F3A877 /* other.swift */; };
+		73B2B2002EB0B16B00F3A877 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1FF2EB0B16400F3A877 /* LaunchViewModel.swift */; };
 		73D129C82EB08B2F00079434 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D129C72EB08B2F00079434 /* BaseViewController.swift */; };
 		73D129CE2EB08B5A00079434 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D129CD2EB08B5A00079434 /* BaseTabBarController.swift */; };
 		73D129D02EB08B6D00079434 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D129CF2EB08B6D00079434 /* BaseNavigationController.swift */; };
@@ -29,6 +33,10 @@
 		73B2B1F32EB0A73E00F3A877 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		73B2B1F52EB0A74A00F3A877 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		73B2B1F72EB0A7A900F3A877 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		73B2B1F92EB0ADE700F3A877 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		73B2B1FB2EB0AEBC00F3A877 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		73B2B1FD2EB0AF4D00F3A877 /* other.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = other.swift; sourceTree = "<group>"; };
+		73B2B1FF2EB0B16400F3A877 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		73D129C72EB08B2F00079434 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		73D129CD2EB08B5A00079434 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		73D129CF2EB08B6D00079434 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
@@ -59,9 +67,12 @@
 		73D129C02EB08AF700079434 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				73B2B1FF2EB0B16400F3A877 /* LaunchViewModel.swift */,
+				73B2B1F92EB0ADE700F3A877 /* BaseView.swift */,
 				73D129C72EB08B2F00079434 /* BaseViewController.swift */,
 				73D129CD2EB08B5A00079434 /* BaseTabBarController.swift */,
 				73D129CF2EB08B6D00079434 /* BaseNavigationController.swift */,
+				73B2B1FB2EB0AEBC00F3A877 /* LaunchViewController.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -109,6 +120,7 @@
 		73D129C62EB08B1500079434 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				73B2B1FD2EB0AF4D00F3A877 /* other.swift */,
 				73B2B1F72EB0A7A900F3A877 /* Model.swift */,
 				73D129D32EB08C2100079434 /* loginAuthManager.swift */,
 			);
@@ -287,14 +299,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73B2B1FC2EB0AEBC00F3A877 /* LaunchViewController.swift in Sources */,
 				73D129D02EB08B6D00079434 /* BaseNavigationController.swift in Sources */,
 				73B2B1F02EB09A9700F3A877 /* httpsRequest.swift in Sources */,
 				73B2B1F22EB0A21000F3A877 /* commonPara.swift in Sources */,
+				73B2B1FA2EB0ADE700F3A877 /* BaseView.swift in Sources */,
 				73B2B1F42EB0A73E00F3A877 /* LoginView.swift in Sources */,
 				73D129D42EB08C2B00079434 /* loginAuthManager.swift in Sources */,
 				73F59DF02EAF638100A68B13 /* AppDelegate.swift in Sources */,
+				73B2B2002EB0B16B00F3A877 /* LaunchViewModel.swift in Sources */,
 				73D129C82EB08B2F00079434 /* BaseViewController.swift in Sources */,
 				73D129D22EB08C0D00079434 /* LoginViewController.swift in Sources */,
+				73B2B1FE2EB0AF4F00F3A877 /* other.swift in Sources */,
 				73B2B1F82EB0A7AD00F3A877 /* Model.swift in Sources */,
 				73B2B1F62EB0A74F00F3A877 /* LoginViewModel.swift in Sources */,
 				73D129CE2EB08B5A00079434 /* BaseTabBarController.swift in Sources */,
