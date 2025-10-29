@@ -22,7 +22,16 @@ class LaunchViewModel {
             throw error
         }
         
-        
+    }
+    
+    func toAppleMarket(with json: [String: String]) async throws -> BaseModel {
+        do {
+            let model: BaseModel = try await HttpsRequest.shared.postFrom("/Pasteurella/nighted", parameters: json)
+            return model
+        } catch {
+            print("error===: \(error)")
+            throw error
+        }
     }
     
 }

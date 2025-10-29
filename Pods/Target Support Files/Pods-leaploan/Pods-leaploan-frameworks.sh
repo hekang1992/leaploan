@@ -176,6 +176,7 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardCore/IQKeyboardCore.framework"
@@ -200,6 +201,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardCore/IQKeyboardCore.framework"

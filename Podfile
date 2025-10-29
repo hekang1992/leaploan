@@ -15,9 +15,12 @@ target 'leaploan' do
   pod 'RxGesture'
   pod 'MJRefresh'
   pod 'Kingfisher'
+#  pod "Atributika"
   pod 'SAMKeychain'
   pod 'FBSDKCoreKit'
+#  pod "AtributikaViews"
   pod 'TYAlertController'
   pod 'IQKeyboardManagerSwift'
-
+  pod 'ActiveLabel'
+  
 end
