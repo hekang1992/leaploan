@@ -27,7 +27,7 @@ class LoginView: BaseView {
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
-        bgImageView.image = UIImage(named: "tongyongbeijing")
+        bgImageView.image = UIImage(named: "common_bg_image")
         return bgImageView
     }()
     

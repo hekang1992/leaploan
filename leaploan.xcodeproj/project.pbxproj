@@ -11,6 +11,7 @@
 		739C7FA92EB1EAEA00677C85 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739C7FA82EB1EAEA00677C85 /* CenterViewController.swift */; };
 		739C7FAB2EB1EAF900677C85 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739C7FAA2EB1EAF900677C85 /* HomeViewController.swift */; };
 		739C7FAD2EB1EB0F00677C85 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739C7FAC2EB1EB0F00677C85 /* OrderViewController.swift */; };
+		739C7FB12EB1ED9D00677C85 /* CenterPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739C7FB02EB1ED9D00677C85 /* CenterPageView.swift */; };
 		73B2B1F02EB09A9700F3A877 /* httpsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1EF2EB09A9700F3A877 /* httpsRequest.swift */; };
 		73B2B1F22EB0A21000F3A877 /* commonPara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F12EB0A20E00F3A877 /* commonPara.swift */; };
 		73B2B1F42EB0A73E00F3A877 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F32EB0A73E00F3A877 /* LoginView.swift */; };
@@ -34,6 +35,7 @@
 		739C7FA82EB1EAEA00677C85 /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		739C7FAA2EB1EAF900677C85 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		739C7FAC2EB1EB0F00677C85 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		739C7FB02EB1ED9D00677C85 /* CenterPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterPageView.swift; sourceTree = "<group>"; };
 		73B2B1EF2EB09A9700F3A877 /* httpsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = httpsRequest.swift; sourceTree = "<group>"; };
 		73B2B1F12EB0A20E00F3A877 /* commonPara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commonPara.swift; sourceTree = "<group>"; };
 		73B2B1F32EB0A73E00F3A877 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		73D129C52EB08B1000079434 /* center */ = {
 			isa = PBXGroup;
 			children = (
+				739C7FB02EB1ED9D00677C85 /* CenterPageView.swift */,
 				739C7FA82EB1EAEA00677C85 /* CenterViewController.swift */,
 			);
 			path = center;
@@ -311,6 +314,7 @@
 				73B2B1FC2EB0AEBC00F3A877 /* LaunchViewController.swift in Sources */,
 				73D129D02EB08B6D00079434 /* BaseNavigationController.swift in Sources */,
 				73B2B1F02EB09A9700F3A877 /* httpsRequest.swift in Sources */,
+				739C7FB12EB1ED9D00677C85 /* CenterPageView.swift in Sources */,
 				739C7FAB2EB1EAF900677C85 /* HomeViewController.swift in Sources */,
 				73B2B1F22EB0A21000F3A877 /* commonPara.swift in Sources */,
 				73B2B1FA2EB0ADE700F3A877 /* BaseView.swift in Sources */,
