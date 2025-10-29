@@ -13,6 +13,7 @@ import CFNetwork
 import SystemConfiguration.CaptiveNetwork
 import AppTrackingTransparency
 import FBSDKCoreKit
+import IQKeyboardManagerSwift
 
 let CHANGE_ROOT_VC = NSNotification.Name("CHANGE_ROOT_VC")
 
@@ -35,6 +36,9 @@ class LaunchViewController: BaseViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        IQKeyboardManager.shared.isEnabled = true
+        IQKeyboardManager.shared.resignOnTouchOutside = true
         
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "launch_image")

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 extension UIColor {
     convenience init(hex: UInt32, alpha: CGFloat = 1.0) {
@@ -34,3 +35,9 @@ extension UIColor {
     }
 }
 
+class HudToastView {
+    static func showMessage(with message: String) {
+        guard let window = UIApplication.shared.windows.first else { return }
+        window.makeToast(message, duration: 3.0, position: .center)
+    }
+}

@@ -22,5 +22,6 @@ target 'leaploan' do
   pod 'TYAlertController'
   pod 'IQKeyboardManagerSwift'
   pod 'ActiveLabel'
+  pod 'Toast-Swift'
   
 end

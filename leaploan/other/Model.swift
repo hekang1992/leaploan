@@ -13,6 +13,8 @@ class BaseModel: Codable {
 
 class billionthModel: Codable {
     var oocyst: oocystModel?
+    var morts: String?
+    var shavery: String?
 }
 
 class oocystModel: Codable {

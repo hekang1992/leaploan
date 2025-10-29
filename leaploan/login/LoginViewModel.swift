@@ -8,6 +8,13 @@
 class LoginViewModel {
     
     func findCodeInfo(with json: [String: String]) async throws -> BaseModel {
+        
+        Loading.show()
+        
+        defer {
+            Loading.hide()
+        }
+        
         do {
             let model: BaseModel = try await HttpsRequest.shared.postFrom("/Pasteurella/phlebotomic", parameters: json)
             return model
@@ -17,6 +24,21 @@ class LoginViewModel {
         }
     }
     
-    
+    func pushLoginInfo(with json: [String: String]) async throws -> BaseModel {
+        
+        Loading.show()
+        
+        defer {
+            Loading.hide()
+        }
+        
+        do {
+            let model: BaseModel = try await HttpsRequest.shared.postFrom("/Pasteurella/phacotherapy", parameters: json)
+            return model
+        } catch {
+            print("error===: \(error)")
+            throw error
+        }
+    }
     
 }
