@@ -15,6 +15,7 @@ class billionthModel: Codable {
     var oocyst: oocystModel?
     var morts: String?
     var shavery: String?
+    var userInfo: userInfoModel?
 }
 
 class oocystModel: Codable {
@@ -22,4 +23,8 @@ class oocystModel: Codable {
     var inflictable: String?
     var dispender: String?
     var poinder: String?
+}
+
+class userInfoModel: Codable {
+    var userphone: String?
 }

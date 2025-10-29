@@ -70,7 +70,6 @@ class CenterPageView: UIView {
     
     lazy var phoneLabel: UILabel = {
         let phoneLabel = UILabel()
-        phoneLabel.text = LoginAuthManager.phoneNumber
         phoneLabel.textAlignment = .center
         phoneLabel.textColor = UIColor.init(hexString: "#1ABFFF")
         phoneLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(700))
@@ -105,6 +104,18 @@ class CenterPageView: UIView {
         return orderImageView
     }()
     
+    lazy var odImageView: UIImageView = {
+        let odImageView = UIImageView()
+        odImageView.image = UIImage(named: "mc_icon_image")
+        return odImageView
+    }()
+    
+    lazy var moreView: UIView = {
+        let moreView = UIView()
+        moreView.backgroundColor = .systemPink
+        return moreView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImageView)
@@ -118,6 +129,8 @@ class CenterPageView: UIView {
         scrollView.addSubview(phoneLabel)
         scrollView.addSubview(mentLabel)
         scrollView.addSubview(orderImageView)
+        scrollView.addSubview(odImageView)
+        scrollView.addSubview(moreView)
         bgImageView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
             make.height.equalTo(450)
@@ -148,10 +161,11 @@ class CenterPageView: UIView {
         }
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(5)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
         headImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
+            make.top.equalToSuperview().offset(28)
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 70, height: 70))
         }
@@ -169,6 +183,18 @@ class CenterPageView: UIView {
             make.centerX.equalToSuperview()
             make.top.equalTo(mentLabel.snp.bottom).offset(20)
             make.size.equalTo(CGSize(width: 355, height: 114))
+        }
+        odImageView.snp.makeConstraints { make in
+            make.top.equalTo(orderImageView.snp.bottom).offset(25)
+            make.left.equalToSuperview().offset(6)
+            make.size.equalTo(CGSize(width: 163, height: 29))
+        }
+        moreView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.left.equalToSuperview()
+            make.top.equalTo(odImageView.snp.bottom).offset(14)
+            make.height.equalTo(400)
+            make.bottom.equalToSuperview().offset(-20)
         }
         
         setupGradient()

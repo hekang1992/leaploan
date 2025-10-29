@@ -11,37 +11,48 @@ import MJRefresh
 
 class CenterViewController: BaseViewController {
     
+    let viewModel = CenterPageViewModel()
+    
     lazy var centerView: CenterPageView = {
         let centerView = CenterPageView()
         return centerView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.addSubview(centerView)
         centerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        self.centerView.scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.centerView.scrollView.mj_header?.endRefreshing()
-            }
+        self.centerView.scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            self?.refreshApi()
         })
-        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshApi()
     }
-    */
+}
 
+extension CenterViewController {
+    
+    private func refreshApi() {
+        let json = ["phone": LoginAuthManager.phoneNumber]
+        Task {
+            do {
+                let model = try await viewModel.refreshCenterApi(with: json)
+                if model.phacotherapy == "0" {
+                    self.centerView.phoneLabel.text = model.billionth?.userInfo?.userphone ?? ""
+                }
+                await self.centerView.scrollView.mj_header?.endRefreshing()
+            } catch  {
+                await self.centerView.scrollView.mj_header?.endRefreshing()
+            }
+        }
+    }
+    
 }
