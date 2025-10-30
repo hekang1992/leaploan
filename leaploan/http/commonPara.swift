@@ -97,3 +97,9 @@ class ParameterToUrlConfig {
         return components.url?.absoluteString
     }
 }
+
+class AppTitleConfig {
+    
+    static let settting_title = "Settings"
+    
+}

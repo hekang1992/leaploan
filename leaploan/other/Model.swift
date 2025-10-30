@@ -16,6 +16,7 @@ class billionthModel: Codable {
     var morts: String?
     var shavery: String?
     var userInfo: userInfoModel?
+    var mankin: [mankinModel]?
 }
 
 class oocystModel: Codable {
@@ -27,4 +28,10 @@ class oocystModel: Codable {
 
 class userInfoModel: Codable {
     var userphone: String?
+}
+
+class mankinModel: Codable {
+    var nighted: String?
+    var antisubversive: String?
+    var unworthily: String?
 }

@@ -30,11 +30,19 @@ class CenterViewController: BaseViewController {
         self.centerView.scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             self?.refreshApi()
         })
+        
+        centerView.block = { [weak self] model in
+            guard let self = self else { return }
+            let pageUrl = model.antisubversive ?? ""
+            SchemeURLManagerTool.goPageWithPageUrl(pageUrl, from: self)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshApi()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            self.refreshApi()
+        }
     }
 }
 
@@ -47,6 +55,7 @@ extension CenterViewController {
                 let model = try await viewModel.refreshCenterApi(with: json)
                 if model.phacotherapy == "0" {
                     self.centerView.phoneLabel.text = model.billionth?.userInfo?.userphone ?? ""
+                    self.centerView.modelArray = model.billionth?.mankin ?? []
                 }
                 await self.centerView.scrollView.mj_header?.endRefreshing()
             } catch  {

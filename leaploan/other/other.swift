@@ -41,3 +41,97 @@ class HudToastView {
         window.makeToast(message, duration: 3.0, position: .center)
     }
 }
+
+class SchemeURLManagerTool {
+    
+    enum SchemePath: String {
+        case setting = "Acontias"
+        case home = "unfleshed"
+        case login = "trigly"
+        case order = "likelihoods"
+        case productDetail = "mediastinum"
+        
+        var path: String {
+            return "/\(rawValue)"
+        }
+    }
+    
+    static func goPageWithPageUrl(_ pageUrl: String, from viewController: BaseViewController) {
+        guard let url = URL(string: pageUrl) else {
+            openWebPage(with: pageUrl, from: viewController)
+            return
+        }
+        
+        routeToPage(with: url, from: viewController)
+    }
+    
+    private static func routeToPage(with url: URL, from viewController: BaseViewController) {
+        let path = url.path
+        switch path {
+        case SchemePath.setting.path:
+            navigateToSettingPage(from: viewController)
+        case SchemePath.home.path:
+            navigateToHomePage(from: viewController)
+        case SchemePath.login.path:
+            navigateToLoginPage(from: viewController)
+        case SchemePath.order.path:
+            navigateToOrderPage(from: viewController)
+        case SchemePath.productDetail.path:
+            navigateToProductDetailPage(with: url, from: viewController)
+        default:
+            handleUnknownScheme(from: viewController)
+        }
+    }
+    
+    private static func navigateToSettingPage(from viewController: BaseViewController) {
+         let settingVC = SettingViewController()
+         viewController.navigationController?.pushViewController(settingVC, animated: true)
+    }
+    
+    private static func navigateToHomePage(from viewController: BaseViewController) {
+        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+    }
+    
+    private static func navigateToLoginPage(from viewController: BaseViewController) {
+        LoginAuthManager.removeLoginInfo()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+        }
+    }
+    
+    private static func navigateToOrderPage(from viewController: BaseViewController) {
+        // 跳转到订单页面
+        // let orderVC = OrderViewController()
+        // viewController.navigationController?.pushViewController(orderVC, animated: true)
+    }
+    
+    private static func navigateToProductDetailPage(with url: URL, from viewController: BaseViewController) {
+        // 解析 URL 参数并跳转到商品详情
+        // if let productId = extractProductId(from: url) {
+        //     let detailVC = ProductDetailViewController(productId: productId)
+        //     viewController.navigationController?.pushViewController(detailVC, animated: true)
+        // }
+    }
+    
+    private static func handleUnknownScheme(from viewController: BaseViewController) {
+        // 处理未知的 Scheme，可以记录日志或显示错误提示
+        print("Unknown scheme path")
+    }
+    
+    private static func openWebPage(with urlString: String, from viewController: BaseViewController) {
+        let webVC = WebPageViewController()
+        webVC.pageUrl = urlString
+        viewController.navigationController?.pushViewController(webVC, animated: true)
+    }
+    
+    // MARK: - URL 参数解析工具方法
+    private static func extractProductId(from url: URL) -> String? {
+        // 解析 URL 中的商品ID参数
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems else {
+            return nil
+        }
+        
+        return queryItems.first(where: { $0.name == "id" })?.value
+    }
+}

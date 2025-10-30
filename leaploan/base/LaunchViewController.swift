@@ -16,6 +16,7 @@ import FBSDKCoreKit
 import IQKeyboardManagerSwift
 
 let CHANGE_ROOT_VC = NSNotification.Name("CHANGE_ROOT_VC")
+let CHANGE_ROOT_LAUNCH_VC = NSNotification.Name("CHANGE_ROOT_LAUNCH_VC")
 
 class LaunchViewController: BaseViewController {
     

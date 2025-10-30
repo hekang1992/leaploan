@@ -12,6 +12,12 @@ import SnapKit
 
 struct API {
     static let baseURL = "http://47.84.60.25:8590/Mithraeums"
+    static let schemeURL = "Or://on.rs.ec"
+    static let schemeURL_setting = "Or://on.rs.ec/Acontias"
+    static let schemeURL_home = "Or://on.rs.ec/unfleshed"
+    static let schemeURL_login = "Or://on.rs.ec/trigly"
+    static let schemeURL_order = "Or://on.rs.ec/likelihoods"
+    static let schemeURL_product_detail = "Or://on.rs.ec/mediastinum"
 }
 
 final class HttpsRequest {

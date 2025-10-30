@@ -8,8 +8,22 @@
 import UIKit
 import SnapKit
 import ActiveLabel
+import RxCocoa
+import RxSwift
+import RxGesture
 
 class CenterPageView: UIView {
+    
+    var block: ((mankinModel) -> Void)?
+    
+    let disposeBag = DisposeBag()
+    
+    var modelArray: [mankinModel]? {
+        didSet {
+            guard let modelArray = modelArray else { return }
+            setupGridViews(items: modelArray)
+        }
+    }
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -110,14 +124,32 @@ class CenterPageView: UIView {
         return odImageView
     }()
     
-    lazy var moreView: UIView = {
-        let moreView = UIView()
-        moreView.backgroundColor = .systemPink
-        return moreView
+    lazy var containerStackView: UIStackView = {
+        let containerStackView = UIStackView()
+        containerStackView.axis = .vertical
+        containerStackView.spacing = 0
+        containerStackView.distribution = .fillEqually
+        containerStackView.alignment = .fill
+        return containerStackView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupUI()
+        setupConstraints()
+        setupGradient()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = bgView.bounds
+    }
+    
+    private func setupUI() {
         addSubview(bgImageView)
         addSubview(nameLabel)
         addSubview(bgView)
@@ -130,7 +162,10 @@ class CenterPageView: UIView {
         scrollView.addSubview(mentLabel)
         scrollView.addSubview(orderImageView)
         scrollView.addSubview(odImageView)
-        scrollView.addSubview(moreView)
+        scrollView.addSubview(containerStackView)
+    }
+    
+    private func setupConstraints() {
         bgImageView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
             make.height.equalTo(450)
@@ -189,24 +224,13 @@ class CenterPageView: UIView {
             make.left.equalToSuperview().offset(6)
             make.size.equalTo(CGSize(width: 163, height: 29))
         }
-        moreView.snp.makeConstraints { make in
+        containerStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.left.equalToSuperview()
-            make.top.equalTo(odImageView.snp.bottom).offset(14)
-            make.height.equalTo(400)
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
+            make.top.equalTo(odImageView.snp.bottom).offset(10)
             make.bottom.equalToSuperview().offset(-20)
         }
-        
-        setupGradient()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradientLayer.frame = bgView.bounds
     }
     
     private func setupGradient() {
@@ -218,4 +242,40 @@ class CenterPageView: UIView {
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
         bgView.layer.insertSublayer(gradientLayer, at: 0)
     }
+    
+    private func setupGridViews(items: [mankinModel]) {
+        containerStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        for i in stride(from: 0, to: items.count, by: 2) {
+            let rowStackView = UIStackView()
+            rowStackView.axis = .horizontal
+            rowStackView.spacing = 10
+            rowStackView.distribution = .fillEqually
+            rowStackView.alignment = .fill
+            
+            let firstItemView = createItemView(with: items[i])
+            rowStackView.addArrangedSubview(firstItemView)
+            
+            if i + 1 < items.count {
+                let secondItemView = createItemView(with: items[i + 1])
+                rowStackView.addArrangedSubview(secondItemView)
+            } else {
+                let emptyView = UIView()
+                emptyView.backgroundColor = .clear
+                rowStackView.addArrangedSubview(emptyView)
+            }
+            
+            containerStackView.addArrangedSubview(rowStackView)
+        }
+    }
+    
+    private func createItemView(with model: mankinModel) -> UIView {
+        let itemView = CenterListView()
+        itemView.model = model
+        itemView.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
+            self?.block?(model)
+        }).disposed(by: disposeBag)
+        return itemView
+    }
+    
 }

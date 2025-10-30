@@ -43,6 +43,16 @@ extension AppDelegate {
                 self?.switchChangeRootVc(notification)
             })
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default
+            .rx
+            .notification(CHANGE_ROOT_LAUNCH_VC)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] notification in
+                guard let self = self else { return }
+                window?.rootViewController = LaunchViewController()
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc func switchChangeRootVc(_ noti: Notification) {
