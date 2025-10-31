@@ -106,15 +106,13 @@ class SchemeURLManagerTool {
     }
     
     private static func navigateToProductDetailPage(with url: URL, from viewController: BaseViewController) {
-        // 解析 URL 参数并跳转到商品详情
-        // if let productId = extractProductId(from: url) {
-        //     let detailVC = ProductDetailViewController(productId: productId)
-        //     viewController.navigationController?.pushViewController(detailVC, animated: true)
-        // }
+         if let productId = extractProductId(from: url) {
+             let detailVC = ProductDetailViewController(productId: productId)
+             viewController.navigationController?.pushViewController(detailVC, animated: true)
+         }
     }
     
     private static func handleUnknownScheme(from viewController: BaseViewController) {
-        // 处理未知的 Scheme，可以记录日志或显示错误提示
         print("Unknown scheme path")
     }
     
@@ -124,14 +122,11 @@ class SchemeURLManagerTool {
         viewController.navigationController?.pushViewController(webVC, animated: true)
     }
     
-    // MARK: - URL 参数解析工具方法
     private static func extractProductId(from url: URL) -> String? {
-        // 解析 URL 中的商品ID参数
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               let queryItems = components.queryItems else {
             return nil
         }
-        
-        return queryItems.first(where: { $0.name == "id" })?.value
+        return queryItems.first(where: { $0.name == "snowier" })?.value
     }
 }

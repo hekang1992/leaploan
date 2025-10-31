@@ -18,6 +18,11 @@ class OrderViewController: BaseViewController {
     
     var orderType: String = "7"
     
+    lazy var emptyView: AppEmptyView = {
+        let emptyView = AppEmptyView(frame: .zero)
+        return emptyView
+    }()
+    
     lazy var oneBtn: UIButton = {
         let oneBtn = UIButton(type: .custom)
         oneBtn.setTitle("Repayment", for: .normal)
@@ -136,6 +141,7 @@ class OrderViewController: BaseViewController {
             self?.twoBtn.backgroundColor = UIColor.white
             self?.threeBtn.backgroundColor = UIColor.white
             self?.orderType = "7"
+            self?.getListInfo(with: "7")
         }).disposed(by: disposeBag)
         
         twoBtn.rx.tap.bind(onNext: { [weak self] in
@@ -146,6 +152,7 @@ class OrderViewController: BaseViewController {
             self?.twoBtn.backgroundColor = UIColor.init(hexString: "#FF29D5")
             self?.threeBtn.backgroundColor = UIColor.white
             self?.orderType = "6"
+            self?.getListInfo(with: "7")
         }).disposed(by: disposeBag)
         
         threeBtn.rx.tap.bind(onNext: { [weak self] in
@@ -156,8 +163,18 @@ class OrderViewController: BaseViewController {
             self?.twoBtn.backgroundColor = UIColor.white
             self?.threeBtn.backgroundColor = UIColor.init(hexString: "#FF29D5")
             self?.orderType = "5"
+            self?.getListInfo(with: "5")
         }).disposed(by: disposeBag)
         
+        view.addSubview(emptyView)
+        emptyView.snp.makeConstraints { make in
+            make.left.bottom.right.equalToSuperview()
+            make.top.equalTo(whiteView.snp.bottom).offset(12)
+        }
+        
+        emptyView.clickBlock = {
+            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+        }
         
     }
     
@@ -175,6 +192,14 @@ extension OrderViewController {
         Task {
             do {
                 let model = try await viewModel.getOrderListInfo(with: json)
+                if model.phacotherapy == "0" {
+                    let modelArray = model.billionth?.mankin ?? []
+                    if modelArray.count > 0 && !modelArray.isEmpty {
+                        emptyView.isHidden = true
+                    }else {
+                        emptyView.isHidden = false
+                    }
+                }
             } catch  {
                 
             }

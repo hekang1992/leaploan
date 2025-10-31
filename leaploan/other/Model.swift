@@ -17,6 +17,10 @@ class billionthModel: Codable {
     var shavery: String?
     var userInfo: userInfoModel?
     var mankin: [mankinModel]?
+    var cosmometry: cosmometryModel?
+    var antisubversive: String?
+    var sesti: sestiModel?
+    var gadgeteer: [gadgeteerModel]?
 }
 
 class oocystModel: Codable {
@@ -34,4 +38,39 @@ class mankinModel: Codable {
     var nighted: String?
     var antisubversive: String?
     var unworthily: String?
+    var frypans: String?
+    var majeure: [majeureModel]?
+}
+
+class majeureModel: Codable {
+    var negrita: Int?
+    var sonnetized: String?
+    var sporogenous: String?
+    var mesopectus: String?
+    
+    var cabaho: String?
+    var kenai: String?
+    var chiefdom: String?
+    var acad: String?
+    var petaliform: String?
+    var premisory: String?
+    var threeDes: String?
+}
+
+class cosmometryModel: Codable {
+    var nighted: String?
+    var photodrama: String?
+}
+
+class sestiModel: Codable {
+    var sonnetized: String?
+    var negrita: String?
+}
+
+class gadgeteerModel: Codable {
+    var nighted: String?
+    var huggermugger: String?
+    var scrutinizer: String?
+    var hundredfold: Int?
+    var tilewright: String?
 }
