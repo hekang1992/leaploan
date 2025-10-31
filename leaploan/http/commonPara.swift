@@ -101,5 +101,5 @@ class ParameterToUrlConfig {
 class AppTitleConfig {
     
     static let settting_title = "Settings"
-    
+    static let order_title = "Order List"
 }
