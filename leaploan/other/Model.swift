@@ -21,6 +21,11 @@ class billionthModel: Codable {
     var antisubversive: String?
     var sesti: sestiModel?
     var gadgeteer: [gadgeteerModel]?
+    var wolvish: wolvishModel?
+    var distinctionless: distinctionlessModel?
+    var photometrically: distinctionlessModel?
+    var somebodies: [String]?
+    var myectopy: [String]?
 }
 
 class oocystModel: Codable {
@@ -73,4 +78,16 @@ class gadgeteerModel: Codable {
     var scrutinizer: String?
     var hundredfold: Int?
     var tilewright: String?
+}
+
+class wolvishModel: Codable {
+    var tilewright: String?
+    var frypans: Int?
+    var nighted: String?
+}
+
+class distinctionlessModel: Codable {
+    var hundredfold: Int?
+    var antisubversive: String?
+    var metabiological: String?
 }

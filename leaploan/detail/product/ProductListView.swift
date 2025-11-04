@@ -14,7 +14,7 @@ class ProductListView: UIView {
     var model: gadgeteerModel? {
         didSet {
             guard let model = model else { return }
-            bgImageView.kf.setImage(with: URL(string: model.scrutinizer ?? ""))
+            footImageView.kf.setImage(with: URL(string: model.scrutinizer ?? ""))
             nameLabel.text = model.nighted ?? ""
             descLabel.text = model.huggermugger ?? ""
             let hundredfold = model.hundredfold ?? 0
@@ -25,8 +25,8 @@ class ProductListView: UIView {
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
-        bgImageView.backgroundColor = .systemBlue
         bgImageView.isUserInteractionEnabled = true
+        bgImageView.image = UIImage(named: "whi_icon_image")
         return bgImageView
     }()
     
@@ -41,6 +41,12 @@ class ProductListView: UIView {
         completeImageView.image = UIImage(named: "complete_icon_image")
         completeImageView.isHidden = true
         return completeImageView
+    }()
+    
+    lazy var footImageView: UIImageView = {
+        let footImageView = UIImageView()
+        footImageView.contentMode = .scaleAspectFit
+        return footImageView
     }()
     
     lazy var nameLabel: UILabel = {
@@ -69,9 +75,12 @@ class ProductListView: UIView {
         bgImageView.addSubview(nameLabel)
         bgImageView.addSubview(descLabel)
         bgImageView.addSubview(completeImageView)
+        bgImageView.addSubview(footImageView)
         
         bgImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(2)
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(93)
+            make.bottom.equalToSuperview().inset(5)
         }
         
         rightImageView.snp.makeConstraints { make in
@@ -90,6 +99,11 @@ class ProductListView: UIView {
             make.top.equalTo(nameLabel.snp.bottom).offset(6)
             make.left.equalToSuperview().offset(10)
             make.width.equalTo(120)
+        }
+        
+        footImageView.snp.makeConstraints { make in
+            make.right.bottom.equalToSuperview()
+            make.size.equalTo(CGSize(width: 64, height: 47))
         }
         
         completeImageView.snp.makeConstraints { make in

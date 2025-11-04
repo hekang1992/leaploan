@@ -13,6 +13,12 @@ class BaseViewController: UIViewController {
         let headView = AppHeadView()
         return headView
     }()
+    
+    lazy var stepHeadView: StepHeadView = {
+        let stepHeadView = StepHeadView()
+        return stepHeadView
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

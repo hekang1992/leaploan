@@ -15,6 +15,8 @@ class ProductDetailListView: UIView {
     
     let disposeBag = DisposeBag()
     
+    var returnBlock: ((gadgeteerModel) -> Void)?
+    
     lazy var containerStackView: UIStackView = {
         let containerStackView = UIStackView()
         containerStackView.axis = .vertical
@@ -35,7 +37,7 @@ class ProductDetailListView: UIView {
         super.init(frame: frame)
         addSubview(containerStackView)
         containerStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(5)
         }
     }
     
@@ -81,7 +83,7 @@ extension ProductDetailListView {
             .tapGesture()
             .when(.recognized)
             .bind(onNext: { [weak self] _ in
-                
+                self?.returnBlock?(model)
             })
             .disposed(by: disposeBag)
         return itemView

@@ -8,10 +8,14 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import RxSwift
+import RxCocoa
 
 class ProductDetailViewController: BaseViewController {
     
     let productId: String
+    
+    let disposeBag = DisposeBag()
     
     init(productId: String) {
         self.productId = productId
@@ -23,6 +27,8 @@ class ProductDetailViewController: BaseViewController {
     }
     
     let viewModel = ProductViewModel()
+    
+    var baseModel: BaseModel?
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
@@ -41,7 +47,14 @@ class ProductDetailViewController: BaseViewController {
     lazy var scroImageView: UIImageView = {
         let scroImageView = UIImageView()
         scroImageView.image = UIImage(named: "audio_icon_image")
+        scroImageView.isUserInteractionEnabled = true
         return scroImageView
+    }()
+    
+    lazy var descImageView: UIImageView = {
+        let descImageView = UIImageView()
+        descImageView.image = UIImage(named: "qie_icon_image")
+        return descImageView
     }()
     
     lazy var nameLabel: UILabel = {
@@ -114,6 +127,13 @@ class ProductDetailViewController: BaseViewController {
             make.centerX.equalToSuperview()
         }
         
+        scroImageView.addSubview(descImageView)
+        descImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(48)
+            make.left.equalToSuperview().offset(3)
+            make.size.equalTo(CGSize(width: 168, height: 44))
+        }
+        
         scrollView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(scroImageView.snp.bottom).offset(20)
@@ -136,11 +156,26 @@ class ProductDetailViewController: BaseViewController {
         
         scroImageView.addSubview(listView)
         listView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(103)
+            make.top.equalTo(descImageView.snp.bottom).inset(8)
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(12)
             make.bottom.equalToSuperview().offset(-30)
         }
+        
+        listView.returnBlock = { [weak self] model in
+            guard let self = self, let baseModel = baseModel else { return }
+            let wolvishModel = baseModel.billionth?.wolvish
+            let tilewright = wolvishModel?.tilewright ?? ""
+            RouterNextStepConfig.changeVc(with: tilewright, vc: self)
+        }
+        
+        applyBtn.rx.tap.bind(onNext: { [weak self] in
+            guard let self = self, let baseModel = baseModel else { return }
+            let wolvishModel = baseModel.billionth?.wolvish
+            let tilewright = wolvishModel?.tilewright ?? ""
+            RouterNextStepConfig.changeVc(with: tilewright, vc: self)
+        }).disposed(by: disposeBag)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,6 +192,7 @@ extension ProductDetailViewController {
         Task {
             do {
                 let model = try await viewModel.findProductDetailInfo(with: json)
+                self.baseModel = model
                 if model.phacotherapy == "0" {
                     if let cosmometryModel = model.billionth?.cosmometry, let photodrama = cosmometryModel.photodrama, !photodrama.isEmpty {
                         nameLabel.isHidden = false
@@ -170,6 +206,53 @@ extension ProductDetailViewController {
             } catch {
                 await self.scrollView.mj_header?.endRefreshing()
             }
+        }
+    }
+    
+}
+
+class RouterNextStepConfig {
+    
+    static func changeVc(with type: String, vc: ProductDetailViewController) {
+        let json = ["snowier": vc.productId, "hundredfold": type]
+        switch type {
+        case RouterConfig.ONE_AUTH_STEP:
+            Task {
+                do {
+                    let model = try await vc.viewModel.findFacelInfo(with: json)
+                    if model.phacotherapy == "0" {
+                        let imageModel = model.billionth?.distinctionless
+                        if imageModel?.hundredfold == 0 {
+                            let selectVc = SelectAuthViewController()
+                            selectVc.productID = vc.productId
+                            selectVc.model = model
+                            selectVc.baseModel = vc.baseModel
+                            vc.navigationController?.pushViewController(selectVc, animated: true)
+                        }else {
+                            let faceVc = FaceViewController()
+                            faceVc.productID = vc.productId
+                            faceVc.model = model
+                            faceVc.baseModel = vc.baseModel
+                            vc.navigationController?.pushViewController(faceVc, animated: true)
+                        }
+                    }
+                } catch  {
+                    
+                }
+            }
+            break
+        case RouterConfig.TWO_AUTH_STEP:
+            break
+        case RouterConfig.THREE_AUTH_STEP:
+            break
+        case RouterConfig.FOUR_AUTH_STEP:
+            break
+        case RouterConfig.FIVE_AUTH_STEP:
+            break
+        case RouterConfig.SIX_AUTH_STEP:
+            break
+        default:
+            break
         }
     }
     

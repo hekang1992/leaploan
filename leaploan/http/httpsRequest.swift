@@ -96,7 +96,7 @@ extension HttpsRequest {
             AF.upload(multipartFormData: { formData in
                 if let imageData = image.jpegData(compressionQuality: 0.8) {
                     formData.append(imageData,
-                                    withName: "file",
+                                    withName: "froideur",
                                     fileName: "upload.jpg",
                                     mimeType: "image/jpeg")
                 }

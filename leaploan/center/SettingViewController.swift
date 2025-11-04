@@ -86,7 +86,7 @@ extension SettingViewController {
     
     private func tcInfo() {
         let logoutView = AppPopAlertView(frame: self.view.bounds)
-        logoutView.bgImageView.image = UIImage(named: "lee_ip_image")
+        logoutView.bgImageView.image = UIImage(named: "ex_ic_image")
         let alertVc = TYAlertController(alert: logoutView, preferredStyle: .alert)!
         self.present(alertVc, animated: true)
         
