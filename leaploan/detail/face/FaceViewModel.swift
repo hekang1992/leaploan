@@ -27,4 +27,22 @@ class FaceViewModel {
         }
     }
     
+    /// SAVE_IMAGE_INFO_CDC
+    func saveImageInfo(with json: [String: String]) async throws -> BaseModel {
+        
+        Loading.show()
+        
+        defer {
+            Loading.hide()
+        }
+        
+        do {
+            let model: BaseModel = try await HttpsRequest.shared.postFrom("/Pasteurella/oocyst", parameters: json)
+            return model
+        } catch {
+            print("error===: \(error)")
+            throw error
+        }
+    }
+    
 }

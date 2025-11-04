@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxGesture
 import TYAlertController
+import Kingfisher
 
 class FaceViewController: BaseViewController {
     
@@ -40,6 +41,17 @@ class FaceViewController: BaseViewController {
     let viewModel = ProductViewModel()
     
     let faceViewModel = FaceViewModel()
+    
+    lazy var clickBtn: UIButton = {
+        let clickBtn = UIButton(type: .custom)
+        clickBtn.setTitle("Next Step", for: .normal)
+        clickBtn.backgroundColor = UIColor.init(hexString: "#FF29D5")
+        clickBtn.setTitleColor(.white, for: .normal)
+        clickBtn.layer.cornerRadius = 22
+        clickBtn.layer.masksToBounds = true
+        clickBtn.isHidden = true
+        return clickBtn
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,12 +100,20 @@ class FaceViewController: BaseViewController {
             make.height.equalTo(87)
         }
         
-        stepHeadView.configWithModelArray(with: baseModel?.billionth?.gadgeteer ?? [])
+        stepHeadView.configWithModelArray(with: baseModel?.billionth?.gadgeteer ?? [], selectIndex: 0)
         
         view.addSubview(faceUploadView)
         faceUploadView.snp.makeConstraints { make in
             make.top.equalTo(stepHeadView.snp.bottom).offset(12)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-60)
+        }
+        
+        view.addSubview(clickBtn)
+        clickBtn.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-20)
+            make.size.equalTo(CGSize(width: 321, height: 44))
+            make.centerX.equalToSuperview()
         }
         
         faceUploadView.nameLabel.text = type
@@ -130,8 +150,9 @@ class FaceViewController: BaseViewController {
             .when(.recognized)
             .bind(onNext: { [weak self] _ in
                 let distinctionlessModel = self?.faceModel?.billionth?.distinctionless
+                let photometricallyModel = self?.faceModel?.billionth?.photometrically
                 let idstatus = distinctionlessModel?.hundredfold ?? 0
-                let facestatus = distinctionlessModel?.hundredfold ?? 0
+                let facestatus = photometricallyModel?.hundredfold ?? 0
                 if idstatus == 0 {
                     HudToastView.showMessage(with: "Complete identity verification first.")
                 }else if facestatus == 0 {
@@ -140,6 +161,11 @@ class FaceViewController: BaseViewController {
                     HudToastView.showMessage(with: "Identity verification completed.")
                 }
             }).disposed(by: disposeBag)
+        
+        clickBtn.rx.tap.bind(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.popAuthListVC()
+        }).disposed(by: disposeBag)
         
         getFaceInfo()
     }
@@ -161,13 +187,28 @@ extension FaceViewController {
                 let photostatus = photoModel?.hundredfold ?? 0
                 let facestatus = faceModel?.hundredfold ?? 0
                 
+                
+                let photoslogo = photoModel?.antisubversive ?? ""
+                let faceslogo = faceModel?.antisubversive ?? ""
+                
+                
+                
                 if photostatus == 0 {
                     alertPhotoView()
-                }else if facestatus == 0 {
-                    alertFaceView()
-                }else {
-                    
+                    return
                 }
+                
+                self.faceUploadView.photoListView.bgImageView.kf.setImage(with: URL(string: photoslogo))
+                self.faceUploadView.photoListView.descImageView.image = UIImage(named: "check_sel_image")
+                
+                if facestatus == 0 {
+                    alertFaceView()
+                    return
+                }
+                
+                self.faceUploadView.faceListView.bgImageView.kf.setImage(with: URL(string: faceslogo))
+                self.faceUploadView.faceListView.descImageView.image = UIImage(named: "check_sel_image")
+                self.clickBtn.isHidden = false
             } catch  {
                 
             }
@@ -186,9 +227,9 @@ extension FaceViewController {
         photoView.cameraBlock = { [weak self] in
             guard let self = self else { return }
             self.dismiss(animated: true) {
-                CameraPickerManager.shared.takePhoto(from: self) { image in
+                CameraPickerManager.shared.takePhoto(from: self, source: "1") { image in
                     guard let image = image else { return }
-                    self.upLoadPhotoImageInfo(with: "1", image: image)
+                    self.upLoadPhotoImageInfo(with: "1",frypans: "11", image: image)
                 }
             }
         }
@@ -198,23 +239,86 @@ extension FaceViewController {
             self.dismiss(animated: true) {
                 AlbumPickerManager.shared.pickImage(from: self) { image in
                     guard let image = image else { return }
-                    self.upLoadPhotoImageInfo(with: "2", image: image)
+                    self.upLoadPhotoImageInfo(with: "2",frypans: "11", image: image)
                 }
             }
         }
     }
     
     private func alertFaceView() {
-        HudToastView.showMessage(with: "face")
+        let photoView = ChooseFaceView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: photoView, preferredStyle: .actionSheet)!
+        self.present(alertVc, animated: true)
+        
+        photoView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        photoView.cameraBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true) {
+                CameraPickerManager.shared.takePhoto(from: self, source: "2") { image in
+                    guard let image = image else { return }
+                    self.upLoadPhotoImageInfo(with: "1", frypans: "10", image: image)
+                }
+            }
+        }
     }
     
-    private func upLoadPhotoImageInfo(with cratemen: String, image: UIImage) {
-        let json = ["cratemen": cratemen, "frypans": "11", "metabiological": type]
+    private func upLoadPhotoImageInfo(with cratemen: String, frypans: String, image: UIImage) {
+        let json = ["cratemen": cratemen, "frypans": frypans, "metabiological": type]
         Task {
             do {
                 let model = try await faceViewModel.uploadImageInfo(with: json, image: image)
                 if model.phacotherapy == "0" {
-                    
+                    if frypans == "11" {
+                        alertWithModel(with: model)
+                    }else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                            self.getFaceInfo()
+                        }
+                    }
+                }else {
+                    HudToastView.showMessage(with: model.marsi ?? "")
+                }
+            } catch  {
+                
+            }
+        }
+    }
+    
+    private func alertWithModel(with model: BaseModel) {
+        let selectNameView = SelectNameView(frame: self.view.bounds)
+        let modelArray = model.billionth?.floroscope ?? []
+        selectNameView.modelArray = modelArray
+        let alertVc = TYAlertController(alert: selectNameView, preferredStyle: .actionSheet, transitionAnimation: .dropDown)!
+        self.present(alertVc, animated: true)
+        selectNameView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        selectNameView.clickBlock = { [weak self] in
+            guard let self = self else { return }
+            var json: [String: String] = ["metabiological": type,
+                                          "frypans": "11",
+                                          "snowier": productID]
+            self.dismiss(animated: true) {
+                for model in modelArray {
+                    let key = model.phacotherapy ?? ""
+                    let value = model.operculiferous ?? ""
+                    json[key] = value
+                }
+                print("json===========\(json)")
+                self.saveInfo(with: json)
+            }
+        }
+    }
+    
+    private func saveInfo(with json: [String: String]) {
+        Task {
+            do {
+                let model = try await faceViewModel.saveImageInfo(with: json)
+                if model.phacotherapy == "0" {
+                    getFaceInfo()
                 }else {
                     HudToastView.showMessage(with: model.marsi ?? "")
                 }

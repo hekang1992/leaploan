@@ -29,3 +29,16 @@ class BaseViewController: UIViewController {
     
 
 }
+
+extension BaseViewController {
+    
+    func popAuthListVC() {
+        guard let navigationController = self.navigationController else { return }
+        if let targetVC = navigationController.viewControllers.first(where: { $0 is ProductDetailViewController }) {
+            navigationController.popToViewController(targetVC, animated: true)
+        } else {
+            navigationController.popToRootViewController(animated: true)
+        }
+    }
+    
+}

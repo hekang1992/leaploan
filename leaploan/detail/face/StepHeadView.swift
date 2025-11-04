@@ -32,7 +32,7 @@ class StepHeadView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configWithModelArray(with modelArray: [gadgeteerModel]) {
+    func configWithModelArray(with modelArray: [gadgeteerModel], selectIndex: Int) {
         buttons.forEach { $0.removeFromSuperview() }
         buttons.removeAll()
         
@@ -51,6 +51,11 @@ class StepHeadView: UIView {
             let button = UIButton(type: .custom)
             button.tag = index
             let title = model.tilewright ?? ""
+            if index == selectIndex {
+                button.isEnabled = false
+            }else {
+                button.isEnabled = true
+            }
             button.setImage(UIImage(named: "\(title)_image"), for: .normal)
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             
@@ -90,6 +95,6 @@ class StepHeadView: UIView {
     }
     
     @objc private func buttonTapped(_ sender: UIButton) {
-        // 处理按钮点击事件
+        
     }
 }

@@ -97,13 +97,13 @@ class CameraPickerManager: NSObject {
     static let shared = CameraPickerManager()
     private var completion: ((UIImage?) -> Void)?
     
-    func takePhoto(from viewController: UIViewController, completion: @escaping (UIImage?) -> Void) {
+    func takePhoto(from viewController: UIViewController, source: String, completion: @escaping (UIImage?) -> Void) {
         self.completion = completion
         
         AVCaptureDevice.requestAccess(for: .video) { granted in
             DispatchQueue.main.async {
                 if granted {
-                    self.presentCamera(from: viewController)
+                    self.presentCamera(from: viewController, source: source)
                 } else {
                     self.showPermissionAlert(from: viewController, type: "相机")
                 }
@@ -111,7 +111,7 @@ class CameraPickerManager: NSObject {
         }
     }
     
-    private func presentCamera(from viewController: UIViewController) {
+    private func presentCamera(from viewController: UIViewController, source: String) {
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
             let alert = UIAlertController(
                 title: "相机不可用",
@@ -129,6 +129,11 @@ class CameraPickerManager: NSObject {
         imagePicker.sourceType = .camera
         imagePicker.allowsEditing = true
         imagePicker.cameraCaptureMode = .photo
+        if source == "1" {
+            imagePicker.cameraDevice = .rear
+        }else {
+            imagePicker.cameraDevice = .front
+        }
         viewController.present(imagePicker, animated: true)
     }
     

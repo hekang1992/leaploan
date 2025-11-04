@@ -164,9 +164,19 @@ class ProductDetailViewController: BaseViewController {
         
         listView.returnBlock = { [weak self] model in
             guard let self = self, let baseModel = baseModel else { return }
+            /// NEXT_PAGE_MESSAGE
             let wolvishModel = baseModel.billionth?.wolvish
-            let tilewright = wolvishModel?.tilewright ?? ""
-            RouterNextStepConfig.changeVc(with: tilewright, vc: self)
+            let wolvishtilewright = wolvishModel?.tilewright ?? ""
+            /// LIST_INFO_MESSAGE
+            let isAuth = model.hundredfold ?? 0
+            let tilewright = model.tilewright ?? ""
+            
+            var type: String = ""
+            
+            type = isAuth == 1 ? tilewright : wolvishtilewright
+            
+            RouterNextStepConfig.changeVc(with: type, vc: self)
+            
         }
         
         applyBtn.rx.tap.bind(onNext: { [weak self] in
@@ -213,7 +223,8 @@ extension ProductDetailViewController {
 
 class RouterNextStepConfig {
     
-    static func changeVc(with type: String, vc: ProductDetailViewController) {
+    static func changeVc(with type: String,
+                         vc: ProductDetailViewController) {
         let json = ["snowier": vc.productId, "hundredfold": type]
         switch type {
         case RouterConfig.ONE_AUTH_STEP:
@@ -242,6 +253,10 @@ class RouterNextStepConfig {
             }
             break
         case RouterConfig.TWO_AUTH_STEP:
+            let personalVc = PersonalViewController()
+            personalVc.productID = vc.productId
+            personalVc.baseModel = vc.baseModel
+            vc.navigationController?.pushViewController(personalVc, animated: true)
             break
         case RouterConfig.THREE_AUTH_STEP:
             break

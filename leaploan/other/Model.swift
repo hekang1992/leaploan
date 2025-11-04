@@ -26,6 +26,7 @@ class billionthModel: Codable {
     var photometrically: distinctionlessModel?
     var somebodies: [String]?
     var myectopy: [String]?
+    var floroscope: [floroscopeModel]?
 }
 
 class oocystModel: Codable {
@@ -90,4 +91,10 @@ class distinctionlessModel: Codable {
     var hundredfold: Int?
     var antisubversive: String?
     var metabiological: String?
+}
+
+class floroscopeModel: Codable {
+    var responsive: String?
+    var operculiferous: String?
+    var phacotherapy: String?
 }
