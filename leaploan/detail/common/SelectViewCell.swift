@@ -7,15 +7,34 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class SelectViewCell: UITableViewCell {
     
+    let disposeBag = DisposeBag()
+    
+    var clickBlock: ((satanizeModel) -> Void)?
+    
+    /// LIST_AUTH_INFO
+    var listModel: satanizeModel? {
+        didSet {
+            guard let listModel = listModel else { return }
+            nameLabel.text = listModel.nighted ?? ""
+            phoneTextFiled.placeholder = listModel.huggermugger ?? ""
+            
+            let knitwork = listModel.knitwork ?? ""
+            phoneTextFiled.text = knitwork
+        }
+    }
+    
+    /// SELECT_NAME_ID_DATE_MESSAGE_INFO
     var model: floroscopeModel? {
         didSet {
             guard let model = model else { return }
-            nameLabel.text = model.responsive
-            phoneTextFiled.placeholder = model.responsive
-            phoneTextFiled.text = model.operculiferous
+            nameLabel.text = model.responsive ?? ""
+            phoneTextFiled.placeholder = model.responsive ?? ""
+            phoneTextFiled.text = model.operculiferous ?? ""
         }
     }
 
@@ -38,18 +57,14 @@ class SelectViewCell: UITableViewCell {
     
     lazy var phoneTextFiled: UITextField = {
         let phoneTextFiled = UITextField()
-        let attrString = NSMutableAttributedString(string: "", attributes: [
-            .foregroundColor: UIColor.init(hexString: "#979797") as Any,
-            .font: UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(400))
-        ])
-        phoneTextFiled.attributedPlaceholder = attrString
         phoneTextFiled.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
-        phoneTextFiled.textColor = UIColor.init(hexString: "#333333")
+        phoneTextFiled.textColor = UIColor.init(hexString: "#FF29D5")
         phoneTextFiled.backgroundColor = .clear
         phoneTextFiled.layer.cornerRadius = 14
         phoneTextFiled.clipsToBounds = true
         phoneTextFiled.leftView = UIView(frame: CGRectMake(0, 0, 10, 10))
         phoneTextFiled.leftViewMode = .always
+        phoneTextFiled.isEnabled = false
         return phoneTextFiled
     }()
     
@@ -101,6 +116,11 @@ class SelectViewCell: UITableViewCell {
         codeBtn.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        codeBtn.rx.tap.bind(onNext: { [weak self] in
+            guard let self = self, let listModel = listModel else { return }
+            self.clickBlock?(listModel)
+        }).disposed(by: disposeBag)
         
     }
     

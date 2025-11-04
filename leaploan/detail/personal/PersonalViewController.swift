@@ -10,6 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import TYAlertController
+import BRPickerView
 
 class PersonalViewController: BaseViewController {
     
@@ -18,6 +19,10 @@ class PersonalViewController: BaseViewController {
     var baseModel: BaseModel?
     
     let disposeBag = DisposeBag()
+    
+    let viewModel = PersonalViewModel()
+    
+    let dataSource = BehaviorRelay<[satanizeModel]>(value: [])
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
@@ -34,9 +39,22 @@ class PersonalViewController: BaseViewController {
         return clickBtn
     }()
     
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.clear
+        tableView.register(CommonViewCell.self, forCellReuseIdentifier: "CommonViewCell")
+        tableView.register(SelectViewCell.self, forCellReuseIdentifier: "SelectViewCell")
+        tableView.estimatedRowHeight = 80
+        tableView.showsVerticalScrollIndicator = false
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.rowHeight = UITableView.automaticDimension
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.init(hexString: "#1ABFFF")
         
@@ -99,9 +117,19 @@ class PersonalViewController: BaseViewController {
         headImageView.image = UIImage(named: "pep_auth_image")
         bgView.addSubview(headImageView)
         headImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
+            make.top.equalToSuperview()
             make.left.equalToSuperview().offset(12)
             make.size.equalTo(CGSize(width: 329, height: 105))
+        }
+        
+        let graniImageView = UIImageView()
+        graniImageView.isUserInteractionEnabled = true
+        graniImageView.image = UIImage(named: "auth_bg_icon_image")
+        bgView.addSubview(graniImageView)
+        graniImageView.snp.makeConstraints { make in
+            make.top.equalTo(headImageView.snp.bottom)
+            make.left.right.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().offset(-10)
         }
         
         view.addSubview(clickBtn)
@@ -111,17 +139,151 @@ class PersonalViewController: BaseViewController {
             make.size.equalTo(CGSize(width: 321, height: 44))
         }
         
+        graniImageView.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(20)
+            make.left.right.bottom.equalToSuperview()
+        }
+        
+        dataSource
+            .bind(to: tableView.rx.items) { [weak self] (tableView, row, element) in
+                return self?.configureCell(for: tableView, at: row, with: element) ?? UITableViewCell()
+            }
+            .disposed(by: disposeBag)
+        
+        clickBtn.rx.tap.bind(onNext: { [weak self] in
+            guard let self = self else { return }
+            var json: [String: String] = ["snowier": productID]
+            self.dataSource.value.forEach { model in
+                let desulfurization = model.desulfurization ?? ""
+                let key = model.phacotherapy ?? ""
+                if desulfurization == "topsmelts" {
+                    let dictValue = String(model.frypans ?? 0)
+                    json[key] = dictValue == "0" ? "" : dictValue
+                }else {
+                    json[key] = model.knitwork
+                }
+            }
+            self.saveInfo(with: json)
+        }).disposed(by: disposeBag)
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getListInfo()
     }
-    */
+    
+    private func saveInfo(with json: [String: String]) {
+        Task {
+            do {
+                let model = try await viewModel.savePersonalInfo(with: json)
+                if model.phacotherapy == "0" {
+                    self.popAuthListVC()
+                }else {
+                    HudToastView.showMessage(with: model.marsi ?? "")
+                }
+            } catch  {
+                
+            }
+        }
+    }
+    
+}
 
+
+extension PersonalViewController {
+    
+    private func configureCell(for tableView: UITableView, at row: Int, with element: satanizeModel) -> UITableViewCell {
+        if element.desulfurization == "tweezing" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommonViewCell") as! CommonViewCell
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            cell.listModel = element
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectViewCell") as! SelectViewCell
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            cell.listModel = element
+            cell.clickBlock = { [weak self] satanizeModel in
+                guard let self = self else { return }
+                self.clickCellWithModel(with: cell, model: satanizeModel)
+            }
+            return cell
+        }
+    }
+    
+    private func getListInfo() {
+        let json = ["snowier": productID]
+        Task {
+            do {
+                let model = try await viewModel.getPersonalInfo(with: json)
+                if model.phacotherapy == "0" {
+                    self.dataSource.accept(model.billionth?.satanize ?? [])
+                }
+            } catch  {
+                
+            }
+        }
+    }
+    
+    private func clickCellWithModel(with cell: SelectViewCell, model: satanizeModel) {
+        let desulfurization = model.desulfurization ?? ""
+        if desulfurization == "topsmelts" {
+            let modelArray = model.veritism ?? []
+            setupPickerView(model: model, textField: cell.phoneTextFiled, array: modelArray)
+        }else {
+            let addressCityModelArray = HomeAddressModel.shared.cityModelArray ?? []
+            setupadressPickerView(model: model, textField: cell.phoneTextFiled, array: addressCityModelArray)
+        }
+    }
+    
+}
+
+extension PersonalViewController {
+    
+    func setupPickerView(model: satanizeModel, textField: UITextField, array: [veritismModel]) {
+        let stringPickerView = BRAddressPickerView()
+        stringPickerView.pickerMode = .province
+        let enumArray = EnumModel.getFirstModelArray(dataSourceArr: array)
+        stringPickerView.title = model.nighted ?? ""
+        stringPickerView.dataSourceArr = enumArray
+        stringPickerView.selectIndexs = [0]
+        stringPickerView.resultBlock = { province, city, area in
+            let provinceName = province?.name ?? ""
+            textField.text = provinceName
+            model.knitwork = provinceName
+            model.frypans = Int(province?.code ?? "0")
+        }
+        configurePickerStyle(for: stringPickerView)
+    }
+    
+    func setupadressPickerView(model: satanizeModel, textField: UITextField, array: [BRProvinceModel]) {
+        let stringPickerView = BRAddressPickerView()
+        stringPickerView.pickerMode = .area
+        stringPickerView.title = model.nighted ?? ""
+        stringPickerView.dataSourceArr = array
+        stringPickerView.selectIndexs = [0]
+        stringPickerView.resultBlock = { province, city, area in
+            let provinceName = province?.name ?? ""
+            let cityName = city?.name ?? ""
+            let areaName = area?.name ?? ""
+            let addressString = provinceName + "|" + cityName + "|" + areaName
+            textField.text = addressString
+            model.knitwork = addressString
+        }
+        configurePickerStyle(for: stringPickerView)
+        
+    }
+    
+    private func configurePickerStyle(for pickerView: BRAddressPickerView) {
+        let customStyle = BRPickerStyle()
+        customStyle.pickerColor = .white
+        customStyle.pickerTextFont = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight(500))
+        customStyle.selectRowTextColor = UIColor.init(hexString: "#333333")
+        pickerView.pickerStyle = customStyle
+        pickerView.show()
+    }
+    
 }

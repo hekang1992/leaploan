@@ -27,6 +27,7 @@ class billionthModel: Codable {
     var somebodies: [String]?
     var myectopy: [String]?
     var floroscope: [floroscopeModel]?
+    var satanize: [satanizeModel]?
 }
 
 class oocystModel: Codable {
@@ -46,6 +47,9 @@ class mankinModel: Codable {
     var unworthily: String?
     var frypans: String?
     var majeure: [majeureModel]?
+    var mankin: [mankinModel]?
+    var negrita: Int?
+    var unmalted: String?
 }
 
 class majeureModel: Codable {
@@ -97,4 +101,20 @@ class floroscopeModel: Codable {
     var responsive: String?
     var operculiferous: String?
     var phacotherapy: String?
+}
+
+class satanizeModel: Codable {
+    var nighted: String?
+    var huggermugger: String?
+    var phacotherapy: String?
+    var desulfurization: String?
+    var quinazolyl: Int?///keybord
+    var knitwork: String?
+    var frypans: Int?
+    var veritism: [veritismModel]?
+}
+
+class veritismModel: Codable {
+    var unmalted: String?
+    var frypans: Int?
 }

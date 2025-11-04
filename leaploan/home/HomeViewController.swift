@@ -37,6 +37,14 @@ class HomeViewController: BaseViewController {
             applyProductInfo(with: productID)
         }
         
+        Task {
+            do {
+              let _ = try await viewModel.getCityAddressInfo(with: ["cleantha": "01"])
+            } catch  {
+                
+            }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

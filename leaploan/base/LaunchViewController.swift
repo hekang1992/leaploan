@@ -38,8 +38,8 @@ class LaunchViewController: BaseViewController {
         
         // Do any additional setup after loading the view.
         
-        IQKeyboardManager.shared.isEnabled = true
-        IQKeyboardManager.shared.resignOnTouchOutside = true
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "launch_image")

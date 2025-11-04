@@ -10,12 +10,28 @@ import SnapKit
 
 class CommonViewCell: UITableViewCell {
     
+    /// LIST_AUTH_INFO
+    var listModel: satanizeModel? {
+        didSet {
+            guard let listModel = listModel else { return }
+            nameLabel.text = listModel.nighted ?? ""
+            phoneTextFiled.placeholder = listModel.huggermugger ?? ""
+            
+            let knitwork = listModel.knitwork ?? ""
+            phoneTextFiled.text = knitwork
+            
+            let quinazolyl = listModel.quinazolyl ?? 0
+            phoneTextFiled.keyboardType = quinazolyl == 1 ? .numberPad : .default
+        }
+    }
+    
+    /// SELECT_NAME_ID_DATE_MESSAGE_INFO
     var model: floroscopeModel? {
         didSet {
             guard let model = model else { return }
-            nameLabel.text = model.responsive
-            phoneTextFiled.placeholder = model.responsive
-            phoneTextFiled.text = model.operculiferous
+            nameLabel.text = model.responsive ?? ""
+            phoneTextFiled.placeholder = model.responsive ?? ""
+            phoneTextFiled.text = model.operculiferous ?? ""
         }
     }
     
@@ -37,13 +53,8 @@ class CommonViewCell: UITableViewCell {
     
     lazy var phoneTextFiled: UITextField = {
         let phoneTextFiled = UITextField()
-        let attrString = NSMutableAttributedString(string: "", attributes: [
-            .foregroundColor: UIColor.init(hexString: "#979797") as Any,
-            .font: UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(400))
-        ])
-        phoneTextFiled.attributedPlaceholder = attrString
         phoneTextFiled.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
-        phoneTextFiled.textColor = UIColor.init(hexString: "#333333")
+        phoneTextFiled.textColor = UIColor.init(hexString: "#FF29D5")
         phoneTextFiled.backgroundColor = .clear
         phoneTextFiled.layer.cornerRadius = 14
         phoneTextFiled.clipsToBounds = true
@@ -57,6 +68,7 @@ class CommonViewCell: UITableViewCell {
     lazy var rightImageView: UIImageView = {
         let rightImageView = UIImageView()
         rightImageView.image = UIImage(named: "right_icon_image")
+        rightImageView.isHidden = true
         return rightImageView
     }()
     
@@ -111,6 +123,7 @@ extension CommonViewCell: UITextFieldDelegate {
         if textField == phoneTextFiled {
             let currentText = textField.text ?? ""
             model?.operculiferous = currentText
+            listModel?.knitwork = currentText
         }
     }
     

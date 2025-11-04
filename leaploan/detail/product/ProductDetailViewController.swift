@@ -259,8 +259,16 @@ class RouterNextStepConfig {
             vc.navigationController?.pushViewController(personalVc, animated: true)
             break
         case RouterConfig.THREE_AUTH_STEP:
+            let personalVc = WorkViewController()
+            personalVc.productID = vc.productId
+            personalVc.baseModel = vc.baseModel
+            vc.navigationController?.pushViewController(personalVc, animated: true)
             break
         case RouterConfig.FOUR_AUTH_STEP:
+            let personalVc = ConactCheckViewController()
+            personalVc.productID = vc.productId
+            personalVc.baseModel = vc.baseModel
+            vc.navigationController?.pushViewController(personalVc, animated: true)
             break
         case RouterConfig.FIVE_AUTH_STEP:
             break

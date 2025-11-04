@@ -5,6 +5,8 @@
 //  Created by hekang on 2025/10/31.
 //
 
+import BRPickerView
+
 class AppHomeViewModel {
     
     func findHomeInfo(with json: [String: String]) async throws -> BaseModel {
@@ -40,4 +42,34 @@ class AppHomeViewModel {
             throw error
         }
     }
+    
+    func getCityAddressInfo(with json: [String: String]) async throws -> BaseModel {
+        
+        Loading.show()
+        
+        defer {
+            Loading.hide()
+        }
+        
+        do {
+            let model: BaseModel = try await HttpsRequest.shared.get("/Pasteurella/coprincipals", parameters: json)
+            if model.phacotherapy == "0" {
+                let mankin = model.billionth?.mankin ?? []
+                HomeAddressModel.shared.cityModelArray = AddressModel.getAddressModelArray(dataSourceArr: mankin)
+            }
+            return model
+        } catch {
+            print("error===: \(error)")
+            throw error
+        }
+    }
+    
 }
+
+#warning("HomeAddressModel")
+class HomeAddressModel {
+    static let shared = HomeAddressModel()
+    private init() {}
+    var cityModelArray: [BRProvinceModel]?
+}
+

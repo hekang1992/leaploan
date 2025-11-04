@@ -20,8 +20,9 @@ target 'leaploan' do
   pod 'FBSDKCoreKit'
 #  pod "AtributikaViews"
   pod 'TYAlertController'
-  pod 'IQKeyboardManagerSwift'
+  pod 'IQKeyboardManagerSwift', '~> 6.5.2'
   pod 'ActiveLabel'
   pod 'Toast-Swift'
+  pod 'BRPickerView'
   
 end
