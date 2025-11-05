@@ -144,31 +144,71 @@ struct CellConfigurator {
     }
     
     static func selectCellNormalTime(with cell: SelectViewCell, model: floroscopeModel) {
-       let timeStr = cell.phoneTextFiled.text ?? "1990-11-11"
-        let timeArray = timeStr.components(separatedBy: "-")
-        let one = timeArray[0]
-        let two = timeArray[1]
-        let three = timeArray[2]
+        let defaultDateString = "1990-11-11"
+        let minDate = NSDate.br_setYear(1920, month: 11, day: 11)
+        
+        let timeStr = cell.phoneTextFiled.text ?? defaultDateString
+        let dateComponents = parseDateString(timeStr, defaultDate: defaultDateString)
         
         let datePickerView = BRDatePickerView()
         datePickerView.pickerMode = .YMD
         datePickerView.title = "Date of birth"
-        datePickerView.minDate = NSDate.br_setYear(1920, month: 11, day: 11)
-        datePickerView.selectDate = NSDate.br_setYear(Int(one)!, month: Int(two)!, day: Int(three)!)
+        datePickerView.minDate = minDate
+        datePickerView.selectDate = NSDate.br_setYear(dateComponents.year,
+                                                     month: dateComponents.month,
+                                                     day: dateComponents.day)
         datePickerView.maxDate = Date()
-        datePickerView.resultBlock = { selectDate, selectValue in
-            let timeArray = selectValue!.components(separatedBy: "-")
-            let year = timeArray[2]
-            let mon = timeArray[1]
-            let day = timeArray[0]
-            cell.phoneTextFiled.text = "\(day)-\(mon)-\(year)"
-            model.operculiferous = "\(day)-\(mon)-\(year)"
+        
+        datePickerView.resultBlock = { [weak cell, weak model] selectDate, selectValue in
+            guard let selectValue = selectValue,
+                  let cell = cell,
+                  let model = model else { return }
+            
+            let formattedDate = formatSelectedDate(selectValue)
+            cell.phoneTextFiled.text = formattedDate
+            model.operculiferous = formattedDate
         }
-       let customStyle = BRPickerStyle()
-       customStyle.pickerColor = .white
-       customStyle.pickerTextFont = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight(500))
-       customStyle.selectRowTextColor = UIColor.init(hexString: "#333333")
-       datePickerView.pickerStyle = customStyle
-       datePickerView.show()
+        
+        configurePickerStyle(for: datePickerView)
+        datePickerView.show()
+    }
+
+    private static func parseDateString(_ dateString: String, defaultDate: String) -> (year: Int, month: Int, day: Int) {
+        let components = dateString.components(separatedBy: "-")
+        
+        guard components.count >= 3,
+              let year = Int(components[0]),
+              let month = Int(components[1]),
+              let day = Int(components[2]) else {
+            
+            let defaultComponents = defaultDate.components(separatedBy: "-")
+            return (Int(defaultComponents[0]) ?? 1990,
+                    Int(defaultComponents[1]) ?? 11,
+                    Int(defaultComponents[2]) ?? 11)
+        }
+        
+        return (year, month, day)
+    }
+
+    private static func formatSelectedDate(_ selectedValue: String) -> String {
+        let components = selectedValue.components(separatedBy: "-")
+        
+        guard components.count >= 3 else {
+            return "11-11-1990"
+        }
+        
+        let day = components[0]
+        let month = components[1]
+        let year = components[2]
+        
+        return "\(day)-\(month)-\(year)"
+    }
+
+    private static func configurePickerStyle(for datePickerView: BRDatePickerView) {
+        let customStyle = BRPickerStyle()
+        customStyle.pickerColor = .white
+        customStyle.pickerTextFont = UIFont.systemFont(ofSize: 15, weight: .medium)
+        customStyle.selectRowTextColor = UIColor(hexString: "#333333")
+        datePickerView.pickerStyle = customStyle
     }
 }
