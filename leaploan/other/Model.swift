@@ -66,6 +66,8 @@ class majeureModel: Codable {
     var petaliform: String?
     var premisory: String?
     var threeDes: String?
+    
+    var majeure: [majeureModel]?
 }
 
 class cosmometryModel: Codable {

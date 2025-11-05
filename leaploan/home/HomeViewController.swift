@@ -30,8 +30,14 @@ class HomeViewController: BaseViewController {
         minView.isHidden = true
         
         view.backgroundColor = UIColor.init(hexString: "#1ABFFF")
+        
         view.addSubview(homeView)
         homeView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        view.addSubview(minView)
+        minView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -45,9 +51,14 @@ class HomeViewController: BaseViewController {
             applyProductInfo(with: productID)
         }
         
+        self.minView.collectionView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            getHomeMessageInfo()
+        })
+        
         Task {
             do {
-              let _ = try await viewModel.getCityAddressInfo(with: ["cleantha": "01"])
+                let _ = try await viewModel.getCityAddressInfo(with: ["cleantha": "01"])
             } catch  {
                 
             }
@@ -79,15 +90,28 @@ extension HomeViewController {
                             self.homeView.descModel = descModel
                             self.homeView.isHidden = false
                             self.minView.isHidden = true
-                        }else if frypans == "sporocystid" {
+                        }else if ["bullethead", "sporocystid"].contains(frypans) {
                             self.homeView.isHidden = true
                             self.minView.isHidden = false
+                            if frypans == "bullethead" {
+                                self.minView.twoModelArray = model.majeure ?? []
+                            } else if frypans == "sporocystid" {
+                                self.minView.oneModel = model.majeure?.first
+                            }
+                            self.minView.descModel = descModel
+                            self.minView.collectionView.reloadData()
                         }
                     }
                 }
-                await self.homeView.scrollView.mj_header?.endRefreshing()
+                Task {
+                    self.homeView.scrollView.mj_header?.endRefreshing()
+                    self.minView.collectionView.mj_header?.endRefreshing()
+                }
             } catch  {
-                await self.homeView.scrollView.mj_header?.endRefreshing()
+                Task {
+                    self.homeView.scrollView.mj_header?.endRefreshing()
+                    self.minView.collectionView.mj_header?.endRefreshing()
+                }
             }
         }
     }
