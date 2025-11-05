@@ -114,7 +114,8 @@ extension LoginViewController {
                     let token = model.billionth?.shavery ?? ""
                     LoginAuthManager.saveLoginInfo(with: phone, token: token)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+                        let json = ["tabBar": "0"]
+                        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil, userInfo: json)
                     }
                 }
                 HudToastView.showMessage(with: model.marsi ?? "")

@@ -195,7 +195,8 @@ class OrderViewController: BaseViewController {
         }
         
         emptyView.clickBlock = {
-            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+            let json = ["tabBar": "0"]
+            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil, userInfo: json)
         }
         
         tableView.rx.setDelegate(self).disposed(by: disposeBag)

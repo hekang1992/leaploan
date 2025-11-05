@@ -88,20 +88,23 @@ class SchemeURLManagerTool {
     }
     
     private static func navigateToHomePage(from viewController: BaseViewController) {
-        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+        let json = ["tabBar": "0"]
+        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil, userInfo: json)
     }
     
     private static func navigateToLoginPage(from viewController: BaseViewController) {
         LoginAuthManager.removeLoginInfo()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+            let json = ["tabBar": "0"]
+            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil, userInfo: json)
         }
     }
     
     private static func navigateToOrderPage(from viewController: BaseViewController) {
-        // 跳转到订单页面
-        // let orderVC = OrderViewController()
-        // viewController.navigationController?.pushViewController(orderVC, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            let json = ["tabBar": "1"]
+            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil, userInfo: json)
+        }
     }
     
     private static func navigateToProductDetailPage(with url: URL, from viewController: BaseViewController) {

@@ -131,7 +131,8 @@ extension H5WebViewController: WKNavigationDelegate, WKScriptMessageHandler {
             break
         case "akenes":
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+                let json = ["tabBar": "0"]
+                NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil, userInfo: json)
             }
             break
         case "mazaedia":
@@ -139,6 +140,8 @@ extension H5WebViewController: WKNavigationDelegate, WKScriptMessageHandler {
             appStarInfo()
             break
         case "deploys":
+            let pageUrls = message.body as? [String] ?? []
+            SchemeURLManagerTool.goPageWithPageUrl(pageUrls.first ?? "", from: self)
             break
         case "metrication":
             /// START_BIND_CARD
@@ -167,7 +170,6 @@ extension H5WebViewController {
     private func appStarInfo() {
         guard #available(iOS 14.0, *) else { return }
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-        
         SKStoreReviewController.requestReview(in: windowScene)
     }
     

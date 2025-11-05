@@ -57,7 +57,11 @@ extension AppDelegate {
     
     @objc func switchChangeRootVc(_ noti: Notification) {
         if LoginAuthManager.isLoggedIn {
-            window?.rootViewController = BaseTabBarController()
+            let tabbar = BaseTabBarController()
+            let json = noti.userInfo as? [String: String]
+            let index = json?["tabBar"] as? String ?? "0"
+            tabbar.selectedIndex = Int(index) ?? 0
+            window?.rootViewController = tabbar
         }else {
             window?.rootViewController = BaseNavigationController(rootViewController: LoginViewController())
         }
