@@ -30,7 +30,8 @@ class PhoneConnectViewCell: UITableViewCell {
             
             let name = model.unmalted ?? ""
             let phone = model.obsequiosity ?? ""
-            nameTextFiled.text = name + "-" + phone
+            let laseStr = name + "-" + phone
+            nameTextFiled.text = laseStr == "-" ? "" : laseStr
         }
     }
     

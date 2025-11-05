@@ -10,6 +10,7 @@ import SnapKit
 import MJRefresh
 import RxSwift
 import RxCocoa
+import RxGesture
 
 class ProductDetailViewController: BaseViewController {
     
@@ -72,7 +73,7 @@ class ProductDetailViewController: BaseViewController {
             let nsRange = NSRange(nightedRange, in: fullText)
             attributedString.addAttribute(.foregroundColor, value: UIColor.init(hexString: "#FF29D5"), range: nsRange)
         }
-        
+        nameLabel.isUserInteractionEnabled = true
         nameLabel.attributedText = attributedString
         return nameLabel
     }()
@@ -187,6 +188,14 @@ class ProductDetailViewController: BaseViewController {
             let tilewright = wolvishModel?.tilewright ?? ""
             let pageUrl: String = wolvishModel?.antisubversive ?? ""
             RouterNextStepConfig.changePushVc(with: tilewright, pageUrl: pageUrl, vc: self)
+        }).disposed(by: disposeBag)
+        
+        nameLabel.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
+            guard let self = self, let baseModel = baseModel else { return }
+            let photodrama = baseModel.billionth?.cosmometry?.photodrama ?? ""
+            let webVc = H5WebViewController()
+            webVc.pageUrl = photodrama
+            self.navigationController?.pushViewController(webVc, animated: true)
         }).disposed(by: disposeBag)
         
     }

@@ -209,6 +209,7 @@ extension PersonalViewController {
             cell.clickBlock = { [weak self] satanizeModel in
                 guard let self = self else { return }
                 self.clickCellWithModel(with: cell, model: satanizeModel)
+                self.view.endEditing(true)
             }
             return cell
         }
