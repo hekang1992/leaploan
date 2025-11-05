@@ -45,6 +45,24 @@ class ProductViewModel {
         }
     }
     
+    /// DUE_ORDER_MESSAGE
+    func dueOrderInfo(with json: [String: String]) async throws -> BaseModel {
+        
+        Loading.show()
+        
+        defer {
+            Loading.hide()
+        }
+        
+        do {
+            let model: BaseModel = try await HttpsRequest.shared.postFrom("/Pasteurella/harkening", parameters: json)
+            return model
+        } catch {
+            print("error===: \(error)")
+            throw error
+        }
+    }
+    
 }
 
 

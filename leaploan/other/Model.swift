@@ -28,6 +28,7 @@ class billionthModel: Codable {
     var myectopy: [String]?
     var floroscope: [floroscopeModel]?
     var satanize: [satanizeModel]?
+    var cronie: [cronieModel]?
 }
 
 class oocystModel: Codable {
@@ -75,6 +76,10 @@ class cosmometryModel: Codable {
 class sestiModel: Codable {
     var sonnetized: String?
     var negrita: String?
+    var caranday: String?
+    var nasology: Int?
+    var expansible: String?
+    var octagonally: Int?
 }
 
 class gadgeteerModel: Codable {
@@ -83,12 +88,14 @@ class gadgeteerModel: Codable {
     var scrutinizer: String?
     var hundredfold: Int?
     var tilewright: String?
+    var antisubversive: String?
 }
 
 class wolvishModel: Codable {
     var tilewright: String?
     var frypans: Int?
     var nighted: String?
+    var antisubversive: String?
 }
 
 class distinctionlessModel: Codable {
@@ -117,4 +124,65 @@ class satanizeModel: Codable {
 class veritismModel: Codable {
     var unmalted: String?
     var frypans: Int?
+}
+
+class cronieModel: Codable {
+    var nighted: String?
+    var uncontinently: String?
+    var unmanliest: String?
+    var indexes: String?
+    var odontography: String?
+    var veritism: [veritismModel]?
+    var knitwork: String?
+    var unmalted: String?
+    var obsequiosity: String?
+    var unconjugated: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case nighted
+        case uncontinently
+        case unmanliest
+        case indexes
+        case odontography
+        case veritism
+        case knitwork
+        case unmalted
+        case obsequiosity
+        case unconjugated
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        nighted = try container.decodeIfPresent(String.self, forKey: .nighted)
+        uncontinently = try container.decodeIfPresent(String.self, forKey: .uncontinently)
+        unmanliest = try container.decodeIfPresent(String.self, forKey: .unmanliest)
+        indexes = try container.decodeIfPresent(String.self, forKey: .indexes)
+        odontography = try container.decodeIfPresent(String.self, forKey: .odontography)
+        veritism = try container.decodeIfPresent([veritismModel].self, forKey: .veritism)
+        knitwork = try container.decodeIfPresent(String.self, forKey: .knitwork)
+        unmalted = try container.decodeIfPresent(String.self, forKey: .unmalted)
+        obsequiosity = try container.decodeIfPresent(String.self, forKey: .obsequiosity)
+        
+        if let strValue = try? container.decode(String.self, forKey: .unconjugated) {
+            unconjugated = strValue
+        } else if let intValue = try? container.decode(Int.self, forKey: .unconjugated) {
+            unconjugated = String(intValue)
+        } else {
+            unconjugated = nil
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(nighted, forKey: .nighted)
+        try container.encodeIfPresent(uncontinently, forKey: .uncontinently)
+        try container.encodeIfPresent(unmanliest, forKey: .unmanliest)
+        try container.encodeIfPresent(indexes, forKey: .indexes)
+        try container.encodeIfPresent(odontography, forKey: .odontography)
+        try container.encodeIfPresent(veritism, forKey: .veritism)
+        try container.encodeIfPresent(knitwork, forKey: .knitwork)
+        try container.encodeIfPresent(unmalted, forKey: .unmalted)
+        try container.encodeIfPresent(obsequiosity, forKey: .obsequiosity)
+        try container.encodeIfPresent(unconjugated, forKey: .unconjugated)
+    }
 }

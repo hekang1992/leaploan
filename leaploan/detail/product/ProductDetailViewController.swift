@@ -175,7 +175,9 @@ class ProductDetailViewController: BaseViewController {
             
             type = isAuth == 1 ? tilewright : wolvishtilewright
             
-            RouterNextStepConfig.changeVc(with: type, vc: self)
+            let pageUrl: String = model.antisubversive ?? ""
+            
+            RouterNextStepConfig.changePushVc(with: type, pageUrl: pageUrl, vc: self)
             
         }
         
@@ -183,7 +185,8 @@ class ProductDetailViewController: BaseViewController {
             guard let self = self, let baseModel = baseModel else { return }
             let wolvishModel = baseModel.billionth?.wolvish
             let tilewright = wolvishModel?.tilewright ?? ""
-            RouterNextStepConfig.changeVc(with: tilewright, vc: self)
+            let pageUrl: String = wolvishModel?.antisubversive ?? ""
+            RouterNextStepConfig.changePushVc(with: tilewright, pageUrl: pageUrl, vc: self)
         }).disposed(by: disposeBag)
         
     }
@@ -223,8 +226,9 @@ extension ProductDetailViewController {
 
 class RouterNextStepConfig {
     
-    static func changeVc(with type: String,
-                         vc: ProductDetailViewController) {
+    static func changePushVc(with type: String,
+                             pageUrl: String,
+                             vc: ProductDetailViewController,) {
         let json = ["snowier": vc.productId, "hundredfold": type]
         switch type {
         case RouterConfig.ONE_AUTH_STEP:
@@ -271,8 +275,33 @@ class RouterNextStepConfig {
             vc.navigationController?.pushViewController(personalVc, animated: true)
             break
         case RouterConfig.FIVE_AUTH_STEP:
+            let personalVc = H5WebViewController()
+            personalVc.productID = vc.productId
+            personalVc.pageUrl = pageUrl
+            vc.navigationController?.pushViewController(personalVc, animated: true)
             break
         case RouterConfig.SIX_AUTH_STEP:
+            let orderID = vc.baseModel?.billionth?.sesti?.caranday ?? ""
+            let nasology = vc.baseModel?.billionth?.sesti?.nasology ?? 0
+            let expansible = vc.baseModel?.billionth?.sesti?.expansible ?? ""
+            let octagonally = vc.baseModel?.billionth?.sesti?.octagonally ?? 0
+            let json = ["cognominal": orderID, "nasology": String(nasology), "expansible": expansible, "octagonally": String(octagonally)]
+            Task {
+                do {
+                    let model = try await vc.viewModel.dueOrderInfo(with: json)
+                    if model.phacotherapy == "0" {
+                        let antisubversive = model.billionth?.antisubversive ?? ""
+                        let webVc = H5WebViewController()
+                        webVc.productID = vc.productId
+                        webVc.pageUrl = antisubversive
+                        vc.navigationController?.pushViewController(webVc, animated: true)
+                    }else {
+                        HudToastView.showMessage(with: model.marsi ?? "")
+                    }
+                } catch  {
+                    
+                }
+            }
             break
         default:
             break
