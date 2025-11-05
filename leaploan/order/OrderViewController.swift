@@ -18,6 +18,8 @@ class OrderViewController: BaseViewController {
     
     var orderType: String = "7"
     
+    var modelArray: [mankinModel]?
+    
     lazy var emptyView: AppEmptyView = {
         let emptyView = AppEmptyView(frame: .zero)
         return emptyView
@@ -166,16 +168,24 @@ class OrderViewController: BaseViewController {
             self?.getListInfo(with: "5")
         }).disposed(by: disposeBag)
         
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.left.bottom.right.equalToSuperview()
+            make.top.equalTo(whiteView.snp.bottom).offset(2)
+        }
+        
         view.addSubview(emptyView)
         emptyView.snp.makeConstraints { make in
             make.left.bottom.right.equalToSuperview()
-            make.top.equalTo(whiteView.snp.bottom).offset(12)
+            make.top.equalTo(whiteView.snp.bottom).inset(12)
         }
         
         emptyView.clickBlock = {
             NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
         }
         
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        tableView.rx.setDataSource(self).disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -199,11 +209,30 @@ extension OrderViewController {
                     }else {
                         emptyView.isHidden = false
                     }
+                    self.modelArray = modelArray
+                    self.tableView.reloadData()
                 }
             } catch  {
                 
             }
         }
+    }
+    
+}
+
+extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return modelArray?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderListViewCell", for: indexPath) as! OrderListViewCell
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        let model = modelArray?[indexPath.row]
+        cell.model = model
+        return cell
     }
     
 }

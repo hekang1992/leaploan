@@ -51,6 +51,7 @@ class mankinModel: Codable {
     var mankin: [mankinModel]?
     var negrita: Int?
     var unmalted: String?
+    var mesopectus: String?
 }
 
 class majeureModel: Codable {
