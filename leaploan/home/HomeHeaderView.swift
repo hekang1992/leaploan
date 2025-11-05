@@ -7,9 +7,18 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
 class HomeHeaderView: UICollectionReusableView {
-       
+    
+    let disposeBag = DisposeBag()
+    
+    var smallCardBlock: ((majeureModel) -> Void)?
+    
+    var agreementBlock: ((cosmometryModel) -> Void)?
+    
     var model: majeureModel? {
         didSet {
             guard let model = model else { return }
@@ -93,9 +102,9 @@ class HomeHeaderView: UICollectionReusableView {
         fiveLabel.textAlignment = .center
         fiveLabel.textColor = UIColor.init(hexString: "#333333")
         fiveLabel.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(400))
+        fiveLabel.isUserInteractionEnabled = true
         return fiveLabel
     }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -138,6 +147,26 @@ class HomeHeaderView: UICollectionReusableView {
             make.top.equalTo(fourLabel.snp.bottom).offset(10)
             make.height.equalTo(12)
         }
+        
+        mainImageView.rx.tapGesture()
+            .when(.recognized)
+            .bind(onNext: { [weak self] gesture in
+                guard let self = self else { return }
+                let location = gesture.location(in: self.mainImageView)
+                let labelFrame = self.fiveLabel.convert(self.fiveLabel.bounds, to: self.mainImageView)
+                if labelFrame.contains(location) {
+                    return
+                }
+                guard let model = self.model else { return }
+                self.smallCardBlock?(model)
+            })
+            .disposed(by: disposeBag)
+        
+        fiveLabel.rx.tapGesture().bind(onNext: { [weak self] _ in
+            guard let self = self, let descModel = descModel else { return }
+            self.agreementBlock?(descModel)
+        }).disposed(by: disposeBag)
+        
     }
     
     required init?(coder: NSCoder) {

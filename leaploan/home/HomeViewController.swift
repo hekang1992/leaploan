@@ -51,10 +51,29 @@ class HomeViewController: BaseViewController {
             applyProductInfo(with: productID)
         }
         
+        /// MINVIEW_PAGE_INFO
         self.minView.collectionView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             guard let self = self else { return }
             getHomeMessageInfo()
         })
+        
+        self.minView.smallBlock = { [weak self] model in
+            guard let self = self else { return }
+            applyProductInfo(with: String(model.negrita ?? 0))
+        }
+        
+        self.minView.agreementBlock = { [weak self] model in
+            guard let self = self else { return }
+            let photodrama = model.photodrama ?? ""
+            let webVc = H5WebViewController()
+            webVc.pageUrl = photodrama
+            self.navigationController?.pushViewController(webVc, animated: true)
+        }
+        
+        self.minView.productListBlock = { [weak self] model in
+            guard let self = self else { return }
+            applyProductInfo(with: String(model.negrita ?? 0))
+        }
         
         Task {
             do {
@@ -125,6 +144,8 @@ extension HomeViewController {
                     if let billionthModel = model.billionth {
                         withModel(with: billionthModel)
                     }
+                }else {
+                    HudToastView.showMessage(with: model.marsi ?? "")
                 }
             } catch  {
                 

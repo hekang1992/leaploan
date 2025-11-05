@@ -16,6 +16,12 @@ class AppMainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
     
     var twoModelArray: [majeureModel]?
     
+    var smallBlock: ((majeureModel) -> Void)?
+    
+    var agreementBlock: ((cosmometryModel) -> Void)?
+    
+    var productListBlock: ((majeureModel) -> Void)?
+    
     lazy var bgView: UIView = {
         let bgView = UIView()
         return bgView
@@ -79,8 +85,6 @@ class AppMainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
         bgView.layer.insertSublayer(gradientLayer, at: 0)
     }
-
-    // MARK: UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return twoModelArray?.count ?? 0
@@ -97,12 +101,16 @@ class AppMainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as! HomeHeaderView
             header.model = oneModel
             header.descModel = descModel
+            header.smallCardBlock = { [weak self] model in
+                self?.smallBlock?(model)
+            }
+            header.agreementBlock = { [weak self] model in
+                self?.agreementBlock?(model)
+            }
             return header
         }
         return UICollectionReusableView()
     }
-    
-    // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat = 10
@@ -113,5 +121,11 @@ class AppMainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 275)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let model = twoModelArray?[indexPath.row] {
+            self.productListBlock?(model)
+        }
     }
 }
