@@ -9,12 +9,12 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import BRPickerView
 
 class SelectNameView: UIView {
     
     var modelArray: [floroscopeModel]? {
         didSet {
-            guard let modelArray = modelArray else { return }
             tableView.reloadData()
         }
     }
@@ -124,6 +124,7 @@ extension SelectNameView: UITableViewDelegate, UITableViewDataSource {
 
 
 struct CellConfigurator {
+   static let disposeBag = DisposeBag()
     static func configure(_ cell: UITableViewCell, with model: floroscopeModel) {
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
@@ -131,9 +132,43 @@ struct CellConfigurator {
         if let selectCell = cell as? SelectViewCell {
             selectCell.model = model
             selectCell.bgView.backgroundColor = UIColor.init(hexString: "#F1F8FF")
+            
+            selectCell.codeBtn.rx.tap.bind(onNext: {
+                CellConfigurator.selectCellNormalTime(with: selectCell, model: model)
+            }).disposed(by: disposeBag)
+            
         } else if let commonCell = cell as? CommonViewCell {
             commonCell.model = model
             commonCell.bgView.backgroundColor = UIColor.init(hexString: "#F1F8FF")
         }
+    }
+    
+    static func selectCellNormalTime(with cell: SelectViewCell, model: floroscopeModel) {
+       let timeStr = cell.phoneTextFiled.text ?? "1990-11-11"
+        let timeArray = timeStr.components(separatedBy: "-")
+        let one = timeArray[0]
+        let two = timeArray[1]
+        let three = timeArray[2]
+        
+        let datePickerView = BRDatePickerView()
+        datePickerView.pickerMode = .YMD
+        datePickerView.title = "Date of birth"
+        datePickerView.minDate = NSDate.br_setYear(1920, month: 11, day: 11)
+        datePickerView.selectDate = NSDate.br_setYear(Int(one)!, month: Int(two)!, day: Int(three)!)
+        datePickerView.maxDate = Date()
+        datePickerView.resultBlock = { selectDate, selectValue in
+            let timeArray = selectValue!.components(separatedBy: "-")
+            let year = timeArray[2]
+            let mon = timeArray[1]
+            let day = timeArray[0]
+            cell.phoneTextFiled.text = "\(day)-\(mon)-\(year)"
+            model.operculiferous = "\(day)-\(mon)-\(year)"
+        }
+       let customStyle = BRPickerStyle()
+       customStyle.pickerColor = .white
+       customStyle.pickerTextFont = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight(500))
+       customStyle.selectRowTextColor = UIColor.init(hexString: "#333333")
+       datePickerView.pickerStyle = customStyle
+       datePickerView.show()
     }
 }

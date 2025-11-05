@@ -86,7 +86,7 @@ class PersonalViewController: BaseViewController {
             
             downView.sureBlock = {
                 self.dismiss(animated: true) {
-                    self.navigationController?.popViewController(animated: true)
+                    self.popAuthListVC()
                 }
             }
             

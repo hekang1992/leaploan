@@ -11,6 +11,10 @@ import ActiveLabel
 
 class LoginView: BaseView {
     
+    var oneBlock: (() -> Void)?
+    
+    var twoBlock: (() -> Void)?
+    
     lazy var bgView: UIView = {
         let bgView = UIView()
         bgView.backgroundColor = .clear
@@ -210,12 +214,14 @@ class LoginView: BaseView {
         mentLabel.font = .systemFont(ofSize: 12, weight: UIFont.Weight(400))
         mentLabel.textColor = UIColor(hexString: "#979797")
         
-        mentLabel.handleCustomTap(for: .custom(pattern: "Privacy Policy")) { _ in
+        mentLabel.handleCustomTap(for: .custom(pattern: "Privacy Policy")) { [weak self] _ in
             print("🟢 Privacy Policy tapped")
+            self?.oneBlock?()
         }
         
-        mentLabel.handleCustomTap(for: .custom(pattern: "Loan Terms")) { _ in
+        mentLabel.handleCustomTap(for: .custom(pattern: "Loan Terms")) { [weak self] _ in
             print("🟢 Loan Terms tapped")
+            self?.twoBlock?()
         }
         
         return mentLabel

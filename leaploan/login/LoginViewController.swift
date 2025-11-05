@@ -44,12 +44,25 @@ class LoginViewController: UIViewController {
             self.resignResponse()
             self.codeInfo()
         }).disposed(by: disposeBag)
-     
+        
         loginView.loginBtn.rx.tap.bind(onNext: { [weak self] in
             guard let self = self else { return }
             self.loginInfo()
         }).disposed(by: disposeBag)
         
+        loginView.oneBlock = { [weak self] in
+            let model = PushManagerModel.shared.model
+            let webVc = H5WebViewController()
+            webVc.pageUrl = model?.billionth?.gulash ?? ""
+            self?.navigationController?.pushViewController(webVc, animated: true)
+        }
+        
+        loginView.twoBlock = { [weak self] in
+            let model = PushManagerModel.shared.model
+            let webVc = H5WebViewController()
+            webVc.pageUrl = model?.billionth?.gulash ?? ""
+            self?.navigationController?.pushViewController(webVc, animated: true)
+        }
     }
     
     deinit {

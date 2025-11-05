@@ -87,7 +87,7 @@ class FaceViewController: BaseViewController {
             
             downView.sureBlock = {
                 self.dismiss(animated: true) {
-                    self.navigationController?.popViewController(animated: true)
+                    self.popAuthListVC()
                 }
             }
             
@@ -301,15 +301,13 @@ extension FaceViewController {
             var json: [String: String] = ["metabiological": type,
                                           "frypans": "11",
                                           "snowier": productID]
-            self.dismiss(animated: true) {
-                for model in modelArray {
-                    let key = model.phacotherapy ?? ""
-                    let value = model.operculiferous ?? ""
-                    json[key] = value
-                }
-                print("json===========\(json)")
-                self.saveInfo(with: json)
+            for model in modelArray {
+                let key = model.phacotherapy ?? ""
+                let value = model.operculiferous ?? ""
+                json[key] = value
             }
+            print("json===========\(json)")
+            self.saveInfo(with: json)
         }
     }
     
@@ -318,7 +316,9 @@ extension FaceViewController {
             do {
                 let model = try await faceViewModel.saveImageInfo(with: json)
                 if model.phacotherapy == "0" {
-                    getFaceInfo()
+                    self.dismiss(animated: true) {
+                        self.getFaceInfo()
+                    }
                 }else {
                     HudToastView.showMessage(with: model.marsi ?? "")
                 }

@@ -51,6 +51,12 @@ class HomeViewController: BaseViewController {
             applyProductInfo(with: productID)
         }
         
+        homeView.descBlock = { [weak self] pageUrl in
+            let webVc = H5WebViewController()
+            webVc.pageUrl = pageUrl
+            self?.navigationController?.pushViewController(webVc, animated: true)
+        }
+        
         /// MINVIEW_PAGE_INFO
         self.minView.collectionView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             guard let self = self else { return }

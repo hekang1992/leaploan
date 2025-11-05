@@ -88,6 +88,7 @@ extension LaunchViewController {
                 if model.phacotherapy == "0" {
                     sureBtn.isHidden = true
                     sureBtn.isEnabled = true
+                    PushManagerModel.shared.model = model
                     if let oocystModel = model.billionth?.oocyst {
                         marketModel(with: oocystModel)
                     }
@@ -189,5 +190,5 @@ class LaunchInitInfo {
 class PushManagerModel {
     static let shared = PushManagerModel()
     private init() {}
-    var model: oocystModel?
+    var model: BaseModel?
 }

@@ -19,6 +19,8 @@ class AppHomeView: UIView {
     
     var applyBlock: ((String) -> Void)?
     
+    var descBlock: ((String) -> Void)?
+    
     var model: majeureModel? {
         didSet {
             guard let model = model else { return }
@@ -306,10 +308,20 @@ class AppHomeView: UIView {
             .rx
             .tapGesture()
             .when(.recognized)
-            .bind(onNext: { [weak self] _ in
+            .bind(onNext: { [weak self] gesture in
                 guard let self = self, let model = model else { return }
+                let location = gesture.location(in: self.mainImageView)
+                let labelFrame = self.fiveLabel.convert(self.fiveLabel.bounds, to: self.mainImageView)
+                if labelFrame.contains(location) {
+                    return
+                }
                 self.applyBlock?(String(model.negrita ?? 0))
             }).disposed(by: disposeBag)
+     
+        self.fiveLabel.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
+            guard let self = self, let descModel = descModel else { return }
+            self.descBlock?(descModel.photodrama ?? "")
+        }).disposed(by: disposeBag)
         
     }
     

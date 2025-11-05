@@ -29,6 +29,7 @@ class billionthModel: Codable {
     var floroscope: [floroscopeModel]?
     var satanize: [satanizeModel]?
     var cronie: [cronieModel]?
+    var gulash: String?
 }
 
 class oocystModel: Codable {
