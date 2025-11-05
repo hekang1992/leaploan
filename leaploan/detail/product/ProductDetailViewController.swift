@@ -111,7 +111,7 @@ class ProductDetailViewController: BaseViewController {
         }
         
         headView.clickBlock = { [weak self] in
-            self?.navigationController?.popToRootViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }
         
         view.addSubview(scrollView)

@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import MJRefresh
+import RxGesture
 
 class OrderViewController: BaseViewController {
     
@@ -109,11 +111,23 @@ class OrderViewController: BaseViewController {
         let clickImageView = UIImageView()
         clickImageView.image = UIImage(named: "opc_icon_image")
         view.addSubview(clickImageView)
+        clickImageView.isUserInteractionEnabled = true
         clickImageView.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 355, height: 100))
             make.centerX.equalToSuperview()
             make.top.equalTo(headView.snp.bottom).offset(10)
         }
+        
+        clickImageView
+            .rx
+            .tapGesture()
+            .when(.recognized)
+            .bind(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let oreVc = OrderCenterViewController()
+                self.navigationController?.pushViewController(oreVc, animated: true)
+            })
+            .disposed(by: disposeBag)
         
         let whiteView = UIView()
         whiteView.backgroundColor = .white
@@ -186,6 +200,12 @@ class OrderViewController: BaseViewController {
         
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         tableView.rx.setDataSource(self).disposed(by: disposeBag)
+        
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            getListInfo(with: orderType)
+        })
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -211,9 +231,12 @@ extension OrderViewController {
                     }
                     self.modelArray = modelArray
                     self.tableView.reloadData()
+                }else {
+                    HudToastView.showMessage(with: model.marsi ?? "")
                 }
+                await self.tableView.mj_header?.endRefreshing()
             } catch  {
-                
+                await self.tableView.mj_header?.endRefreshing()
             }
         }
     }
@@ -233,6 +256,12 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
         let model = modelArray?[indexPath.row]
         cell.model = model
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = modelArray?[indexPath.row]
+        let wakita = model?.wakita ?? ""
+        SchemeURLManagerTool.goPageWithPageUrl(wakita, from: self)
     }
     
 }

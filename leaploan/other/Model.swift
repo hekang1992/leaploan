@@ -52,6 +52,11 @@ class mankinModel: Codable {
     var negrita: Int?
     var unmalted: String?
     var mesopectus: String?
+    var sporogenous: String?
+    var sonnetized: String?
+    var hexametrical: String?
+    var fixates: [fixatesModel]?
+    var wakita: String?
 }
 
 class majeureModel: Codable {
@@ -188,4 +193,9 @@ class cronieModel: Codable {
         try container.encodeIfPresent(obsequiosity, forKey: .obsequiosity)
         try container.encodeIfPresent(unconjugated, forKey: .unconjugated)
     }
+}
+
+class fixatesModel: Codable {
+    var nighted: String?
+    var chondroblast: String?
 }

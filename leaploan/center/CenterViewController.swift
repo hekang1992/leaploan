@@ -36,6 +36,11 @@ class CenterViewController: BaseViewController {
             let pageUrl = model.antisubversive ?? ""
             SchemeURLManagerTool.goPageWithPageUrl(pageUrl, from: self)
         }
+        
+        centerView.orderBlock = { [weak self] in
+            let cenVc = OrderCenterViewController()
+            self?.navigationController?.pushViewController(cenVc, animated: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

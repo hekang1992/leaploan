@@ -57,11 +57,10 @@ class SchemeURLManagerTool {
     }
     
     static func goPageWithPageUrl(_ pageUrl: String, from viewController: BaseViewController) {
-        guard let url = URL(string: pageUrl) else {
+        guard let url = URL(string: pageUrl), pageUrl.hasPrefix(API.schemeURL) else {
             openWebPage(with: pageUrl, from: viewController)
             return
         }
-        
         routeToPage(with: url, from: viewController)
     }
     
@@ -117,7 +116,7 @@ class SchemeURLManagerTool {
     }
     
     private static func openWebPage(with urlString: String, from viewController: BaseViewController) {
-        let webVC = WebPageViewController()
+        let webVC = H5WebViewController()
         webVC.pageUrl = urlString
         viewController.navigationController?.pushViewController(webVC, animated: true)
     }

@@ -16,6 +16,8 @@ class CenterPageView: UIView {
     
     var block: ((mankinModel) -> Void)?
     
+    var orderBlock: (() -> Void)?
+    
     let disposeBag = DisposeBag()
     
     var modelArray: [mankinModel]? {
@@ -231,6 +233,11 @@ class CenterPageView: UIView {
             make.top.equalTo(odImageView.snp.bottom).offset(10)
             make.bottom.equalToSuperview().offset(-20)
         }
+        
+        orderImageView.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            self.orderBlock?()
+        }).disposed(by: disposeBag)
     }
     
     private func setupGradient() {

