@@ -31,6 +31,8 @@ class ProductDetailViewController: BaseViewController {
     
     var baseModel: BaseModel?
     
+    let misassertViewModel = MisassertViewModel()
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "pd_icon_image")
@@ -287,9 +289,11 @@ class RouterNextStepConfig {
             let personalVc = H5WebViewController()
             personalVc.productID = vc.productId
             personalVc.pageUrl = pageUrl
+            personalVc.type = "1"
             vc.navigationController?.pushViewController(personalVc, animated: true)
             break
         case RouterConfig.SIX_AUTH_STEP:
+            let one = String(Int(Date().timeIntervalSince1970))
             let orderID = vc.baseModel?.billionth?.sesti?.caranday ?? ""
             let nasology = vc.baseModel?.billionth?.sesti?.nasology ?? 0
             let expansible = vc.baseModel?.billionth?.sesti?.expansible ?? ""
@@ -303,7 +307,16 @@ class RouterNextStepConfig {
                         let webVc = H5WebViewController()
                         webVc.productID = vc.productId
                         webVc.pageUrl = antisubversive
+                        webVc.orderID = orderID
                         vc.navigationController?.pushViewController(webVc, animated: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                            let two = String(Int(Date().timeIntervalSince1970))
+                            vc.insertMessageInfo(with: "9",
+                                                 onepera: one,
+                                                 twopera: two,
+                                                 threepera: orderID,
+                                                 viewModel: vc.misassertViewModel)
+                        }
                     }else {
                         HudToastView.showMessage(with: model.marsi ?? "")
                     }

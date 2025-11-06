@@ -23,7 +23,7 @@ class AppEmptyView: UIView {
         bgImageView.isUserInteractionEnabled = true
         return bgImageView
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImageView)
@@ -39,8 +39,8 @@ class AppEmptyView: UIView {
             .when(.recognized)
             .bind(onNext: { [weak self] _ in
                 self?.clickBlock?()
-        })
-        .disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {

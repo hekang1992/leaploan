@@ -24,7 +24,7 @@ class ProductItemListView: UIView {
         nameLabel.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(400))
         return nameLabel
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImageView)

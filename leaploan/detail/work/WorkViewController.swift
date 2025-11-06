@@ -52,11 +52,20 @@ class WorkViewController: BaseViewController {
         return tableView
     }()
     
+    var one: String = ""
+    var two: String = ""
+    let misassertViewModel = MisassertViewModel()
+    let locationManager = AppLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.init(hexString: "#1ABFFF")
+        
+        locationManager.getCurrentLocation { model in
+            LocationManagerModel.shared.model = model
+        }
         
         view.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { make in
@@ -153,6 +162,7 @@ class WorkViewController: BaseViewController {
         
         clickBtn.rx.tap.bind(onNext: { [weak self] in
             guard let self = self else { return }
+            two = String(Int(Date().timeIntervalSince1970))
             var json: [String: String] = ["snowier": productID]
             self.dataSource.value.forEach { model in
                 let desulfurization = model.desulfurization ?? ""
@@ -167,6 +177,7 @@ class WorkViewController: BaseViewController {
             self.saveInfo(with: json)
         }).disposed(by: disposeBag)
         
+        one = String(Int(Date().timeIntervalSince1970))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -180,6 +191,11 @@ class WorkViewController: BaseViewController {
                 let model = try await viewModel.savePersonalInfo(with: json)
                 if model.phacotherapy == "0" {
                     self.popAuthListVC()
+                    self.insertMessageInfo(with: "6",
+                                           onepera: one,
+                                           twopera: two,
+                                           threepera: "",
+                                           viewModel: misassertViewModel)
                 }else {
                     HudToastView.showMessage(with: model.marsi ?? "")
                 }

@@ -84,7 +84,7 @@ class GetDoubleIDManager {
             print("Failed to store device ID in keychain")
         }
     }
-
+    
 }
 
 class ParameterToUrlConfig {

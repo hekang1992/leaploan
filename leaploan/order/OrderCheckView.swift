@@ -40,7 +40,7 @@ class OrderCheckView: UIView {
         nameLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(500))
         return nameLabel
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgView)

@@ -22,6 +22,8 @@ class SelectAuthViewController: BaseViewController {
     
     var modelArray: [String]?
     
+    let misassertViewModel = MisassertViewModel()
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "common_bg_image")
@@ -82,10 +84,19 @@ class SelectAuthViewController: BaseViewController {
         return tableView
     }()
     
+    var one: String = ""
+    var two: String = ""
+    
+    let locationManager = AppLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        
+        locationManager.getCurrentLocation { model in
+            LocationManagerModel.shared.model = model
+        }
         
         view.backgroundColor = UIColor.init(hexString: "#1ABFFF")
         
@@ -180,8 +191,11 @@ class SelectAuthViewController: BaseViewController {
         
         self.modelArray = self.model?.billionth?.somebodies ?? []
         self.tableView.reloadData()
+        
+        
+        one = String(Int(Date().timeIntervalSince1970))
     }
-
+    
 }
 
 extension SelectAuthViewController: UITableViewDelegate, UITableViewDataSource {
@@ -199,6 +213,12 @@ extension SelectAuthViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        two = String(Int(Date().timeIntervalSince1970))
+        insertMessageInfo(with: "2",
+                          onepera: one,
+                          twopera: two,
+                          threepera: "",
+                          viewModel: misassertViewModel)
         let faceVc = FaceViewController()
         faceVc.type = modelArray?[indexPath.row] ?? ""
         faceVc.productID = productID
@@ -206,5 +226,7 @@ extension SelectAuthViewController: UITableViewDelegate, UITableViewDataSource {
         faceVc.baseModel = baseModel
         self.navigationController?.pushViewController(faceVc, animated: true)
     }
+    
+    
     
 }

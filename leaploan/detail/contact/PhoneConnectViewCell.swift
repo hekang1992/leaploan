@@ -58,7 +58,7 @@ class PhoneConnectViewCell: UITableViewCell {
         descImageView.contentMode = .scaleAspectFit
         return descImageView
     }()
-
+    
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Hello!"

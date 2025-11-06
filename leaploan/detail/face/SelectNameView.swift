@@ -60,7 +60,7 @@ class SelectNameView: UIView {
         tableView.dataSource = self
         return tableView
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImageView)
@@ -119,12 +119,12 @@ extension SelectNameView: UITableViewDelegate, UITableViewDataSource {
         CellConfigurator.configure(cell, with: model)
         return cell
     }
-
+    
 }
 
 
 struct CellConfigurator {
-   static let disposeBag = DisposeBag()
+    static let disposeBag = DisposeBag()
     static func configure(_ cell: UITableViewCell, with model: floroscopeModel) {
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
@@ -155,8 +155,8 @@ struct CellConfigurator {
         datePickerView.title = "Date of birth"
         datePickerView.minDate = minDate
         datePickerView.selectDate = NSDate.br_setYear(dateComponents.year,
-                                                     month: dateComponents.month,
-                                                     day: dateComponents.day)
+                                                      month: dateComponents.month,
+                                                      day: dateComponents.day)
         datePickerView.maxDate = Date()
         
         datePickerView.resultBlock = { [weak cell, weak model] selectDate, selectValue in
@@ -172,7 +172,7 @@ struct CellConfigurator {
         configurePickerStyle(for: datePickerView)
         datePickerView.show()
     }
-
+    
     private static func parseDateString(_ dateString: String, defaultDate: String) -> (year: Int, month: Int, day: Int) {
         let components = dateString.components(separatedBy: "-")
         
@@ -189,7 +189,7 @@ struct CellConfigurator {
         
         return (year, month, day)
     }
-
+    
     private static func formatSelectedDate(_ selectedValue: String) -> String {
         let components = selectedValue.components(separatedBy: "-")
         
@@ -203,7 +203,7 @@ struct CellConfigurator {
         
         return "\(day)-\(month)-\(year)"
     }
-
+    
     private static func configurePickerStyle(for datePickerView: BRDatePickerView) {
         let customStyle = BRPickerStyle()
         customStyle.pickerColor = .white

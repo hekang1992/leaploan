@@ -17,7 +17,7 @@ class StepHeadView: UIView {
         scrollView.backgroundColor = .clear
         return scrollView
     }()
-
+    
     private var buttons: [UIButton] = []
     
     override init(frame: CGRect) {

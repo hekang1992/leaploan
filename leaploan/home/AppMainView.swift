@@ -11,7 +11,7 @@ import SnapKit
 class AppMainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var descModel: cosmometryModel?
-
+    
     var oneModel: majeureModel?
     
     var twoModelArray: [majeureModel]?
@@ -43,7 +43,7 @@ class AppMainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         collectionView.register(HomeHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Header")
         return collectionView
     }()
-
+    
     private let gradientLayer = CAGradientLayer()
     
     override init(frame: CGRect) {

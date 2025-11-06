@@ -37,7 +37,7 @@ class SelectViewCell: UITableViewCell {
             phoneTextFiled.text = model.operculiferous ?? ""
         }
     }
-
+    
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.textAlignment = .left
@@ -46,7 +46,7 @@ class SelectViewCell: UITableViewCell {
         nameLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(400))
         return nameLabel
     }()
-
+    
     lazy var bgView: UIView = {
         let bgView = UIView()
         bgView.backgroundColor = UIColor.white
@@ -127,5 +127,5 @@ class SelectViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }

@@ -83,8 +83,8 @@ class SchemeURLManagerTool {
     }
     
     private static func navigateToSettingPage(from viewController: BaseViewController) {
-         let settingVC = SettingViewController()
-         viewController.navigationController?.pushViewController(settingVC, animated: true)
+        let settingVC = SettingViewController()
+        viewController.navigationController?.pushViewController(settingVC, animated: true)
     }
     
     private static func navigateToHomePage(from viewController: BaseViewController) {
@@ -108,10 +108,10 @@ class SchemeURLManagerTool {
     }
     
     private static func navigateToProductDetailPage(with url: URL, from viewController: BaseViewController) {
-         if let productId = extractProductId(from: url) {
-             let detailVC = ProductDetailViewController(productId: productId)
-             viewController.navigationController?.pushViewController(detailVC, animated: true)
-         }
+        if let productId = extractProductId(from: url) {
+            let detailVC = ProductDetailViewController(productId: productId)
+            viewController.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
     
     private static func handleUnknownScheme(from viewController: BaseViewController) {

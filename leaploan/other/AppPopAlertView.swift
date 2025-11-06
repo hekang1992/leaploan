@@ -17,7 +17,7 @@ class AppPopAlertView: UIView {
     var cancelBlock: (() -> Void)?
     
     var sureBlock: (() -> Void)?
-
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.isUserInteractionEnabled = true

@@ -22,13 +22,13 @@ class AppHeadView: UIView {
         bgView.backgroundColor = .clear
         return bgView
     }()
-
+    
     lazy var backBtn: UIButton = {
         let backBtn = UIButton(type: .custom)
         backBtn.setImage(UIImage(named: "back_icon_image"), for: .normal)
         return backBtn
     }()
-
+    
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.textAlignment = .center

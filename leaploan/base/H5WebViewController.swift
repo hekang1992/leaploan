@@ -17,6 +17,8 @@ class H5WebViewController: BaseViewController {
     let disposeBag = DisposeBag()
     var pageUrl: String?
     var productID: String = ""
+    var orderID: String = ""
+    var type: String = ""
     
     private lazy var webView = makeWebView()
     
@@ -27,7 +29,9 @@ class H5WebViewController: BaseViewController {
         return progressView
     }()
     
-    var json: [String: String]?
+    var one: String = ""
+    var two: String = ""
+    let misassertViewModel = MisassertViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,15 +123,29 @@ extension H5WebViewController: WKNavigationDelegate, WKScriptMessageHandler {
         switch message.name {
         case "matroclinal":
             /// GO_POING_INFO
-            
+            let time = String(Int(Date().timeIntervalSince1970))
+            self.insertMessageInfo(with: "10",
+                                   onepera: time,
+                                   twopera: time,
+                                   threepera: orderID,
+                                   viewModel: misassertViewModel)
             break
         case "Braque":
             /// END_BIND_CARD
-            json?["end"] = String(Int(Date().timeIntervalSince1970))
+            two = String(Int(Date().timeIntervalSince1970))
+            self.insertMessageInfo(with: "8",
+                                   onepera: one,
+                                   twopera: two,
+                                   threepera: "",
+                                   viewModel: misassertViewModel)
             break
         case "Chappells":
             /// CLOSE_WEB_VIEW
-            self.popAuthListVC()
+            if type == "1" {
+                self.popAuthListVC()
+            }else {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
             break
         case "akenes":
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
@@ -145,7 +163,7 @@ extension H5WebViewController: WKNavigationDelegate, WKScriptMessageHandler {
             break
         case "metrication":
             /// START_BIND_CARD
-            json?["start"] = String(Int(Date().timeIntervalSince1970))
+            one = String(Int(Date().timeIntervalSince1970))
             break
         default:
             break

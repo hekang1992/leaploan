@@ -42,6 +42,15 @@ class FaceViewController: BaseViewController {
     
     let faceViewModel = FaceViewModel()
     
+    /// INSERT_VIEW_MODEL_MESSAGE_INFO
+    let misassertViewModel = MisassertViewModel()
+    
+    var one: String = ""
+    var two: String = ""
+    
+    var three: String = ""
+    var four: String = ""
+    
     lazy var clickBtn: UIButton = {
         let clickBtn = UIButton(type: .custom)
         clickBtn.setTitle("Next Step", for: .normal)
@@ -53,10 +62,17 @@ class FaceViewController: BaseViewController {
         return clickBtn
     }()
     
+    let locationManager = AppLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        locationManager.getCurrentLocation { model in
+            LocationManagerModel.shared.model = model
+        }
+        
         view.backgroundColor = UIColor.init(hexString: "#1ABFFF")
         
         view.addSubview(bgImageView)
@@ -157,6 +173,7 @@ class FaceViewController: BaseViewController {
                     HudToastView.showMessage(with: "Complete identity verification first.")
                 }else if facestatus == 0 {
                     self?.alertFaceView()
+                    self?.three = String(Int(Date().timeIntervalSince1970))
                 }else if facestatus == 1 {
                     HudToastView.showMessage(with: "Identity verification completed.")
                 }
@@ -168,6 +185,8 @@ class FaceViewController: BaseViewController {
         }).disposed(by: disposeBag)
         
         getFaceInfo()
+        /// ONE_MESSAGE_TIME
+        one = String(Int(Date().timeIntervalSince1970))
     }
     
 }
@@ -202,6 +221,7 @@ extension FaceViewController {
                 self.faceUploadView.photoListView.descImageView.image = UIImage(named: "check_sel_image")
                 
                 if facestatus == 0 {
+                    three = String(Int(Date().timeIntervalSince1970))
                     alertFaceView()
                     return
                 }
@@ -274,8 +294,14 @@ extension FaceViewController {
                     if frypans == "11" {
                         alertWithModel(with: model)
                     }else {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        self.four = String(Int(Date().timeIntervalSince1970))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [self] in
                             self.getFaceInfo()
+                            self.insertMessageInfo(with: "4",
+                                                   onepera: three,
+                                                   twopera: four,
+                                                   threepera: "",
+                                                   viewModel: misassertViewModel)
                         }
                     }
                 }else {
@@ -288,6 +314,7 @@ extension FaceViewController {
     }
     
     private func alertWithModel(with model: BaseModel) {
+        two = String(Int(Date().timeIntervalSince1970))
         let selectNameView = SelectNameView(frame: self.view.bounds)
         let modelArray = model.billionth?.floroscope ?? []
         selectNameView.modelArray = modelArray
@@ -316,8 +343,13 @@ extension FaceViewController {
             do {
                 let model = try await faceViewModel.saveImageInfo(with: json)
                 if model.phacotherapy == "0" {
-                    self.dismiss(animated: true) {
+                    self.dismiss(animated: true) { [self] in
                         self.getFaceInfo()
+                        self.insertMessageInfo(with: "3",
+                                               onepera: one,
+                                               twopera: two,
+                                               threepera: "",
+                                               viewModel: misassertViewModel)
                     }
                 }else {
                     HudToastView.showMessage(with: model.marsi ?? "")

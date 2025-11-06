@@ -65,8 +65,6 @@ class ProductViewModel {
     
 }
 
-
-
 class RouterConfig {
     static let ONE_AUTH_STEP = "Rhoecus"
     static let TWO_AUTH_STEP = "stanchly"

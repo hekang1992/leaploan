@@ -51,11 +51,20 @@ class ConactCheckViewController: BaseViewController {
         return tableView
     }()
     
+    var one: String = ""
+    var two: String = ""
+    let misassertViewModel = MisassertViewModel()
+    let locationManager = AppLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.init(hexString: "#1ABFFF")
+        
+        locationManager.getCurrentLocation { model in
+            LocationManagerModel.shared.model = model
+        }
         
         view.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { make in
@@ -153,7 +162,7 @@ class ConactCheckViewController: BaseViewController {
         clickBtn.rx.tap
             .compactMap { [weak self] _ -> [String: String]? in
                 guard let self = self else { return nil }
-
+                two = String(Int(Date().timeIntervalSince1970))
                 let phoneDictArray: [[String: String]] = self.dataSource.value.map { model in
                     [
                         "unmalted": model.unmalted ?? "",
@@ -161,12 +170,12 @@ class ConactCheckViewController: BaseViewController {
                         "unconjugated": model.unconjugated ?? ""
                     ]
                 }
-
+                
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: phoneDictArray, options: []),
                       let jsonString = String(data: jsonData, encoding: .utf8) else {
                     return nil
                 }
-
+                
                 return [
                     "snowier": productID,
                     "billionth": jsonString
@@ -176,8 +185,8 @@ class ConactCheckViewController: BaseViewController {
                 self?.savePhonesInfo(with: json)
             })
             .disposed(by: disposeBag)
-
         
+        one = String(Int(Date().timeIntervalSince1970))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -313,6 +322,11 @@ extension ConactCheckViewController {
                 let model = try await viewModel.savePhonesInfo(with: json)
                 if model.phacotherapy == "0" {
                     self.popAuthListVC()
+                    self.insertMessageInfo(with: "7",
+                                           onepera: one,
+                                           twopera: two,
+                                           threepera: "",
+                                           viewModel: misassertViewModel)
                 }else {
                     HudToastView.showMessage(with: model.marsi ?? "")
                 }

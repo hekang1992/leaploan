@@ -157,7 +157,7 @@ extension LaunchViewController {
 }
 
 class LaunchInitInfo {
-
+    
     static func getJsonInfo() -> [String: Any] {
         var result: [String: Any] = [:]
         

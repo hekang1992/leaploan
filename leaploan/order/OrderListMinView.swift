@@ -41,7 +41,7 @@ class OrderListMinView: UIView {
         cycleView.layer.masksToBounds = true
         return cycleView
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(oneLabel)

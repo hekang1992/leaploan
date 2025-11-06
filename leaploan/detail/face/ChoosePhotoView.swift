@@ -17,7 +17,7 @@ class ChoosePhotoView: UIView {
     var cancelBlock: (() -> Void)?
     var photoBlock: (() -> Void)?
     var cameraBlock: (() -> Void)?
-
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "phot_pop_image")
@@ -100,7 +100,7 @@ class ChooseFaceView: UIView {
     
     var cancelBlock: (() -> Void)?
     var cameraBlock: (() -> Void)?
-
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "face_pop_auth_image")

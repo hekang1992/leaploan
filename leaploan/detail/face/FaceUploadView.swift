@@ -66,7 +66,7 @@ class FaceUploadView: UIView {
         faceListView.bgImageView.image = UIImage(named: "face_up_image")
         return faceListView
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(scrollView)
@@ -124,7 +124,7 @@ class FaceUploadView: UIView {
             .when(.recognized)
             .bind(onNext: { [weak self] _ in
                 self?.umidClick?()
-        }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
     }
     

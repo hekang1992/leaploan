@@ -317,7 +317,7 @@ class AppHomeView: UIView {
                 }
                 self.applyBlock?(String(model.negrita ?? 0))
             }).disposed(by: disposeBag)
-     
+        
         self.fiveLabel.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
             guard let self = self, let descModel = descModel else { return }
             self.descBlock?(descModel.photodrama ?? "")

@@ -35,10 +35,10 @@ class OrderCenterViewController: BaseViewController {
         tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.init(hexString: "#C8E8FB")
         let bgImageView = UIImageView()

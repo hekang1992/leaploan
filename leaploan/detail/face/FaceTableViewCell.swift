@@ -48,7 +48,7 @@ class FaceTableViewCell: UITableViewCell {
         bgView.backgroundColor = .clear
         return bgView
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(bgView)

@@ -109,7 +109,7 @@ class ContactsUtil: NSObject {
                 result.append(ContactModel(unmalted: name, disensure: disensure))
             }
         } catch {
-            print("获取通讯录失败：\(error)")
+            print("error=====：\(error)")
         }
         
         return result

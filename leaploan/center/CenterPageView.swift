@@ -34,7 +34,7 @@ class CenterPageView: UIView {
         scrollView.backgroundColor = .clear
         return scrollView
     }()
-
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "common_bg_image")
@@ -106,7 +106,7 @@ class CenterPageView: UIView {
             let nsRange = NSRange(range, in: attributedString.string)
             attributedString.addAttribute(.font,
                                           value: UIFont.systemFont(ofSize: 12, weight: .bold),
-                                        range: nsRange)
+                                          range: nsRange)
         }
         mentLabel.attributedText = attributedString
         

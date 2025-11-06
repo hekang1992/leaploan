@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import ActiveLabel
 
-class LoginView: BaseView {
+class LoginView: UIView {
     
     var oneBlock: (() -> Void)?
     
