@@ -10,7 +10,6 @@ target 'leaploan' do
   pod 'SnapKit'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'DeviceKit'
   pod 'Alamofire'
   pod 'RxGesture'
   pod 'MJRefresh'

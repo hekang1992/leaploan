@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import DeviceKit
 import AdSupport
 import SAMKeychain
 import AppTrackingTransparency
@@ -21,7 +20,7 @@ class commonPara: NSObject {
     var braunstein: String?
     
     init(vallombrosan: String? = nil, apozemical: String? = nil, thermotensile: String? = nil, fundy: String? = nil, shavery: String? = nil, braunstein: String? = nil) {
-        let current = Device.current
+        let current = UIDevice.current
         self.vallombrosan = "1.0.0"
         self.apozemical = current.name
         self.thermotensile = GetDoubleIDManager.shared.getIDFV()
