@@ -47,7 +47,16 @@ class H5WebViewController: BaseViewController {
         setupConstraints()
         
         headView.clickBlock = { [weak self] in
-            self?.popAuthListVC()
+            guard let self = self else { return }
+            if self.webView.canGoBack {
+                self.webView.goBack()
+            }else {
+                if type == "1" {
+                    self.popAuthListVC()
+                }else {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            }
         }
     }
     
@@ -124,28 +133,34 @@ extension H5WebViewController: WKNavigationDelegate, WKScriptMessageHandler {
         case "matroclinal":
             /// GO_POING_INFO
             let time = String(Int(Date().timeIntervalSince1970))
-            self.insertMessageInfo(with: "10",
-                                   onepera: time,
-                                   twopera: time,
-                                   threepera: orderID,
-                                   viewModel: misassertViewModel)
+            Task.detached { [weak self] in
+                guard let self = self else { return }
+                await self.insertMessageInfo(
+                    with: "10",
+                    onepera: time,
+                    twopera: time,
+                    threepera: orderID,
+                    viewModel: misassertViewModel
+                )
+            }
             break
         case "Braque":
             /// END_BIND_CARD
             two = String(Int(Date().timeIntervalSince1970))
-            self.insertMessageInfo(with: "8",
-                                   onepera: one,
-                                   twopera: two,
-                                   threepera: "",
-                                   viewModel: misassertViewModel)
+            Task.detached { [weak self] in
+                guard let self = self else { return }
+                await self.insertMessageInfo(
+                    with: "8",
+                    onepera: one,
+                    twopera: two,
+                    threepera: "",
+                    viewModel: misassertViewModel
+                )
+            }
             break
         case "Chappells":
             /// CLOSE_WEB_VIEW
-            if type == "1" {
-                self.popAuthListVC()
-            }else {
-                self.navigationController?.popToRootViewController(animated: true)
-            }
+            self.popAuthListVC()
             break
         case "akenes":
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {

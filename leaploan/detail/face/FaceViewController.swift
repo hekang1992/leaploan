@@ -297,11 +297,17 @@ extension FaceViewController {
                         self.four = String(Int(Date().timeIntervalSince1970))
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [self] in
                             self.getFaceInfo()
-                            self.insertMessageInfo(with: "4",
-                                                   onepera: three,
-                                                   twopera: four,
-                                                   threepera: "",
-                                                   viewModel: misassertViewModel)
+                            
+                            Task.detached { [weak self] in
+                                guard let self = self else { return }
+                                await self.insertMessageInfo(
+                                    with: "4",
+                                    onepera: three,
+                                    twopera: four,
+                                    threepera: "",
+                                    viewModel: misassertViewModel
+                                )
+                            }
                         }
                     }
                 }else {
@@ -342,23 +348,37 @@ extension FaceViewController {
         Task {
             do {
                 let model = try await faceViewModel.saveImageInfo(with: json)
+                
                 if model.phacotherapy == "0" {
-                    self.dismiss(animated: true) { [self] in
-                        self.getFaceInfo()
-                        self.insertMessageInfo(with: "3",
-                                               onepera: one,
-                                               twopera: two,
-                                               threepera: "",
-                                               viewModel: misassertViewModel)
+                    await MainActor.run { [weak self] in
+                        guard let self = self else { return }
+                        self.dismiss(animated: true) {
+                            self.getFaceInfo()
+                            
+                            // fire-and-forget 埋点，不阻塞
+                            Task.detached { [weak self] in
+                                guard let self = self else { return }
+                                await self.insertMessageInfo(
+                                    with: "3",
+                                    onepera: one,
+                                    twopera: two,
+                                    threepera: "",
+                                    viewModel: misassertViewModel
+                                )
+                            }
+                        }
                     }
-                }else {
+                } else {
                     HudToastView.showMessage(with: model.marsi ?? "")
                 }
-            } catch  {
                 
+            } catch {
+                print("❌ saveInfo error: \(error)")
             }
         }
     }
+    
+    
     
 }
 

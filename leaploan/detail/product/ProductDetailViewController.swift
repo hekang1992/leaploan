@@ -308,14 +308,19 @@ class RouterNextStepConfig {
                         webVc.productID = vc.productId
                         webVc.pageUrl = antisubversive
                         webVc.orderID = orderID
+                        webVc.type = "2"
                         vc.navigationController?.pushViewController(webVc, animated: true)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                             let two = String(Int(Date().timeIntervalSince1970))
-                            vc.insertMessageInfo(with: "9",
-                                                 onepera: one,
-                                                 twopera: two,
-                                                 threepera: orderID,
-                                                 viewModel: vc.misassertViewModel)
+                            Task.detached {
+                                await vc.insertMessageInfo(
+                                    with: "9",
+                                    onepera: one,
+                                    twopera: two,
+                                    threepera: orderID,
+                                    viewModel: vc.misassertViewModel
+                                )
+                            }
                         }
                     }else {
                         HudToastView.showMessage(with: model.marsi ?? "")

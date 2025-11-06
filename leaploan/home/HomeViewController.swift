@@ -26,6 +26,8 @@ class HomeViewController: BaseViewController {
     
     let firstViewModel = LaunchViewModel()
     
+    let misassertViewModel = MisassertViewModel()
+    
     let locationManager = AppLocationManager()
     
     override func viewDidLoad() {
@@ -187,27 +189,32 @@ extension HomeViewController {
     private func findLocationModelInfo() {
         locationManager.getCurrentLocation { model in
             LocationManagerModel.shared.model = model
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            let model = LocationManagerModel.shared.model
-            let json: [String: Any] = [
-                "cuisse": model?.province ?? "",
-                "swooping": model?.countryCode ?? "",
-                "thysanurian": model?.country ?? "",
-                "backboneless": model?.address ?? "",
-                "biogeographically": model?.latitude ?? 0.0,
-                "unlustily": model?.longitude ?? 0.0,
-                "twanging": model?.city ?? "",
-                "rump": model?.subLocality ?? ""
-            ]
-            
-            Task {
-                do {
-                    let _ = try await self.viewModel.backLocationendInfo(with: json)
-                } catch {
-                    print("error======: \(error)")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                let model = LocationManagerModel.shared.model
+                let thysanurian = model?.country ?? ""
+                let biogeographically = model?.latitude ?? ""
+                let unlustily = model?.longitude ?? ""
+                if !thysanurian.isEmpty && !biogeographically.isEmpty && !unlustily.isEmpty {
+                    let json: [String: Any] = [
+                        "cuisse": model?.province ?? "",
+                        "swooping": model?.countryCode ?? "",
+                        "thysanurian": model?.country ?? "",
+                        "backboneless": model?.address ?? "",
+                        "biogeographically": model?.latitude ?? "",
+                        "unlustily": model?.longitude ?? "",
+                        "twanging": model?.city ?? "",
+                        "rump": model?.subLocality ?? ""
+                    ]
+                    
+                    Task {
+                        do {
+                            let _ = try await self.viewModel.backLocationendInfo(with: json)
+                        } catch {
+                            print("error======: \(error)")
+                        }
+                    }
                 }
+                
             }
         }
     }
@@ -268,6 +275,19 @@ extension HomeViewController {
             } catch  {
                 
             }
+        }
+        
+        let one = UserDefaults.standard.object(forKey: "one") as? String ?? ""
+        let two = UserDefaults.standard.object(forKey: "one") as? String ?? ""
+        Task.detached { [weak self] in
+            guard let self = self else { return }
+            await self.insertMessageInfo(
+                with: "1",
+                onepera: one,
+                twopera: two,
+                threepera: "",
+                viewModel: misassertViewModel
+            )
         }
     }
     

@@ -24,6 +24,9 @@ class LoginViewController: UIViewController {
     
     let viewModel = LoginViewModel()
     
+    var one: String = ""
+    var two: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,6 +66,10 @@ class LoginViewController: UIViewController {
             webVc.pageUrl = model?.billionth?.gulash ?? ""
             self?.navigationController?.pushViewController(webVc, animated: true)
         }
+        
+        one = String(Int(Date().timeIntervalSince1970))
+        UserDefaults.standard.set(one, forKey: "one")
+        UserDefaults.standard.synchronize()
     }
     
     deinit {
@@ -92,6 +99,9 @@ extension LoginViewController {
     }
     
     private func loginInfo() {
+        two = String(Int(Date().timeIntervalSince1970))
+        UserDefaults.standard.set(two, forKey: "two")
+        UserDefaults.standard.synchronize()
         let phone = self.loginView.phoneTextFiled.text ?? ""
         let code = self.loginView.codeTextFiled.text ?? ""
         if phone.isEmpty {

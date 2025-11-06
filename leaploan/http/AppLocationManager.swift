@@ -26,9 +26,13 @@ class AppLocationManager: NSObject {
     private let locationManager = CLLocationManager()
     private var completion: ((SimpleLocation?) -> Void)?
     private var isUpdating = false
+    private var hasReceivedLocation = false // 新增：标记是否已收到位置
     
     func getCurrentLocation(completion: @escaping (SimpleLocation?) -> Void) {
+        // 重置状态
+        self.hasReceivedLocation = false
         self.completion = completion
+        
         let status = locationManager.authorizationStatus
         guard status == .authorizedWhenInUse || status == .authorizedAlways else {
             locationManager.delegate = self
@@ -43,7 +47,9 @@ extension AppLocationManager: CLLocationManagerDelegate {
     
     private func startSingleLocationUpdate() {
         guard !isUpdating else { return }
+        
         isUpdating = true
+        hasReceivedLocation = false
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.startUpdatingLocation()
@@ -55,14 +61,16 @@ extension AppLocationManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard !hasReceivedLocation, let location = locations.last else { return }
+        
+        guard location.horizontalAccuracy >= 0 && location.horizontalAccuracy <= 100 else { return }
+        
+        hasReceivedLocation = true
         stopLocationUpdate()
         
-        guard let location = locations.last else {
-            completion?(nil)
-            return
-        }
-        
-        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+        CLGeocoder().reverseGeocodeLocation(location) { [weak self] placemarks, error in
+            guard let self = self else { return }
+            
             let placemark = placemarks?.first
             
             let locationInfo = SimpleLocation(
@@ -79,24 +87,33 @@ extension AppLocationManager: CLLocationManagerDelegate {
             )
             
             self.completion?(locationInfo)
+            self.completion = nil
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         stopLocationUpdate()
-        completion?(nil)
+        if !hasReceivedLocation {
+            hasReceivedLocation = true
+            completion?(nil)
+            completion = nil
+        }
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = manager.authorizationStatus
         if status == .authorizedWhenInUse || status == .authorizedAlways {
+            hasReceivedLocation = false
             startSingleLocationUpdate()
         } else if status == .denied || status == .restricted {
-            completion?(nil)
+            if !hasReceivedLocation {
+                hasReceivedLocation = true
+                completion?(nil)
+                completion = nil
+            }
         }
     }
 }
-
 
 class LocationManagerModel {
     static let shared = LocationManagerModel()

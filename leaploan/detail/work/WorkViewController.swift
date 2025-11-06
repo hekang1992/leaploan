@@ -191,11 +191,16 @@ class WorkViewController: BaseViewController {
                 let model = try await viewModel.savePersonalInfo(with: json)
                 if model.phacotherapy == "0" {
                     self.popAuthListVC()
-                    self.insertMessageInfo(with: "6",
-                                           onepera: one,
-                                           twopera: two,
-                                           threepera: "",
-                                           viewModel: misassertViewModel)
+                    Task.detached { [weak self] in
+                        guard let self = self else { return }
+                        await self.insertMessageInfo(
+                            with: "6",
+                            onepera: one,
+                            twopera: two,
+                            threepera: "",
+                            viewModel: misassertViewModel
+                        )
+                    }
                 }else {
                     HudToastView.showMessage(with: model.marsi ?? "")
                 }

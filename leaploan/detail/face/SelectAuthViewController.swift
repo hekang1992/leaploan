@@ -214,11 +214,16 @@ extension SelectAuthViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         two = String(Int(Date().timeIntervalSince1970))
-        insertMessageInfo(with: "2",
-                          onepera: one,
-                          twopera: two,
-                          threepera: "",
-                          viewModel: misassertViewModel)
+        Task.detached { [weak self] in
+            guard let self = self else { return }
+            await self.insertMessageInfo(
+                with: "2",
+                onepera: one,
+                twopera: two,
+                threepera: "",
+                viewModel: misassertViewModel
+            )
+        }
         let faceVc = FaceViewController()
         faceVc.type = modelArray?[indexPath.row] ?? ""
         faceVc.productID = productID
