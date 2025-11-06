@@ -30,6 +30,7 @@ class billionthModel: Codable {
     var satanize: [satanizeModel]?
     var cronie: [cronieModel]?
     var gulash: String?
+    var accidentalness: Int?
 }
 
 class oocystModel: Codable {

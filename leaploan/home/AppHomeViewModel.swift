@@ -64,9 +64,21 @@ class AppHomeViewModel {
         }
     }
     
+    /// BACK_END_LOCATION_MESSAGE_INFO
+    func backLocationendInfo(with json: [String: Any]) async throws -> BaseModel {
+        
+        do {
+            let model: BaseModel = try await HttpsRequest.shared.postFrom("/Pasteurella/louting", parameters: json)
+            return model
+        } catch {
+            print("error===: \(error)")
+            throw error
+        }
+    }
+    
 }
 
-#warning("HomeAddressModel")
+
 class HomeAddressModel {
     static let shared = HomeAddressModel()
     private init() {}

@@ -10,12 +10,15 @@ import CoreLocation
 
 struct SimpleLocation {
     let country: String?
+    let countryCode: String?
     let province: String?
     let city: String?
+    let district: String?
+    let subLocality: String?
     let street: String?
     let address: String?
-    let latitude: Double
-    let longitude: Double
+    let latitude: String?
+    let longitude: String?
 }
 
 class AppLocationManager: NSObject {
@@ -40,7 +43,6 @@ extension AppLocationManager: CLLocationManagerDelegate {
     
     private func startSingleLocationUpdate() {
         guard !isUpdating else { return }
-        
         isUpdating = true
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -65,12 +67,15 @@ extension AppLocationManager: CLLocationManagerDelegate {
             
             let locationInfo = SimpleLocation(
                 country: placemark?.country,
+                countryCode: placemark?.isoCountryCode,
                 province: placemark?.administrativeArea,
                 city: placemark?.locality,
+                district: placemark?.subAdministrativeArea,
+                subLocality: placemark?.subLocality,
                 street: placemark?.thoroughfare,
                 address: placemark?.name,
-                latitude: location.coordinate.latitude,
-                longitude: location.coordinate.longitude
+                latitude: String(format: "%.6f", location.coordinate.latitude),
+                longitude: String(format: "%.6f", location.coordinate.longitude)
             )
             
             self.completion?(locationInfo)
@@ -90,5 +95,11 @@ extension AppLocationManager: CLLocationManagerDelegate {
             completion?(nil)
         }
     }
-    
+}
+
+
+class LocationManagerModel {
+    static let shared = LocationManagerModel()
+    private init() {}
+    var model: SimpleLocation?
 }

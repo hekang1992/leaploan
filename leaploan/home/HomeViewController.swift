@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import CoreLocation
 
 class HomeViewController: BaseViewController {
     
@@ -22,6 +23,10 @@ class HomeViewController: BaseViewController {
     }()
     
     let viewModel = AppHomeViewModel()
+    
+    let firstViewModel = LaunchViewModel()
+    
+    let locationManager = AppLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +48,12 @@ class HomeViewController: BaseViewController {
         
         self.homeView.scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             guard let self = self else { return }
-            getHomeMessageInfo()
+            homeMessageApiInfo()
         })
         
         homeView.applyBlock = { [weak self] productID in
             guard let self = self else { return }
-            applyProductInfo(with: productID)
+            findLocationStatus(with: productID)
         }
         
         homeView.descBlock = { [weak self] pageUrl in
@@ -60,12 +65,13 @@ class HomeViewController: BaseViewController {
         /// MINVIEW_PAGE_INFO
         self.minView.collectionView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             guard let self = self else { return }
-            getHomeMessageInfo()
+            homeMessageApiInfo()
         })
         
         self.minView.smallBlock = { [weak self] model in
             guard let self = self else { return }
-            applyProductInfo(with: String(model.negrita ?? 0))
+            let productID = String(model.negrita ?? 0)
+            findLocationStatus(with: productID)
         }
         
         self.minView.agreementBlock = { [weak self] model in
@@ -78,7 +84,8 @@ class HomeViewController: BaseViewController {
         
         self.minView.productListBlock = { [weak self] model in
             guard let self = self else { return }
-            applyProductInfo(with: String(model.negrita ?? 0))
+            let productID = String(model.negrita ?? 0)
+            findLocationStatus(with: productID)
         }
         
         Task {
@@ -88,17 +95,122 @@ class HomeViewController: BaseViewController {
                 
             }
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        homeMessageApiInfo()
+    }
+    
+    private func homeMessageApiInfo() {
+        findLocationModelInfo()
         getHomeMessageInfo()
+        toMarket()
     }
     
 }
 
 extension HomeViewController {
+    
+    /// GET_GOOGLE_MARKET_MESSAGE_INFO
+    private func toMarket() {
+        let undersheriffwick = GetDoubleIDManager.shared.getIDFV()
+        let soilier = GetDoubleIDManager.shared.getIDFA()
+        let json = ["undersheriffwick": undersheriffwick, "soilier": soilier]
+        Task {
+            do {
+                let _ = try await firstViewModel.toAppleMarket(with: json)
+            } catch  {
+                
+            }
+        }
+    }
+    
+    /// GET_LOCATION_STATUS
+    private func findLocationStatus(with productID: String) {
+        let model = PushManagerModel.shared.model
+        let accidentalness = model?.billionth?.accidentalness ?? 0
+        if accidentalness == 1 {
+            let status = CLLocationManager().authorizationStatus
+            if status == .authorizedWhenInUse || status == .authorizedAlways {
+                applyProductInfo(with: productID)
+            } else if status == .denied || status == .restricted {
+                if shouldShowPermissionAlert() {
+                    showPermissionAlert()
+                }else {
+                    applyProductInfo(with: productID)
+                }
+            }
+        }else {
+            applyProductInfo(with: productID)
+        }
+    }
+    
+    private func showPermissionAlert() {
+        DispatchQueue.main.async {
+            guard let vc = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController else { return }
+            
+            let alert = UIAlertController(
+                title: "无法访问定位",
+                message: "请前往设置开启定位权限以使用此功能。",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+            alert.addAction(UIAlertAction(title: "去设置", style: .default, handler: { _ in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            }))
+            vc.present(alert, animated: true)
+            
+            self.recordPermissionAlertShown()
+        }
+    }
+    
+    private func shouldShowPermissionAlert() -> Bool {
+        let defaults = UserDefaults.standard
+        let lastShownDate = defaults.object(forKey: "PermissionAlertLastShown") as? Date
+        
+        guard let lastDate = lastShownDate else {
+            return true
+        }
+        
+        let twentyFourHours: TimeInterval = 24 * 60 * 60
+        return Date().timeIntervalSince(lastDate) > twentyFourHours
+    }
+    
+    private func recordPermissionAlertShown() {
+        let defaults = UserDefaults.standard
+        defaults.set(Date(), forKey: "PermissionAlertLastShown")
+    }
+    
+    private func findLocationModelInfo() {
+        locationManager.getCurrentLocation { model in
+            LocationManagerModel.shared.model = model
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            let model = LocationManagerModel.shared.model
+            let json: [String: Any] = [
+                "cuisse": model?.province ?? "",
+                "swooping": model?.countryCode ?? "",
+                "thysanurian": model?.country ?? "",
+                "backboneless": model?.address ?? "",
+                "biogeographically": model?.latitude ?? 0.0,
+                "unlustily": model?.longitude ?? 0.0,
+                "twanging": model?.city ?? "",
+                "rump": model?.subLocality ?? ""
+            ]
+            
+            Task {
+                do {
+                    let _ = try await self.viewModel.backLocationendInfo(with: json)
+                } catch {
+                    print("error======: \(error)")
+                }
+            }
+        }
+    }
     
     private func getHomeMessageInfo() {
         let json = ["louting": "1", "scrutinizer": LoginAuthManager.phoneNumber]
