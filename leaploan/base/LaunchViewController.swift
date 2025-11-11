@@ -91,8 +91,7 @@ extension LaunchViewController {
                     PushManagerModel.shared.model = model
                     if let oocystModel = model.billionth?.oocyst {
                         marketModel(with: oocystModel)
-                    }
-                    pushNoti()
+                    }                    
                 }else {
                     sureBtn.isHidden = false
                     sureBtn.isEnabled = true
@@ -138,6 +137,9 @@ extension LaunchViewController {
         let json = ["undersheriffwick": undersheriffwick, "soilier": soilier]
         Task {
             let _ = try await viewModel.toAppleMarket(with: json)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            self.pushNoti()
         }
     }
     

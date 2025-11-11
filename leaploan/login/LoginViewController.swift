@@ -27,6 +27,8 @@ class LoginViewController: UIViewController {
     var one: String = ""
     var two: String = ""
     
+    let locationManager = AppLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,6 +75,11 @@ class LoginViewController: UIViewController {
         one = String(Int(Date().timeIntervalSince1970))
         UserDefaults.standard.set(one, forKey: "one")
         UserDefaults.standard.synchronize()
+        
+        locationManager.getCurrentLocation { model in
+            LocationManagerModel.shared.model = model
+        }
+        
     }
     
     deinit {

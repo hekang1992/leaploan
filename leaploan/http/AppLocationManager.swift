@@ -27,7 +27,7 @@ class AppLocationManager: NSObject {
     private var completion: ((SimpleLocation?) -> Void)?
     
     private var debounceWorkItem: DispatchWorkItem?
-    private let debounceInterval: TimeInterval = 3.0
+    private let debounceInterval: TimeInterval = 2.0
     
     func getCurrentLocation(completion: @escaping (SimpleLocation?) -> Void) {
         self.completion = completion
