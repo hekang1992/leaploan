@@ -27,7 +27,6 @@ PODS:
     - BRPickerView/Deprecated/Base
   - BRPickerView/TextPicker (2.9.7):
     - BRPickerView/Core
-  - DeviceKit (5.7.0)
   - FBAEMKit (18.0.1):
     - FBSDKCoreKit_Basics (= 18.0.1)
   - FBSDKCoreKit (18.0.1):
@@ -55,7 +54,6 @@ DEPENDENCIES:
   - ActiveLabel
   - Alamofire
   - BRPickerView
-  - DeviceKit
   - FBSDKCoreKit
   - IQKeyboardManagerSwift (~> 6.5.2)
   - Kingfisher
@@ -73,7 +71,6 @@ SPEC REPOS:
     - ActiveLabel
     - Alamofire
     - BRPickerView
-    - DeviceKit
     - FBAEMKit
     - FBSDKCoreKit
     - FBSDKCoreKit_Basics
@@ -93,7 +90,6 @@ SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   BRPickerView: 6548c8fbe21c0f29e72ab2fae177d196edc83f09
-  DeviceKit: d1a956e25b957efb60a87bfe70be4e00ef36846d
   FBAEMKit: b2ed182002dbcb65d5a60059c9693d322186cd00
   FBSDKCoreKit: 7f96852f2539bdb88ba8d47e5ab4ae70a6f8d691
   FBSDKCoreKit_Basics: 22d4c1a509ded4e45116f3bb167a14907550f62e
@@ -109,6 +105,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
   TYAlertController: c121090edb0bea7426f987da94cdddd81eef4231
 
-PODFILE CHECKSUM: 74b1375c60918c3c5baa988228360d01add47db8
+PODFILE CHECKSUM: 5ab7304bfc1fb16a1206b2ffce7f878465cddf9a
 
 COCOAPODS: 1.16.2

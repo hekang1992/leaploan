@@ -8,12 +8,14 @@
 import UIKit
 import SnapKit
 import ActiveLabel
+import RxSwift
+import RxCocoa
 
 class LoginView: UIView {
     
     var oneBlock: (() -> Void)?
     
-    var twoBlock: (() -> Void)?
+    let disposeBag = DisposeBag()
     
     lazy var bgView: UIView = {
         let bgView = UIView()
@@ -206,9 +208,9 @@ class LoginView: UIView {
         mentLabel.numberOfLines = 0
         mentLabel.textAlignment = .left
         
-        mentLabel.enabledTypes = [.custom(pattern: "Privacy Policy"), .custom(pattern: "Loan Terms")]
+        mentLabel.enabledTypes = [.custom(pattern: "Privacy Policy")]
         
-        mentLabel.text = "Creating An Account Indicates That You Consent To Our Privacy Policy And Loan Terms."
+        mentLabel.text = "Creating An Account Indicates That You Consent To Our Privacy Policy."
         mentLabel.customColor[.custom(pattern: "Privacy Policy")] = UIColor(hexString: "#FF29D5")
         mentLabel.customColor[.custom(pattern: "Loan Terms")] = UIColor(hexString: "#FF29D5")
         mentLabel.font = .systemFont(ofSize: 12, weight: UIFont.Weight(400))
@@ -219,12 +221,13 @@ class LoginView: UIView {
             self?.oneBlock?()
         }
         
-        mentLabel.handleCustomTap(for: .custom(pattern: "Loan Terms")) { [weak self] _ in
-            print("🟢 Loan Terms tapped")
-            self?.twoBlock?()
-        }
-        
         return mentLabel
+    }()
+    
+    lazy var voiceBtn: UIButton = {
+        let voiceBtn = UIButton(type: .custom)
+        voiceBtn.setImage(UIImage(named: "voice_icon_image"), for: .normal)
+        return voiceBtn
     }()
     
     override init(frame: CGRect) {
@@ -372,6 +375,16 @@ class LoginView: UIView {
         stackView.addArrangedSubview(checkBtn)
         stackView.addArrangedSubview(mentLabel)
         
+        checkBtn.rx.tap.bind(onNext: { [weak self] in
+            self?.checkBtn.isSelected.toggle()
+        }).disposed(by: disposeBag)
+        
+        scrollView.addSubview(voiceBtn)
+        voiceBtn.snp.makeConstraints { make in
+            make.top.equalTo(stackView.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.size.equalTo(CGSize(width: 157, height: 23))
+        }
     }
     
     required init?(coder: NSCoder) {

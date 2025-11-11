@@ -170,7 +170,7 @@ class FaceViewController: BaseViewController {
                 let idstatus = distinctionlessModel?.hundredfold ?? 0
                 let facestatus = photometricallyModel?.hundredfold ?? 0
                 if idstatus == 0 {
-                    HudToastView.showMessage(with: "Complete identity verification first.")
+                    self?.alertPhotoView()
                 }else if facestatus == 0 {
                     self?.alertFaceView()
                     self?.three = String(Int(Date().timeIntervalSince1970))
@@ -209,7 +209,7 @@ extension FaceViewController {
                 
                 let photoslogo = photoModel?.antisubversive ?? ""
                 let faceslogo = faceModel?.antisubversive ?? ""
-                
+                let metabiological = photoModel?.metabiological ?? ""
                 
                 
                 if photostatus == 0 {
@@ -219,6 +219,7 @@ extension FaceViewController {
                 
                 self.faceUploadView.photoListView.bgImageView.kf.setImage(with: URL(string: photoslogo))
                 self.faceUploadView.photoListView.descImageView.image = UIImage(named: "check_sel_image")
+                self.faceUploadView.nameLabel.text = metabiological
                 
                 if facestatus == 0 {
                     three = String(Int(Date().timeIntervalSince1970))

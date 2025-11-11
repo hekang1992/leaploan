@@ -48,19 +48,22 @@ class LoginViewController: UIViewController {
             self.codeInfo()
         }).disposed(by: disposeBag)
         
+        loginView.voiceBtn.rx.tap.bind(onNext: { [weak self] in
+            guard let self = self else { return }
+            let phoneStr = self.loginView.phoneTextFiled.text ?? ""
+            if phoneStr.isEmpty {
+                HudToastView.showMessage(with: "Please enter phone number")
+                return
+            }
+            self.voiceInfo()
+        }).disposed(by: disposeBag)
+        
         loginView.loginBtn.rx.tap.bind(onNext: { [weak self] in
             guard let self = self else { return }
             self.loginInfo()
         }).disposed(by: disposeBag)
         
         loginView.oneBlock = { [weak self] in
-            let model = PushManagerModel.shared.model
-            let webVc = H5WebViewController()
-            webVc.pageUrl = model?.billionth?.gulash ?? ""
-            self?.navigationController?.pushViewController(webVc, animated: true)
-        }
-        
-        loginView.twoBlock = { [weak self] in
             let model = PushManagerModel.shared.model
             let webVc = H5WebViewController()
             webVc.pageUrl = model?.billionth?.gulash ?? ""
@@ -98,6 +101,21 @@ extension LoginViewController {
         }
     }
     
+    private func voiceInfo() {
+        let phone = self.loginView.phoneTextFiled.text ?? ""
+        let json = ["disensure": phone,
+                    "disponse": "1",
+                    "codetime": String(Int(Date().timeIntervalSince1970))]
+        Task {
+            do {
+                let model = try await viewModel.findVoiceInfo(with: json)
+                HudToastView.showMessage(with: model.marsi ?? "")
+            } catch  {
+                
+            }
+        }
+    }
+    
     private func loginInfo() {
         two = String(Int(Date().timeIntervalSince1970))
         UserDefaults.standard.set(two, forKey: "two")
@@ -110,6 +128,11 @@ extension LoginViewController {
         }
         if code.isEmpty {
             HudToastView.showMessage(with: "Please enter your secure code")
+            return
+        }
+        let isAgree = self.loginView.checkBtn.isSelected
+        if isAgree == false {
+            HudToastView.showMessage(with: "Please read and agree to the agreement first")
             return
         }
         self.resignResponse()

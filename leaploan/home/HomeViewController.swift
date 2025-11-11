@@ -187,41 +187,39 @@ extension HomeViewController {
     }
     
     private func findLocationModelInfo() {
-        locationManager.getCurrentLocation { model in
+        locationManager.getCurrentLocation { [weak self] model in
+            guard let self else { return }
+
             LocationManagerModel.shared.model = model
             let jsonStr = DeviceManager.getRealDeviceData() ?? ""
             let deJson = ["billionth": jsonStr]
-            Task.detached { [weak self] in
-                do {
-                    let _ = try await self?.viewModel.backDevAppInfo(with: deJson)
-                } catch {
-                    
-                }
+
+            Task {
+                try? await self.viewModel.backDevAppInfo(with: deJson)
             }
             
-            let thysanurian = model?.country ?? ""
-            let biogeographically = model?.latitude ?? ""
-            let unlustily = model?.longitude ?? ""
-            if !thysanurian.isEmpty && !biogeographically.isEmpty && !unlustily.isEmpty {
-                let json: [String: Any] = [
-                    "cuisse": model?.province ?? "",
-                    "swooping": model?.countryCode ?? "",
-                    "thysanurian": model?.country ?? "",
-                    "backboneless": model?.address ?? "",
-                    "biogeographically": model?.latitude ?? "",
-                    "unlustily": model?.longitude ?? "",
-                    "twanging": model?.city ?? "",
-                    "rump": model?.subLocality ?? ""
-                ]
-                Task.detached { [weak self] in
-                    do {
-                        let _ = try await self?.viewModel.backLocationendInfo(with: json)
-                    } catch {
-                        print("error======: \(error)")
-                    }
+            guard let model = model else { return }
+
+            let json: [String: Any] = [
+                "cuisse": model.province ?? "",
+                "swooping": model.countryCode ?? "",
+                "thysanurian": model.country ?? "",
+                "backboneless": model.address ?? "",
+                "biogeographically": model.latitude ?? "",
+                "unlustily": model.longitude ?? "",
+                "twanging": model.city ?? "",
+                "rump": model.subLocality ?? ""
+            ]
+            
+            Task {
+                do {
+                    let _ = try await self.viewModel.backLocationendInfo(with: json)
+                } catch {
+                    print("error: \(error)")
                 }
             }
         }
+
     }
     
     private func getHomeMessageInfo() {

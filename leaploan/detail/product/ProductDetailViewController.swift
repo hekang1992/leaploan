@@ -66,12 +66,12 @@ class ProductDetailViewController: BaseViewController {
         nameLabel.numberOfLines = 0
         nameLabel.isHidden = true
         nameLabel.font = UIFont.systemFont(ofSize: 10, weight: UIFont.Weight(200))
-        let fullText = "We strictly follow standard procedures and specifications, and specific privacy measures are detailed in the Privacy Policy."
+        let fullText = "We strictly follow standard procedures and specifications, and specific privacy measures are detailed in the Loan Agreement."
         
         let attributedString = NSMutableAttributedString(string: fullText)
         attributedString.addAttribute(.foregroundColor, value: UIColor.init(hexString: "#333333"), range: NSRange(location: 0, length: fullText.count))
         
-        if let nightedRange = fullText.range(of: "Privacy Policy") {
+        if let nightedRange = fullText.range(of: "Loan Agreement") {
             let nsRange = NSRange(nightedRange, in: fullText)
             attributedString.addAttribute(.foregroundColor, value: UIColor.init(hexString: "#FF29D5"), range: nsRange)
         }

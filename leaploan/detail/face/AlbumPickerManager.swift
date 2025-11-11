@@ -37,7 +37,7 @@ class AlbumPickerManager: NSObject {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         viewController.present(imagePicker, animated: true)
     }
     

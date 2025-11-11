@@ -18,7 +18,7 @@ class OrderViewController: BaseViewController {
     
     let viewModel = OrderListViewModel()
     
-    var orderType: String = "7"
+    var orderType: String = "6"
     
     var modelArray: [mankinModel]?
     
@@ -156,8 +156,8 @@ class OrderViewController: BaseViewController {
             self?.oneBtn.backgroundColor = UIColor.init(hexString: "#FF29D5")
             self?.twoBtn.backgroundColor = UIColor.white
             self?.threeBtn.backgroundColor = UIColor.white
-            self?.orderType = "7"
-            self?.getListInfo(with: "7")
+            self?.orderType = "6"
+            self?.getListInfo(with: "6")
         }).disposed(by: disposeBag)
         
         twoBtn.rx.tap.bind(onNext: { [weak self] in
@@ -167,7 +167,7 @@ class OrderViewController: BaseViewController {
             self?.oneBtn.backgroundColor = UIColor.white
             self?.twoBtn.backgroundColor = UIColor.init(hexString: "#FF29D5")
             self?.threeBtn.backgroundColor = UIColor.white
-            self?.orderType = "6"
+            self?.orderType = "7"
             self?.getListInfo(with: "7")
         }).disposed(by: disposeBag)
         
