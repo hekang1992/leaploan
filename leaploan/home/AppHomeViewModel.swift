@@ -79,7 +79,7 @@ class AppHomeViewModel {
     func backDevAppInfo(with json: [String: Any]) async throws -> BaseModel {
         
         do {
-            let model: BaseModel = try await HttpsRequest.shared.postFrom("/Pasteurella/louting", parameters: json)
+            let model: BaseModel = try await HttpsRequest.shared.postFrom("/Pasteurella/cosmometry", parameters: json)
             return model
         } catch {
             print("error===: \(error)")

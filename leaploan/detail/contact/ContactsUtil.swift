@@ -75,9 +75,7 @@ class ContactsUtil: NSObject {
             completion(false)
             
         case .limited:
-            // iOS17+ 部分授权也弹窗
-            showPermissionAlert()
-            completion(false)
+            completion(true)
             
         @unknown default:
             showPermissionAlert()
