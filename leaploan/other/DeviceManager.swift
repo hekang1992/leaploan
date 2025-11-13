@@ -181,12 +181,18 @@ class DeviceInfoManager {
 
 struct SystemInfo {
     
-    static var availableDiskSpace: UInt64 {
-        if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
-           let freeSize = attributes[.systemFreeSize] as? NSNumber {
-            return freeSize.uint64Value
+   static func getNewFreeSize() -> String {
+        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
+        do {
+            let resourceValues = try tempURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
+            if let availableCapacity = resourceValues.volumeAvailableCapacityForImportantUsage {
+                return "\(availableCapacity)"
+            } else {
+                return "-1"
+            }
+        } catch {
+            return "-1"
         }
-        return 0
     }
     
     static var totalDiskSpace: UInt64 {
@@ -201,29 +207,31 @@ struct SystemInfo {
         return ProcessInfo.processInfo.physicalMemory
     }
     
-    static var availableMemory: UInt64 {
-        var stats = mach_task_basic_info()
-        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size) / 4
-        let kerr: kern_return_t = withUnsafeMutablePointer(to: &stats) {
-            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
-                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+   static func getAvailableMemorySize() -> String {
+        var vmStats = vm_statistics_data_t()
+        var count = mach_msg_type_number_t(MemoryLayout<vm_statistics_data_t>.size / MemoryLayout<integer_t>.size)
+
+        let kernReturn = withUnsafeMutablePointer(to: &vmStats) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
+                host_statistics(mach_host_self(), HOST_VM_INFO, $0, &count)
             }
         }
-        if kerr == KERN_SUCCESS {
-            let usedMemory = UInt64(stats.resident_size)
-            let total = totalMemory
-            if usedMemory < total {
-                return total - usedMemory
-            }
+
+        guard kernReturn == KERN_SUCCESS else {
+            return "-1"
         }
-        return 0
+
+        let pageSize = vm_kernel_page_size
+        let availableMemory = Int64(pageSize) * Int64(vmStats.free_count + vmStats.inactive_count)
+
+        return "\(availableMemory)"
     }
     
     static func infoStrings() -> [String: String] {
-        let a = String(availableDiskSpace)
+        let a = getNewFreeSize()
         let t = String(totalDiskSpace)
         let tm = String(totalMemory)
-        let am = String(totalMemory - availableMemory)
+        let am = getAvailableMemorySize()
 
         return [
             "perinephrium": "\(a)",
