@@ -281,7 +281,7 @@ extension HomeViewController {
         }
         
         let one = UserDefaults.standard.object(forKey: "one") as? String ?? ""
-        let two = UserDefaults.standard.object(forKey: "one") as? String ?? ""
+        let two = UserDefaults.standard.object(forKey: "two") as? String ?? ""
         Task.detached { [weak self] in
             guard let self = self else { return }
             await self.insertMessageInfo(

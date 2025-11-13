@@ -62,14 +62,16 @@ class FaceViewController: BaseViewController {
         return clickBtn
     }()
     
-    let locationManager = AppLocationManager()
+    let phptplocationManager = AppLocationManager()
+    
+    let facelocationManager = AppLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         
-        locationManager.getCurrentLocation { model in
+        phptplocationManager.getCurrentLocation { model in
             LocationManagerModel.shared.model = model
         }
         
@@ -267,6 +269,9 @@ extension FaceViewController {
     }
     
     private func alertFaceView() {
+        facelocationManager.getCurrentLocation { model in
+            LocationManagerModel.shared.model = model
+        }
         let photoView = ChooseFaceView(frame: self.view.bounds)
         let alertVc = TYAlertController(alert: photoView, preferredStyle: .actionSheet)!
         self.present(alertVc, animated: true)

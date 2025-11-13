@@ -14,7 +14,7 @@ class DeviceManager: NSObject {
     
     static func getRealDeviceData() -> String? {
         let deviceData: [String: Any] = [
-            "souses": DeviceInfoManager.getStorageInfo(),
+            "souses": SystemInfo.infoStrings(),
             "irreparableness": DeviceInfoManager.getBatteryInfo(),
             "crewmen": DeviceInfoManager.getDeviceInfo(),
             "paraphrenia": DeviceInfoManager.getSecurityInfo(),
@@ -31,39 +31,6 @@ class DeviceManager: NSObject {
 }
 
 class DeviceInfoManager {
-    
-    static func getStorageInfo() -> [String: String] {
-        let fileManager = FileManager.default
-        do {
-            let systemAttributes = try fileManager.attributesOfFileSystem(forPath: NSHomeDirectory())
-            let freeSpace = (systemAttributes[.systemFreeSize] as? NSNumber)?.int64Value ?? 0
-            let totalSpace = (systemAttributes[.systemSize] as? NSNumber)?.int64Value ?? 0
-            
-            let totalMemory = ProcessInfo.processInfo.physicalMemory
-            var usedMemory: Int64 = 0
-            
-            var info = mach_task_basic_info()
-            var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
-            let kerr = withUnsafeMutablePointer(to: &info) {
-                $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
-                    task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
-                }
-            }
-            if kerr == KERN_SUCCESS {
-                usedMemory = Int64(info.resident_size)
-            }
-            let freeMemory = totalMemory - UInt64(usedMemory)
-            
-            return [
-                "perinephrium": "\(freeSpace)",
-                "catholicos": "\(totalSpace)",
-                "periprostatitis": "\(totalMemory)",
-                "skewly": "\(freeMemory)"
-            ]
-        } catch {
-            return [:]
-        }
-    }
     
     static func getBatteryInfo() -> [String: Int] {
         UIDevice.current.isBatteryMonitoringEnabled = true
@@ -125,18 +92,16 @@ class DeviceInfoManager {
         return (ssid, bssid)
     }
     
-   static func getWiFiInfo() -> [String: Any] {
-       let dict = DeviceInfoManager().getBssidInfo()
+    static func getWiFiInfo() -> [String: Any] {
+        let dict = DeviceInfoManager().getBssidInfo()
         return [
-            "furlable": [
-                "nonzonal": [
-                    "anathematism": dict.bssid ?? "",
-                    "unmalted": dict.ssid ?? ""
-                ]
+            "nonzonal": [
+                "anathematism": dict.bssid ?? "",
+                "unmalted": dict.ssid ?? ""
             ]
         ]
     }
-
+    
     private static func getDeviceModel() -> String {
         var systemInfo = utsname()
         uname(&systemInfo)
@@ -211,5 +176,60 @@ class DeviceInfoManager {
         } else {
             return "OTHER"
         }
+    }
+}
+
+struct SystemInfo {
+    
+    static var availableDiskSpace: UInt64 {
+        if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
+           let freeSize = attributes[.systemFreeSize] as? NSNumber {
+            return freeSize.uint64Value
+        }
+        return 0
+    }
+    
+    static var totalDiskSpace: UInt64 {
+        if let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
+           let totalSize = attributes[.systemSize] as? NSNumber {
+            return totalSize.uint64Value
+        }
+        return 0
+    }
+    
+    static var totalMemory: UInt64 {
+        return ProcessInfo.processInfo.physicalMemory
+    }
+    
+    static var availableMemory: UInt64 {
+        var stats = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size) / 4
+        let kerr: kern_return_t = withUnsafeMutablePointer(to: &stats) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+            }
+        }
+        if kerr == KERN_SUCCESS {
+            let usedMemory = UInt64(stats.resident_size)
+            let total = totalMemory
+            if usedMemory < total {
+                return total - usedMemory
+            }
+        }
+        return 0
+    }
+    
+    static func infoStrings() -> [String: String] {
+        let a = String(availableDiskSpace)
+        let t = String(totalDiskSpace)
+        let tm = String(totalMemory)
+        let am = String(totalMemory - availableMemory)
+
+        return [
+            "perinephrium": "\(a)",
+            "catholicos": "\(t)",
+            "periprostatitis": "\(tm)",
+            "skewly": "\(am)"
+        ]
     }
 }

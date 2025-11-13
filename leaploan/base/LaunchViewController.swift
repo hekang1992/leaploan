@@ -14,6 +14,7 @@ import SystemConfiguration.CaptiveNetwork
 import AppTrackingTransparency
 import FBSDKCoreKit
 import IQKeyboardManagerSwift
+import Alamofire
 
 let CHANGE_ROOT_VC = NSNotification.Name("CHANGE_ROOT_VC")
 let CHANGE_ROOT_LAUNCH_VC = NSNotification.Name("CHANGE_ROOT_LAUNCH_VC")
@@ -57,9 +58,27 @@ class LaunchViewController: BaseViewController {
         
         sureBtn.addTarget(self, action: #selector(sureBtnClick), for: .touchUpInside)
         
-        clickInfo()
+        NetworkMonitor.shared.statusChanged = { status in
+            switch status {
+            case .notReachable:
+                print("=======🚫")
+            case .reachable(.ethernetOrWiFi):
+                print("=======📶WiFi")
+                self.clickInfo()
+                self.getIDFAInfo()
+                NetworkMonitor.shared.stopListening()
+            case .reachable(.cellular):
+                print("=======📱4g/5g")
+                self.clickInfo()
+                self.getIDFAInfo()
+                NetworkMonitor.shared.stopListening()
+            case .unknown:
+                print("=======❓")
+            }
+        }
+
+        NetworkMonitor.shared.startListening()
         
-        getIDFAInfo()
     }
     
 //    @MainActor

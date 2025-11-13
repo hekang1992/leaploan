@@ -130,7 +130,7 @@ class LoginView: UIView {
     
     lazy var codeLabel: UILabel = {
         let codeLabel = UILabel()
-        codeLabel.text = "Mobile"
+        codeLabel.text = "Verification code"
         codeLabel.textAlignment = .left
         codeLabel.textColor = UIColor.init(hexString: "#333333")
         codeLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(500))
@@ -180,7 +180,7 @@ class LoginView: UIView {
     
     lazy var loginBtn: UIButton = {
         let loginBtn = UIButton(type: .custom)
-        loginBtn.setTitle("LON IN", for: .normal)
+        loginBtn.setTitle("LOGIN", for: .normal)
         loginBtn.setTitleColor(.white, for: .normal)
         loginBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(700))
         loginBtn.layer.cornerRadius = 20
