@@ -52,7 +52,7 @@ class AppLocationManager: NSObject {
     
     private func startLocationUpdate() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
     }
 }

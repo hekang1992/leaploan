@@ -39,6 +39,8 @@ class H5WebViewController: BaseViewController {
         loadWebContent()
     }
     
+    let locationManager = AppLocationManager()
+    
     private func setupUI() {
         view.backgroundColor = UIColor(hexString: "#1ABFFF")
         view.addSubview(headView)
@@ -132,16 +134,21 @@ extension H5WebViewController: WKNavigationDelegate, WKScriptMessageHandler {
         switch message.name {
         case "matroclinal":
             /// GO_POING_INFO
-            let time = String(Int(Date().timeIntervalSince1970))
-            Task.detached { [weak self] in
-                guard let self = self else { return }
-                await self.insertMessageInfo(
-                    with: "10",
-                    onepera: time,
-                    twopera: time,
-                    threepera: orderID,
-                    viewModel: misassertViewModel
-                )
+            locationManager.getCurrentLocation { model in
+                LocationManagerModel.shared.model = model
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                let time = String(Int(Date().timeIntervalSince1970))
+                Task.detached { [weak self] in
+                    guard let self = self else { return }
+                    await self.insertMessageInfo(
+                        with: "10",
+                        onepera: time,
+                        twopera: time,
+                        threepera: orderID,
+                        viewModel: misassertViewModel
+                    )
+                }
             }
             break
         case "Braque":
@@ -179,6 +186,9 @@ extension H5WebViewController: WKNavigationDelegate, WKScriptMessageHandler {
         case "metrication":
             /// START_BIND_CARD
             one = String(Int(Date().timeIntervalSince1970))
+            locationManager.getCurrentLocation { model in
+                LocationManagerModel.shared.model = model
+            }
             break
         default:
             break

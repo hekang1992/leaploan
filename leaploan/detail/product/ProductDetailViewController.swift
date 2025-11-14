@@ -293,7 +293,7 @@ class RouterNextStepConfig {
             vc.navigationController?.pushViewController(personalVc, animated: true)
             break
         case RouterConfig.SIX_AUTH_STEP:
-            let one = String(Int(Date().timeIntervalSince1970))
+//            let one = String(Int(Date().timeIntervalSince1970))
             let orderID = vc.baseModel?.billionth?.sesti?.caranday ?? ""
             let nasology = vc.baseModel?.billionth?.sesti?.nasology ?? 0
             let expansible = vc.baseModel?.billionth?.sesti?.expansible ?? ""
