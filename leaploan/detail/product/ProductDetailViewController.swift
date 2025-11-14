@@ -294,6 +294,12 @@ class RouterNextStepConfig {
             break
         case RouterConfig.SIX_AUTH_STEP:
 //            let one = String(Int(Date().timeIntervalSince1970))
+            
+            let man = AppLocationManager()
+            man.getCurrentLocation { model in
+                LocationManagerModel.shared.model = model
+            }
+            
             let orderID = vc.baseModel?.billionth?.sesti?.caranday ?? ""
             let nasology = vc.baseModel?.billionth?.sesti?.nasology ?? 0
             let expansible = vc.baseModel?.billionth?.sesti?.expansible ?? ""
@@ -310,7 +316,7 @@ class RouterNextStepConfig {
                         webVc.orderID = orderID
                         webVc.type = "2"
                         vc.navigationController?.pushViewController(webVc, animated: true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             let two = String(Int(Date().timeIntervalSince1970))
                             Task.detached {
                                 await vc.insertMessageInfo(
